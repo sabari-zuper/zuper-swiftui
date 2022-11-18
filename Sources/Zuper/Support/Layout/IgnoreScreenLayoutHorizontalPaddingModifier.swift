@@ -59,7 +59,7 @@ struct ScreenLayoutHorizontalPaddingModifierPreviews: PreviewProvider {
                         .padding(.medium)
                 )
 
-          //  Button("Button")
+            Button("Button")
         }
         .border(Color.cloudLight)
     }

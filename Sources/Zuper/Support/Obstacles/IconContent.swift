@@ -15,4 +15,8 @@ public extension Icon.Content {
     static let circleEmpty: Self = .sfSymbol("circle", color: nil)
     static let checkCircle: Self = .sfSymbol("checkmark.circle.fill", color: nil)
     static let circleSmall: Self = .sfSymbol("circlebadge.fill", color: nil)
+    static let check: Self = .sfSymbol("checkmark", color: nil)
+    static let infoCircle: Self = .sfSymbol("info.circle.fill", color: nil)
+    static let alert: Self = .sfSymbol("exclamationmark.triangle.fill", color: nil)
+    static let alertCircle: Self = .sfSymbol("exclamationmark.circle.fill", color: nil)
 }

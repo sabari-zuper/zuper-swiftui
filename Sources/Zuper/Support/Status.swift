@@ -8,15 +8,15 @@ public enum Status {
     case warning
     case critical
 
-//    /// Default icon associated with status.
-//    var icon: Icon.Symbol {
-//        switch self {
-//            case .info:         return .none
-//            case .success:      return .informationCircle
-//            case .warning:      return .alert
-//            case .critical:     return .alertCircle
-//        }
-//    }
+    /// Default icon associated with status.
+    var icon: Icon.Content {
+        switch self {
+            case .info:         return .none
+            case .success:      return .check
+            case .warning:      return .alert
+            case .critical:     return .alertCircle
+        }
+    }
 
     /// Default color associated with status.
     var color: Color {
