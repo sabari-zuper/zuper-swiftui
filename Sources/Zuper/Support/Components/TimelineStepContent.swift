@@ -3,7 +3,7 @@ import SwiftUI
 public struct TimelineStepBadgeText: View {
 
     @Environment(\.horizontalSizeClass) var horisontalSizeClass
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var sizeCategory
 
     let label: String
     let sublabel: String
