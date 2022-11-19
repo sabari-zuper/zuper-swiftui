@@ -3,8 +3,6 @@ import SwiftUI
 /// Enables users to pick exactly one option from a group.
 ///
 /// Can be also used to display just the radio rounded indicator.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/radio/)
 public struct Radio: View {
 
     let title: String
@@ -48,7 +46,7 @@ public struct Radio: View {
 // MARK: - Inits
 public extension Radio {
     
-    /// Creates Orbit Radio component.
+    /// Creates Zuper Radio component.
     init(
         _ title: String = "",
         //description: String = "",
@@ -68,7 +66,7 @@ public extension Radio {
 /// If descrition is added in our Zuper app, we can change this to public
 fileprivate extension Radio {
     
-    /// Creates Orbit Radio component.
+    /// Creates Zuper Radio component.
     init(
         _ title: String = "",
         description: String = "",

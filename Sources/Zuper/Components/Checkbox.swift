@@ -3,8 +3,6 @@ import SwiftUI
 /// Enables users to pick multiple options from a group.
 ///
 /// Can be also used to display just the checkbox with no label or description.
-/// 
-/// - Note: [Orbit definition](https://orbit.kiwi/components/checkbox/)
 public struct Checkbox: View {
 
     let title: String
@@ -48,7 +46,7 @@ public struct Checkbox: View {
 // MARK: - Inits
 public extension Checkbox {
     
-    /// Creates Orbit Checkbox component.
+    /// Creates Zuper Checkbox component.
     init(
         _ title: String = "",
        // description: String = "",
@@ -67,7 +65,7 @@ public extension Checkbox {
 /// If descrition is added in our Zuper app, we can change this to public
 fileprivate extension Checkbox {
     
-    /// Creates Orbit Checkbox component.
+    /// Creates Zuper Checkbox component.
     init(
         _ title: String = "",
         description: String = "",
