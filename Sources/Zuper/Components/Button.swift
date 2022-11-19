@@ -92,9 +92,9 @@ public struct Button: View {
         switch style {
             case .primary:
                 HapticsProvider.sendHapticFeedback(.light(1))
-            case .primarySubtle, .secondary, .status(.info, _):
+            case .secondary, .neutral, .status(.info, _):
                 HapticsProvider.sendHapticFeedback(.light(0.5))
-            case .critical, .criticalSubtle, .status(.critical, _):
+            case .destructive, .status(.critical, _):
                 HapticsProvider.sendHapticFeedback(.notification(.error))
             case .status(.warning, _):
                 HapticsProvider.sendHapticFeedback(.notification(.warning))
@@ -111,14 +111,13 @@ public extension Button {
     init(
         _ label: String,
         icon: Icon.Content = .none,
-        disclosureIcon: Icon.Content = .none,
         style: Style = .primary,
         size: Size = .default,
         action: @escaping () -> Void = {}
     ) {
         self.label = label
         self.iconContent = icon
-        self.disclosureIconContent = disclosureIcon
+        self.disclosureIconContent = .none
         self.style = style
         self.size = size
         self.action = action
@@ -134,7 +133,6 @@ public extension Button {
         self.init(
             "",
             icon: icon,
-            disclosureIcon: .none,
             style: style,
             size: size,
             action: action
@@ -147,10 +145,9 @@ extension Button {
 
     public enum Style {
         case primary
-        case primarySubtle
         case secondary
-        case critical
-        case criticalSubtle
+        case neutral
+        case destructive
         case status(_ status: Status, subtle: Bool = false)
 
         public var foregroundColor: Color {
@@ -160,10 +157,9 @@ extension Button {
         public var foregroundUIColor: UIColor {
             switch self {
                 case .primary:                  return .whiteNormal
-                case .primarySubtle:            return .productDark
-                case .secondary:                return .inkDark
-                case .critical:                 return .whiteNormal
-                case .criticalSubtle:           return .redDark
+                case .secondary:            return .productDark
+                case .neutral:                return .inkDark
+                case .destructive:                 return .whiteNormal
                 case .status(.critical, false): return .whiteNormal
                 case .status(.critical, true):  return .redDarkHover
                 case .status(.info, false):     return .whiteNormal
@@ -178,10 +174,9 @@ extension Button {
         @ViewBuilder public var background: some View {
             switch self {
                 case .primary:                  Color.productNormal
-                case .primarySubtle:            Color.productLight
-                case .secondary:                Color.cloudNormal
-                case .critical:                 Color.redNormal
-                case .criticalSubtle:           Color.redLight
+                case .secondary:            Color.productLight
+                case .neutral:                Color.cloudNormal
+                case .destructive:                 Color.redNormal
                 case .status(.critical, false): Color.redNormal
                 case .status(.critical, true):  Color.redLightHover
                 case .status(.info, false):     Color.blueNormal
@@ -196,10 +191,9 @@ extension Button {
         @ViewBuilder public var backgroundActive: some View {
             switch self {
                 case .primary:                  Color.productNormal
-                case .primarySubtle:            Color.productLight
-                case .secondary:                Color.cloudNormalActive
-                case .critical:                 Color.redNormalActive
-                case .criticalSubtle:           Color.redLightActive
+                case .secondary:            Color.productLight
+                case .neutral:                Color.cloudNormalActive
+                case .destructive:                 Color.redNormalActive
                 case .status(.critical, false): Color.redNormalActive
                 case .status(.critical, true):  Color.redLightActive
                 case .status(.info, false):     Color.blueNormalActive
@@ -282,7 +276,7 @@ extension Button {
     }
 }
 
-let gridIcon: Icon.Content = .sfSymbol("grid.circle.fill", color: .inkDark)
+let gridIcon: Icon.Content = .sfSymbol("square.grid.2x2", color: .inkDark)
 
 // MARK: - Previews
 struct ButtonPreviews: PreviewProvider {
@@ -309,7 +303,6 @@ struct ButtonPreviews: PreviewProvider {
     static var standaloneCombinations: some View {
         VStack(spacing: .medium) {
             Button("Button", icon: gridIcon)
-            Button("Button", icon: gridIcon, disclosureIcon: gridIcon)
             Button("Button")
             Button(gridIcon)
             Button(gridIcon)
@@ -349,10 +342,9 @@ struct ButtonPreviews: PreviewProvider {
     @ViewBuilder static var storybook: some View {
         LazyVStack(alignment: .leading, spacing: .xLarge) {
             buttons(.primary)
-            buttons(.primarySubtle)
             buttons(.secondary)
-            buttons(.critical)
-            buttons(.criticalSubtle)
+            buttons(.neutral)
+            buttons(.destructive)
         }
     }
 
@@ -374,10 +366,9 @@ struct ButtonPreviews: PreviewProvider {
     static var snapshot: some View {
         VStack(alignment: .leading, spacing: .xLarge) {
             buttons(.primary)
-            buttons(.primarySubtle)
             buttons(.secondary)
-            buttons(.critical)
-            buttons(.criticalSubtle)
+            buttons(.neutral)
+            buttons(.destructive)
         }
         .padding(.medium)
     }
@@ -389,8 +380,9 @@ struct ButtonPreviews: PreviewProvider {
                 Button("Label", icon: gridIcon, style: style)
             }
             HStack(spacing: .small) {
-                Button("Label", disclosureIcon: .sfSymbol("chevron.right", color: .inkDark), style: style)
-                Button("Label", icon: gridIcon, disclosureIcon: .sfSymbol("chevron.right", color: .inkDark), style: style)
+                Button("Label", style: style)
+                Button("Label", icon: gridIcon, style: style)
+                Button("Test Image", icon:.image(Image("not_3", bundle: .current), mode: .fit), style: .primary)
             }
             HStack(spacing: .small) {
                 Button("Label", style: style)
@@ -418,8 +410,8 @@ struct ButtonPreviews: PreviewProvider {
         HStack(spacing: .xSmall) {
             Group {
                 Button("Label", style: style, size: .small)
-                Button("Label", icon: gridIcon, disclosureIcon: .sfSymbol("chevron.right", color: .inkDark), style: style, size: .small)
-                Button("Label", disclosureIcon: .sfSymbol("chevron.right", color: .inkDark), style: style, size: .small)
+                Button("Label", icon: gridIcon, style: style, size: .small)
+                Button("Label", style: style, size: .small)
                 Button(gridIcon, style: style, size: .small)
             }
             .idealSize()
