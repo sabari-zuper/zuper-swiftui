@@ -1,8 +1,6 @@
 import SwiftUI
 
 /// A pair of label and value to display read-only information.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/keyvalue/)
 public struct KeyValue: View {
 
     let key: String
@@ -24,7 +22,7 @@ public struct KeyValue: View {
 // MARK: - Inits
 extension KeyValue {
 
-    /// Creates Orbit KeyValue component.
+    /// Creates Zuper KeyValue component.
     public init(
         _ key: String = "",
         value: String = "",

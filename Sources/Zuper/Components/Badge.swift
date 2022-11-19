@@ -4,8 +4,6 @@ import SwiftUI
 ///
 /// Badges are indicators of static information.
 /// They can be updated when a status changes, but they should not be actionable.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/badge/)
 public struct Badge: View {
 
     public static let verticalPadding: CGFloat = 4 + 1/3 // Results in ±24 height at normal text size
@@ -60,7 +58,7 @@ public struct Badge: View {
 // MARK: - Inits
 public extension Badge {
     
-    /// Creates Orbit Badge component.
+    /// Creates Zuper Badge component.
     init(_ label: String = "", icon: Icon.Content = .none, style: Style = .neutral,textSize:Text.Size = .small,iconSize:Icon.Size = .small) {
         self.label = label
         self.iconContent = icon

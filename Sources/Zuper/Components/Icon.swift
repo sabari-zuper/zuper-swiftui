@@ -1,11 +1,9 @@
 import SwiftUI
 
-/// An icon matching Orbit name.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/icon/)
+/// An icon matching Zuper name.
 public struct Icon: View {
     
-    public static let sfSymbolToOrbitSizeRatio: CGFloat = 0.75
+    public static let sfSymbolToZuperSizeRatio: CGFloat = 0.75
     public static let averageIconContentPadding: CGFloat = .xxxSmall
     
     @Environment(\.sizeCategory) var sizeCategory
@@ -37,11 +35,11 @@ public struct Icon: View {
         case .sfSymbol(let systemName, let color?):
             Image(systemName: systemName)
                 .foregroundColor(color)
-                .font(.system(size: size.value * Self.sfSymbolToOrbitSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
         case .sfSymbol(let systemName, nil):
             Image(systemName: systemName)
             // foregroundColor(nil) prevents further overrides
-                .font(.system(size: size.value * Self.sfSymbolToOrbitSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
         case .none:
             EmptyView()
         }
@@ -55,7 +53,7 @@ public struct Icon: View {
 // MARK: - Inits
 public extension Icon {
     
-    /// Creates Orbit Icon component for provided icon content.
+    /// Creates Zuper Icon component for provided icon content.
     ///
     /// - Parameters:
     ///     - content: Icon content. Can optionally include the color override.
@@ -65,7 +63,7 @@ public extension Icon {
         self.baselineOffset = baselineOffset
     }
     
-    /// Creates Orbit Icon component for provided Image.
+    /// Creates Zuper Icon component for provided Image.
     init(image: Image, size: Size = .normal, baselineOffset: CGFloat = 0) {
         self.init(
             content: .image(image),
@@ -74,7 +72,7 @@ public extension Icon {
         )
     }
     
-    /// Creates Orbit Icon component for provided SF Symbol with specified color.
+    /// Creates Zuper Icon component for provided SF Symbol with specified color.
     ///
     /// - Parameters:
     ///     - color: SF Symbol color. Can be set to `nil` and specified later using `.foregroundColor()` modifier.
@@ -93,7 +91,7 @@ public extension Icon {
     /// Defines content of an Icon for use in other components.
     /// An optional color can be provided. If not provided, color can be specified later, using `.foregroundColor()` modifier.
     ///
-    /// Icon size in Orbit components is determined by enclosing component.
+    /// Icon size in Zuper components is determined by enclosing component.
     enum Content: Equatable {
         /// Icon using custom Image with overridable size.
         case image(Image, mode: ContentMode = .fit)
@@ -214,15 +212,15 @@ extension Icon: TextRepresentable {
         case .sfSymbol(let systemName, let color?):
             return SwiftUI.Text(Image(systemName: systemName)).foregroundColor(color)
                 .baselineOffset(baselineOffset)
-                .font(.system(size: size.value * Self.sfSymbolToOrbitSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
         case .sfSymbol(let systemName, nil):
             return SwiftUI.Text(Image(systemName: systemName))
                 .baselineOffset(baselineOffset)
-                .font(.system(size: size.value * Self.sfSymbolToOrbitSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
         case .none:
             return SwiftUI.Text("")
                 .baselineOffset(baselineOffset)
-                .font(.system(size: size.value * Self.sfSymbolToOrbitSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
         }
     }
     
@@ -391,7 +389,7 @@ struct IconPreviews: PreviewProvider {
     
     static var storybookMix: some View {
         VStack(alignment: .leading, spacing: .small) {
-            Text("SF Symbol vs Orbit sizes (custom-font-label)", size: .small)
+            Text("SF Symbol vs Zuper sizes (custom-font-label)", size: .small)
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
                     Icon(sfSymbol: sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)

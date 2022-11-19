@@ -1,8 +1,6 @@
 import SwiftUI
 
 /// Displays a single important action a user can take.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/button/)
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
 public struct Button: View {
 
@@ -107,7 +105,7 @@ public struct Button: View {
 // MARK: - Inits
 public extension Button {
 
-    /// Creates Orbit Button component.
+    /// Creates Zuper Button component.
     init(
         _ label: String,
         icon: Icon.Content = .none,
@@ -123,7 +121,7 @@ public extension Button {
         self.action = action
     }
 
-    /// Creates Orbit Button component with icon only.
+    /// Creates Zuper Button component with icon only.
     init(
         _ icon: Icon.Content = .none,
         style: Style = .primary,

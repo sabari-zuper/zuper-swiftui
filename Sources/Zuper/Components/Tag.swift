@@ -1,8 +1,6 @@
 import SwiftUI
 
 /// Offers a label that can optionally be selected and unselected or removed.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/tag/)
 public struct Tag: View {
 
     public static let horizontalPadding: CGFloat = .xSmall
@@ -48,7 +46,7 @@ public struct Tag: View {
                 }
             )
             .buttonStyle(
-                OrbitStyle(style: style, isFocused: isFocused, isSelected: isSelected, isActive: isActive)
+                ZuperStyle(style: style, isFocused: isFocused, isSelected: isSelected, isActive: isActive)
             )
         }
     }
@@ -61,7 +59,7 @@ public struct Tag: View {
 // MARK: - Inits
 public extension Tag {
     
-    /// Creates Orbit Tag component.
+    /// Creates Zuper Tag component.
     init(
         _ label: String = "",
         icon: Icon.Content = .none,
@@ -97,7 +95,7 @@ extension Tag {
         }
     }
 
-    public struct OrbitStyle: ButtonStyle {
+    public struct ZuperStyle: ButtonStyle {
         let style: Style
         let isFocused: Bool
         let isSelected: Bool
@@ -132,7 +130,7 @@ extension Tag {
             }
         }
 
-        /// Creates ButtonStyle matching Orbit Tag component.
+        /// Creates ButtonStyle matching Zuper Tag component.
         public init(
             style: Style,
             isFocused: Bool,

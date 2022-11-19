@@ -1,8 +1,6 @@
 import SwiftUI
 
 /// Displays a single, less important action a user can take.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/buttonlink/)
 public struct ButtonLink: View {
 
     let label: String
@@ -63,7 +61,7 @@ public struct ButtonLink: View {
 // MARK: - Inits
 public extension ButtonLink {
 
-    /// Creates Orbit ButtonLink component.
+    /// Creates Zuper ButtonLink component.
     init(
         _ label: String = "",
         style :TypeStyle = .default,

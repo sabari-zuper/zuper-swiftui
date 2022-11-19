@@ -102,7 +102,7 @@ public extension ListItem {
 //            snapshots
 //            snapshotsLinks
 //            snapshotsCustom
-//            orbit
+//            zuper
 //
 //            List {
 //                ListItem(
@@ -164,7 +164,7 @@ public extension ListItem {
 //        .previewDisplayName("Snapshots - Custom")
 //    }
 //
-//    static var orbit: some View {
+//    static var zuper: some View {
 //        HStack(alignment: .top, spacing: .medium) {
 //            List(spacing: .medium) {
 //                ListItem("ListItem - normal", size: .normal, style: .primary)
@@ -177,6 +177,6 @@ public extension ListItem {
 //            }
 //        }
 //        .padding()
-//        .previewDisplayName("Orbit")
+//        .previewDisplayName("Zuper")
 //    }
 //}

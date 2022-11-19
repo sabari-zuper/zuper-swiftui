@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 
-/// Serial queue for Orbit Toast component.
+/// Serial queue for Zuper Toast component.
 ///
 /// Allows adding new Toasts and dismissing or pausing the currently displayed Toast.
 public final class ToastQueue: ObservableObject {
@@ -18,7 +18,7 @@ public final class ToastQueue: ObservableObject {
         case dismiss
     }
     
-    /// View model for Orbit Toast component.
+    /// View model for Zuper Toast component.
     public struct Toast: Identifiable {
         public let id: UUID
         let description: String
