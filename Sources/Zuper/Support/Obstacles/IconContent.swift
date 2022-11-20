@@ -22,4 +22,7 @@ public extension Icon.Content {
     static let person: Self = .sfSymbol("person.fill", color: nil)
     static let lock: Self = .sfSymbol("lock.fill", color: nil)
     static let lockOpen: Self = .sfSymbol("lock.open.fill", color: nil)
+    static let visibilityOn: Self = .sfSymbol("eye.fill", color: .inkNormal)
+    static let visibilityOff: Self = .sfSymbol("eye.slash.fill", color: .inkNormal)
+    static let email: Self = .sfSymbol("envelope.fill", color: .inkNormal)
 }

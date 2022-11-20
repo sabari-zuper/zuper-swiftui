@@ -3,9 +3,9 @@ import SwiftUI
 public enum Message: Equatable, CustomStringConvertible {
 
     case normal(String, icon: Icon.Content = .none)
-    case help(String, icon: Icon.Content = .sfSymbol("info.circle.fill", color: nil))
-    case warning(String, icon: Icon.Content = .sfSymbol("exclamationmark.triangle.fill", color: nil))
-    case error(String, icon: Icon.Content = .sfSymbol("exclamationmark.circle.fill", color: nil))
+    case help(String, icon: Icon.Content = .sfSymbol("info.circle.fill", color: .blueNormal))
+    case warning(String, icon: Icon.Content = .sfSymbol("exclamationmark.triangle.fill", color: .orangeNormal))
+    case error(String, icon: Icon.Content = .sfSymbol("exclamationmark.circle.fill", color: .redNormal))
 
     public var description: String {
         switch self {
