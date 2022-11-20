@@ -403,8 +403,8 @@ struct InputFieldPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
-            standalone
             zuperTextField
+            standalone
             storybook
             storybookPassword
             storybookMix

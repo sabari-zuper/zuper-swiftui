@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 public extension Icon.Content {
     
     static let sort: Self = .sfSymbol("arrow.up.arrow.down", color: nil)
@@ -25,4 +26,6 @@ public extension Icon.Content {
     static let visibilityOn: Self = .sfSymbol("eye.fill", color: .inkNormal)
     static let visibilityOff: Self = .sfSymbol("eye.slash.fill", color: .inkNormal)
     static let email: Self = .sfSymbol("envelope.fill", color: .inkNormal)
+    static let chevronDown: Self = .image(Image("ic_arrow_down",bundle:.current), mode: .fit)
+    static let datePicker: Self = .sfSymbol("calendar", color: .inkNormal)
 }
