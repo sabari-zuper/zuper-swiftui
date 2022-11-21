@@ -198,6 +198,7 @@ struct CheckboxPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             content(standalone: false)
             content(standalone: true)
@@ -206,6 +207,16 @@ struct CheckboxPreviews: PreviewProvider {
         .previewLayout(PreviewLayout.sizeThatFits)
     }
 
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: .medium) {
+            Heading("Zuper Checkbox", style: .title2)
+            Checkbox("Checkbox unchecked", state: .normal, isChecked: false)
+            Checkbox("Checkbox checked", state: .normal, isChecked: true)
+            Checkbox("Disable Checkbox checked", state: .disabled, isChecked: false)
+            Checkbox("Disable Checkbox checked", state: .disabled, isChecked: true)
+        }.previewDisplayName("Zuper Checkbox")
+    }
+    
     static var standalone: some View {
         StateWrapper(initialState: true) { isSelected in
             checkbox(standalone: false, state: .normal, checked: isSelected.wrappedValue)

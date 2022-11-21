@@ -156,6 +156,7 @@ struct ButtonLinkPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             styles
                 .previewDisplayName("Styles")
@@ -170,6 +171,16 @@ struct ButtonLinkPreviews: PreviewProvider {
         }
         .padding(.medium)
         .previewLayout(.sizeThatFits)
+    }
+    
+    static var zuper: some View {
+        VStack(alignment:.leading, spacing:20) {
+            ButtonLink("Text Button", style: .text, colorStyle: .primary)
+            HStack {
+                Text("Icon Button - ")
+                ButtonLink("", style: .icon, colorStyle: .primary, icon: gridIcon)
+            }
+        }.previewDisplayName("Zuper Buttons")
     }
 
     static var standalone: some View {

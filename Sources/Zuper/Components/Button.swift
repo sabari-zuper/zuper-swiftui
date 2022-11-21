@@ -274,13 +274,14 @@ extension Button {
     }
 }
 
-let gridIcon: Icon.Content = .sfSymbol("square.grid.2x2", color: .inkDark)
+let gridIcon: Icon.Content = .sfSymbol("square.grid.2x2", color: nil)
 
 // MARK: - Previews
 struct ButtonPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             standaloneCombinations
             sizing
@@ -291,6 +292,22 @@ struct ButtonPreviews: PreviewProvider {
         }
         .padding(.medium)
         .previewLayout(.sizeThatFits)
+    }
+    
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: .medium) {
+            Heading("Zuper Buttons", style: .title2)
+            Button("Primary Button", style: .primary)
+            Button("Secondary Button", style: .secondary)
+            Button("Neutral Button", style: .neutral)
+            Button("Destructive Button", style: .destructive)
+            
+            Heading("Status Buttons", style: .title2)
+            Button("Status Info", style: .status(.info))
+            Button("Status Success", style: .status(.success))
+            Button("Status Warning", style: .status(.warning))
+            Button("Status Error", style: .status(.critical))
+        }.previewDisplayName("Zuper Buttons")
     }
     
 
@@ -352,7 +369,7 @@ struct ButtonPreviews: PreviewProvider {
             statusButtonStack(.success)
             statusButtonStack(.warning)
             statusButtonStack(.critical)
-        }
+        }.preferredColorScheme(.dark)
     }
 
     @ViewBuilder static var storybookMix: some View {
@@ -380,7 +397,6 @@ struct ButtonPreviews: PreviewProvider {
             HStack(spacing: .small) {
                 Button("Label", style: style)
                 Button("Label", icon: gridIcon, style: style)
-                Button("Test Image", icon:.image(Image("not_3", bundle: .current), mode: .fit), style: .primary)
             }
             HStack(spacing: .small) {
                 Button("Label", style: style)

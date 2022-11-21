@@ -188,12 +188,23 @@ struct RadioPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             content(standalone: false)
             content(standalone: true)
         }
         .padding(.medium)
         .previewLayout(PreviewLayout.sizeThatFits)
+    }
+    
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: .medium) {
+            Heading("Zuper Radio", style: .title2)
+            Radio("Radio unchecked", state: .normal, isChecked: false)
+            Radio("Radio checked", state: .normal, isChecked: true)
+            Radio("Disable Radio checked", state: .disabled, isChecked: false)
+            Radio("Disable Radio checked", state: .disabled, isChecked: true)
+        }.previewDisplayName("Zuper Radio")
     }
 
     static var standalone: some View {

@@ -31,12 +31,12 @@ struct ProgressPreviews: PreviewProvider {
     public static var previews: some View {
         PreviewWrapper {
             VStack(spacing: .large) {
-                Progress(-3)
                 Progress(0)
                 Progress(0.1)
+                Progress(0.3)
                 Progress(0.5)
+                Progress(0.8)
                 Progress(1)
-                Progress(3)
             }
             .previewDisplayName("Progress")
 

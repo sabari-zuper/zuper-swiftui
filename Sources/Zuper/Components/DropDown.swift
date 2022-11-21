@@ -96,7 +96,7 @@ struct DropDownPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
-            zuperDropDown
+            zuper
             standalone
             intrinsic
             storybook
@@ -106,8 +106,9 @@ struct DropDownPreviews: PreviewProvider {
         .previewLayout(.sizeThatFits)
     }
     
-    static var zuperDropDown: some View {
-        VStack(spacing:20) {
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: .medium) {
+            Heading("Zuper Dropdown Field", style: .title2)
             DropDown("Dropdown with label", value: InputFieldPreviews.value)
             DropDown("",prefix: gridIcon, value: nil, placeholder: "Placeholder")
             DropDown("Date picker dropdown", prefix: .none, value: nil, placeholder: "Placeholder", suffix: .datePicker)

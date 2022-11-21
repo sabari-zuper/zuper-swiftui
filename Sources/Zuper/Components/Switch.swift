@@ -121,6 +121,7 @@ struct SwitchPreviews: PreviewProvider {
     
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             storybook
             storybook
@@ -128,6 +129,17 @@ struct SwitchPreviews: PreviewProvider {
         }
         .padding(.medium)
         .previewLayout(.sizeThatFits)
+    }
+    
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: .medium) {
+            Heading("Zuper Switch", style: .title2)
+            Switch(isOn: .constant(true), isEnabled: true)
+            Switch(isOn: .constant(false), isEnabled: true)
+            
+            Switch(isOn: .constant(true), isEnabled: false)
+            Switch(isOn: .constant(false), isEnabled: false)
+        }.previewDisplayName("Zuper Switch")
     }
     
     static var standalone: some View {

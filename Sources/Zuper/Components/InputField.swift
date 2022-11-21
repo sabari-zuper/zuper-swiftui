@@ -403,7 +403,7 @@ struct InputFieldPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
-            zuperTextField
+            zuper
             standalone
             storybook
             storybookPassword
@@ -419,7 +419,7 @@ struct InputFieldPreviews: PreviewProvider {
         }
     }
     
-    static var zuperTextField: some View {
+    static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
             Heading("Zuper Input Field", style: .title2)
             
