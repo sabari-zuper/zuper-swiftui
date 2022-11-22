@@ -28,4 +28,10 @@ public extension Icon.Content {
     static let email: Self = .sfSymbol("envelope.fill", color: .inkNormal)
     static let chevronDown: Self = .image(Image("ic_arrow_down",bundle:.current), mode: .fit)
     static let datePicker: Self = .sfSymbol("calendar", color: .inkNormal)
+    static let chevron: Self = .image(Image("ic_arrow_down",bundle:.current), mode: .fit)
+    static let chevronRight: Self = .sfSymbol("chevron.right", color: .inkNormal)
+}
+
+public func icon(_ iconContent: String, color: Color? = nil) -> Icon {
+    return Icon(sfSymbol: iconContent, color: color)
 }
