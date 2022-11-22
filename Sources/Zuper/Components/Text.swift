@@ -135,6 +135,10 @@ public extension Text {
         case xLarge
         case custom(CGFloat)
         
+        static let body3 = Size.small
+        static let body2 = Size.normal
+        static let body1 = Size.large
+        
         public var value: CGFloat {
             switch self {
             case .small:                return  UIDevice.current.userInterfaceIdiom == .phone ? 12 : 13
@@ -249,8 +253,11 @@ struct TextPreviews: PreviewProvider {
     }
     
     static var standalone: some View {
-        Text("Plain text with no formatting")
-            .previewDisplayName("Standalone")
+        VStack {
+            Text("Plain text with no formatting",size: .body1)
+            Text("Plain text with no formatting",size: .body2)
+            Text("Plain text with no formatting",size: .body3)
+        }.previewDisplayName("Standalone")
     }
     
     @ViewBuilder static var storybook: some View {
