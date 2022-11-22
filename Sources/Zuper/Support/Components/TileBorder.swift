@@ -163,9 +163,9 @@ struct TileBorderModifierPreviews: PreviewProvider {
                 .background(Color.blueLight)
                 .tileBorder(isSelected: true, status: .critical)
 
-//            ListChoice("ListChoice", showSeparator: false)
-//                .fixedSize()
-//                .tileBorder()
+            ListChoice("ListChoice", showSeparator: false)
+                .fixedSize()
+                .tileBorder()
         }
         .padding(.medium)
         .previewLayout(.sizeThatFits)
