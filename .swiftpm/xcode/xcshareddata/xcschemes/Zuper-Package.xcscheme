@@ -14,23 +14,37 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "zuper-swiftui"
-               BuildableName = "zuper-swiftui"
-               BlueprintName = "zuper-swiftui"
+               BlueprintIdentifier = "Zuper_Zuper"
+               BuildableName = "Zuper_Zuper"
+               BlueprintName = "Zuper_Zuper"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "zuper-swiftuiTests"
-               BuildableName = "zuper-swiftuiTests"
-               BlueprintName = "zuper-swiftuiTests"
+               BlueprintIdentifier = "Zuper"
+               BuildableName = "Zuper"
+               BlueprintName = "Zuper"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ZuperStorybook"
+               BuildableName = "ZuperStorybook"
+               BlueprintName = "ZuperStorybook"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,16 +56,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "zuper-swiftuiTests"
-               BuildableName = "zuper-swiftuiTests"
-               BlueprintName = "zuper-swiftuiTests"
-               ReferencedContainer = "container:">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -74,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "zuper-swiftui"
-            BuildableName = "zuper-swiftui"
-            BlueprintName = "zuper-swiftui"
+            BlueprintIdentifier = "Zuper_Zuper"
+            BuildableName = "Zuper_Zuper"
+            BlueprintName = "Zuper_Zuper"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

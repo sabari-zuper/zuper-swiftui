@@ -179,3 +179,24 @@ public extension Color {
     /// Zuper Icon Primary color.
     static var iconTertiary = Color("Icon Tertiary", bundle: .current)
 }
+
+
+public extension Color {
+    
+    static var bundleBasicStart = Color(red: 0.882, green: 0.243, blue: 0.231)
+    static var bundleBasicEnd = Color(red: 0.91, green: 0.494, blue: 0.035)
+    static var bundleMediumStart = Color(red: 0.216, green: 0.098, blue: 0.671)
+    static var bundleMediumEnd = Color(red: 0.522, green: 0.224, blue: 0.859)
+    static var bundleTopStart = Color(red: 0.176, green: 0.176, blue: 0.18)
+    static var bundleTopEnd = Color(red: 0.412, green: 0.431, blue: 0.451)
+}
+
+public extension UIColor {
+    
+    static var bundleBasicStart = UIColor(red: 0.882, green: 0.243, blue: 0.231, alpha: 1)
+    static var bundleBasicEnd = UIColor(red: 0.91, green: 0.494, blue: 0.035, alpha: 1)
+    static var bundleMediumStart = UIColor(red: 0.216, green: 0.098, blue: 0.671, alpha: 1)
+    static var bundleMediumEnd = UIColor(red: 0.522, green: 0.224, blue: 0.859, alpha: 1)
+    static var bundleTopStart = UIColor(red: 0.176, green: 0.176, blue: 0.18, alpha: 1)
+    static var bundleTopEnd = UIColor(red: 0.412, green: 0.431, blue: 0.451, alpha: 1)
+}

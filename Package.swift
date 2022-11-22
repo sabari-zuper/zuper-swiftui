@@ -10,13 +10,14 @@ let package = Package(
     platforms: [.iOS(.v15)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "Zuper",
-            targets: ["Zuper"]),
+        .library(name: "Zuper",targets: ["Zuper"]),
+        .library(name: "ZuperStorybook", targets: ["ZuperStorybook"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
+        .package(
+            url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
+            from: "1.10.0"
+        ),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,8 +26,16 @@ let package = Package(
             name: "Zuper",
             resources: []
         ),
+        .target(
+            name: "ZuperStorybook",
+            dependencies: ["Zuper"]
+        ),
         .testTarget(
-            name: "zuper-swiftuiTests",
-            dependencies: ["Zuper"]),
+            name: "SnapshotTests",
+            dependencies: [
+                "Zuper",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ]
+        ),
     ]
 )
