@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 public extension Icon.Content {
-    
+    static let grid: Icon.Content = .sfSymbol("square.grid.2x2", color: nil)
     static let sort: Self = .sfSymbol("arrow.up.arrow.down", color: nil)
     static let notificationAdd: Self = .sfSymbol("bell", color: nil)
     static let money: Self = .sfSymbol("banknote.fill", color: nil)
@@ -30,6 +30,8 @@ public extension Icon.Content {
     static let datePicker: Self = .sfSymbol("calendar", color: .inkNormal)
     static let chevron: Self = .image(Image("ic_arrow_down",bundle:.current), mode: .fit)
     static let chevronRight: Self = .sfSymbol("chevron.right", color: .inkNormal)
+    static let sun: Self = .sfSymbol("sun.min", color: .inkNormal)
+    static let timelapse: Self = .sfSymbol("timelapse", color: .inkNormal)
 }
 
 public func icon(_ iconContent: String, color: Color? = nil) -> Icon {

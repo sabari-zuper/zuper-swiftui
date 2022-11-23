@@ -22,7 +22,7 @@ public struct KeyValue: View {
 // MARK: - Inits
 extension KeyValue {
 
-    /// Creates Orbit KeyValue component.
+    /// Creates Zuper KeyValue component.
     public init(
         _ key: String = "",
         value: String = "",

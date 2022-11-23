@@ -102,7 +102,7 @@ public struct Switch: View {
     }
     
     /// Creates Zuper Switch component.
-    init(isOn: Binding<Bool>, isEnabled: Bool = true) {
+    public init(isOn: Binding<Bool>, isEnabled: Bool = true) {
         self._isOn = isOn
         self.hasIcon = false
         self.isEnabled = isEnabled
