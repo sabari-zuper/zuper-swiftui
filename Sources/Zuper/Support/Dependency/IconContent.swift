@@ -37,3 +37,7 @@ public extension Icon.Content {
 public func icon(_ iconContent: String, color: Color? = nil) -> Icon {
     return Icon(sfSymbol: iconContent, color: color)
 }
+
+public func icon(_ iconContent: String, color: Color? = nil) -> Icon.Content {
+    return Icon(sfSymbol: iconContent, color: color).content
+}

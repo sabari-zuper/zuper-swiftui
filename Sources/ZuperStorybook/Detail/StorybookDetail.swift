@@ -125,9 +125,9 @@ struct StorybookDetail: View {
             case (.listChoice, 1):          StorybookListChoice.button
             case (.listChoice, 2):          StorybookListChoice.checkbox
             case (.listChoice, 3):          StorybookListChoice.mix
-         //   case (.notificationBadge, 0):   StorybookNotificationBadge.basic
+            case (.notificationBadge, 0):   StorybookNotificationBadge.basic
          //   case (.notificationBadge, 1):   StorybookNotificationBadge.gradient
-          //  case (.notificationBadge, 2):   StorybookNotificationBadge.mix
+            case (.notificationBadge, 1):   StorybookNotificationBadge.mix
             case (.radio, _):               StorybookRadio.basic
             case (.select, 0):              StorybookSelect.basic
             case (.select, 1):              StorybookSelect.mix
