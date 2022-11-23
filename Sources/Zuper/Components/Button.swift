@@ -296,13 +296,13 @@ struct ButtonPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Buttons", style: .title2)
+            Heading("Zuper Buttons", style: .h2)
             Button("Primary Button", style: .primary)
             Button("Secondary Button", style: .secondary)
             Button("Neutral Button", style: .neutral)
             Button("Destructive Button", style: .destructive)
             
-            Heading("Status Buttons", style: .title2)
+            Heading("Status Buttons", style: .h2)
             Button("Status Info", style: .status(.info))
             Button("Status Success", style: .status(.success))
             Button("Status Warning", style: .status(.warning))

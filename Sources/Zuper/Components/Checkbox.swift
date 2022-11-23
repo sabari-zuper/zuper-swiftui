@@ -209,7 +209,7 @@ struct CheckboxPreviews: PreviewProvider {
 
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Checkbox", style: .title2)
+            Heading("Zuper Checkbox", style: .h2)
             Checkbox("Checkbox unchecked", state: .normal, isChecked: false)
             Checkbox("Checkbox checked", state: .normal, isChecked: true)
             Checkbox("Disable Checkbox checked", state: .disabled, isChecked: false)

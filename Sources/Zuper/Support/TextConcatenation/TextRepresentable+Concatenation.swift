@@ -27,9 +27,9 @@ struct TextConcatenationPreviews: PreviewProvider {
     }
 
     static var standalone: some View {
-        Heading("Hanoi ", style: .title1)
+        Heading("Hanoi ", style: .h1)
             + Icon(sfSymbol: "airplane", size: .xLarge)
-            + Heading(" San Pedro de Alcantara", style: .title1)
+            + Heading(" San Pedro de Alcantara", style: .h1)
             + Icon(sfSymbol: "info.circle", size: .large)
             + Icon(sfSymbol: "xmark.circle.fill", size: .large, color: nil, baselineOffset: -1)
             + Text(" (Delayed)", size: .xLarge, color: .inkNormal)
@@ -58,12 +58,12 @@ struct TextConcatenationPreviews: PreviewProvider {
             concatenatedText("Display Subtitle", style: .displaySubtitle)
             Separator()
                 .padding(.vertical, .small)
-            concatenatedText("Title 1", style: .title1)
-            concatenatedText("Title 2", style: .title2)
-            concatenatedText("Title 3", style: .title3)
-            concatenatedText("Title 4", style: .title4)
-            concatenatedText("Title 5", style: .title5)
-            concatenatedText("Title 6", style: .title6)
+            concatenatedText("Title 1", style: .h1)
+            concatenatedText("Title 2", style: .h2)
+            concatenatedText("Title 3", style: .h3)
+            concatenatedText("Title 4", style: .h4)
+            concatenatedText("Title 5", style: .h5)
+            concatenatedText("Title 6", style: .h6)
         }
     }
 

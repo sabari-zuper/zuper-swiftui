@@ -133,7 +133,7 @@ struct SwitchPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Switch", style: .title2)
+            Heading("Zuper Switch", style: .h2)
             Switch(isOn: .constant(true), isEnabled: true)
             Switch(isOn: .constant(false), isEnabled: true)
             

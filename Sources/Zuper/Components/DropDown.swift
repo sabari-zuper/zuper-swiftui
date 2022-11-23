@@ -108,7 +108,7 @@ struct DropDownPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Dropdown Field", style: .title2)
+            Heading("Zuper Dropdown Field", style: .h2)
             DropDown("Dropdown with label", value: InputFieldPreviews.value)
             DropDown("",prefix: gridIcon, value: nil, placeholder: "Placeholder")
             DropDown("Date picker dropdown", prefix: .none, value: nil, placeholder: "Placeholder", suffix: .datePicker)
@@ -206,7 +206,7 @@ struct SelectLivePreviews: PreviewProvider {
             NavigationView {
                 ScrollView {
                     VStack(alignment: .leading, spacing: .xxSmall) {
-                        Heading("Some content", style: .title3)
+                        Heading("Some content", style: .h3)
                         Text("Very long and multi-line follow-up text to test that it still all works correctly.")
 
                         DropDown(
@@ -221,7 +221,7 @@ struct SelectLivePreviews: PreviewProvider {
                         }
                         .padding(.vertical, .medium)
 
-                        Heading("Some content", style: .title3)
+                        Heading("Some content", style: .h3)
                         Text("Very long and multi-line follow-up text to test that it still all works correctly.")
                     }
                 }

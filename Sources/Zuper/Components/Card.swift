@@ -132,7 +132,7 @@ public extension Card {
         action: CardAction = .none,
         headerSpacing: CGFloat = .medium,
         showBorder: Bool = true,
-        titleStyle: Heading.Style = .title4,
+        titleStyle: Heading.Style = .h6,
         status: Status? = nil,
         backgroundColor: Color? = .whiteDarker,
         contentLayout: CardContentLayout = .default(),
@@ -161,7 +161,7 @@ public extension Card {
         action: CardAction = .none,
         headerSpacing: CGFloat = .medium,
         showBorder: Bool = true,
-        titleStyle: Heading.Style = .title4,
+        titleStyle: Heading.Style = .h6,
         status: Status? = nil,
         backgroundColor: Color? = .whiteDarker
     ) where Content == EmptyView {

@@ -199,7 +199,7 @@ struct RadioPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Radio", style: .title2)
+            Heading("Zuper Radio", style: .h2)
             Radio("Radio unchecked", state: .normal, isChecked: false)
             Radio("Radio checked", state: .normal, isChecked: true)
             Radio("Disable Radio checked", state: .disabled, isChecked: false)

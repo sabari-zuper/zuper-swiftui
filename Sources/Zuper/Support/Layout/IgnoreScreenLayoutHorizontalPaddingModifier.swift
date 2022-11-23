@@ -45,11 +45,11 @@ struct ScreenLayoutHorizontalPaddingModifierPreviews: PreviewProvider {
 
     static func content(padding: ScreenLayoutPadding) -> some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Heading", style: .title1)
+            Heading("Heading", style: .h1)
 
-//            Card("Card", contentLayout: .fill) {
-//                ListChoice("ListChoice")
-//            }
+            Card("Card", contentLayout: .fill) {
+                ListChoice("ListChoice")
+            }
 
             Color.blueLight
                 .frame(height: 100)

@@ -102,75 +102,119 @@ public extension Heading {
         case display
         /// 22 pts.
         case displaySubtitle
-        /// 28 pts.
-        case title1
-        /// 22 pts.
-        case title2
-        /// 18 pts.
-        case title3
-        /// 16 pts.
-        case title4
+//        /// 28 pts.
+//        case title1
+//        /// 22 pts.
+//        case title2
+//        /// 18 pts.
+//        case title3
+//        /// 16 pts.
+//        case title4
         /// 14 pts.
         case title5
         /// 12 pts.
         case title6
-
+        
+        /// 36 pts.
+        case h1
+        /// 28 pts.
+        case h2
+        /// 24 pts.
+        case h3
+        /// 20 pts.
+        case h4
+        /// 18 pts.
+        case h5
+        /// 16 pts.
+        case h6
+        
         public var size: CGFloat {
             switch self {
-                case .display:          return 40
-                case .displaySubtitle:  return 22
-                case .title1:           return 28
-                case .title2:           return 22
-                case .title3:           return Text.Size.xLarge.value
-                case .title4:           return Text.Size.large.value
-                case .title5:           return Text.Size.normal.value
-                case .title6:           return Text.Size.small.value
+            case .display:          return 40
+            case .displaySubtitle:  return 22
+//            case .title1:           return 28
+//            case .title2:           return 22
+//            case .title3:           return Text.Size.xLarge.value
+//            case .title4:           return Text.Size.large.value
+            case .title5:           return Text.Size.normal.value
+            case .title6:           return Text.Size.small.value
+            case .h1:
+                return 36
+            case .h2:
+                return 28
+            case .h3:
+                return 24
+            case .h4:
+                return 20
+            case .h5:
+                return 18
+            case .h6:
+                return 16
             }
         }
-
+        
         public var textStyle: Font.TextStyle {
             switch self {
-                case .display:
-                    return .largeTitle
-                case .displaySubtitle:
-                    if #available(iOS 14.0, *) {
-                        return .title2
-                    } else {
-                        return .headline
-                    }
-                case .title1:
-                    return .title
-                case .title2:
-                    if #available(iOS 14.0, *) {
-                        return .title2
-                    } else {
-                        return .headline
-                    }
-                case .title3:
-                    if #available(iOS 14.0, *) {
-                        return .title3
-                    } else {
-                        return .callout
-                    }
-                case .title4:
-                    return .callout
-                case .title5:
+            case .display:
+                return .largeTitle
+            case .displaySubtitle:
+                if #available(iOS 14.0, *) {
+                    return .title2
+                } else {
                     return .headline
-                case .title6:
-                    return .headline
+                }
+                //            case .title1:
+                //                return .title
+                //            case .title2:
+                //                if #available(iOS 14.0, *) {
+                //                    return .title2
+                //                } else {
+                //                    return .headline
+                //                }
+                //            case .title3:
+                //                if #available(iOS 14.0, *) {
+                //                    return .title3
+                //                } else {
+                //                    return .callout
+                //                }
+//                            case .title4:
+//                                return .callout
+                            case .title5:
+                                return .headline
+                            case .title6:
+                                return .headline
+            case .h1:
+                return .title
+            case .h2:
+                return .title
+            case .h3:
+                return .title
+            case .h4:
+                return .title
+            case .h5:
+                return .title
+            case .h6:
+                return .title
             }
         }
-
+        
         public var lineHeight: CGFloat {
             switch self {
-                case .display:          return 48
-                case .displaySubtitle:  return 28
-                case .title1:           return 32
-                case .title2:           return 28
-                case .title3:           return Text.Size.large.lineHeight
-                case .title4:           return Text.Size.normal.lineHeight
-                case .title5:           return Text.Size.normal.lineHeight
-                case .title6:           return Text.Size.small.lineHeight
+            case .display:          return 48
+            case .displaySubtitle:  return 28
+//            case .title1:           return 32
+//            case .title2:           return 28
+//            case .title3:           return Text.Size.large.lineHeight
+//            case .title4:           return Text.Size.normal.lineHeight
+            case .title5:           return Text.Size.normal.lineHeight
+            case .title6:           return Text.Size.small.lineHeight
+            case .h1:               return 42
+            case .h2:               return 32
+            case .h3:               return 28
+            case .h4:               return 24
+            case .h5:               return 20
+            case .h6:               return 20
+                
             }
         }
 
@@ -178,23 +222,39 @@ public extension Heading {
             switch self {
                 case .display:          return 52
                 case .displaySubtitle:  return 30
-                case .title1:           return 38
-                case .title2:           return 30
-                case .title3:           return 26
-                case .title4:           return 22
+//                case .title1:           return 38
+//                case .title2:           return 30
+//                case .title3:           return 26
+//                case .title4:           return 22
                 case .title5:           return 20
                 case .title6:           return 18
+                case .h1:               return 48
+                case .h2:               return 38
+                case .h3:               return 30
+                case .h4:               return 26
+                case .h5:               return 22
+                case .h6:               return 20
+                    
+                }
             }
-        }
-
-        public var weight: Font.Weight {
-            switch self {
-                case .display, .title1, .title4, .title5, .title6:      return .bold
-                case .displaySubtitle, .title2, .title3:                return .medium
+            
+            public var weight: Font.Weight {
+                switch self {
+                case .display:
+                    return .bold
+                case .displaySubtitle:
+                    return .medium
+                    
+                    //.title1, .title4, .title5, .title6:      return .bold
+//                case .displaySubtitle, .title2, .title3:                return .medium
+                case .title5, .title6:
+                    return .semibold
+                case .h1, .h2, .h3, .h4, .h5, .h6:
+                    return .semibold
+                }
             }
         }
     }
-}
 
 // MARK: - TextRepresentable
 extension Heading: TextRepresentable {
@@ -211,6 +271,7 @@ struct HeadingPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
+            zuper
             standalone
             sizes
             multiline
@@ -222,10 +283,22 @@ struct HeadingPreviews: PreviewProvider {
 
     static var standalone: some View {
         VStack {
-            Heading("Heading", style: .title1)
-            Heading("", style: .title1) // EmptyView
+            Heading("Heading", style: .h1)
+            Heading("", style: .h2) // EmptyView
         }
         .previewDisplayName("Heading")
+    }
+    
+    static var zuper: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Heading("Zuper, Field service", style: .h1)
+            Heading("Zuper, Field service", style: .h2)
+            Heading("Zuper, Field service", style: .h3)
+            Heading("Zuper, Field service", style: .h4)
+            Heading("Zuper, Field service", style: .h5)
+            Heading("Zuper, Field service", style: .h6)
+        }
+        .previewDisplayName("Zuper Heading")
     }
 
     static var sizes: some View {
@@ -234,12 +307,12 @@ struct HeadingPreviews: PreviewProvider {
             heading("Display Subtitle", style: .displaySubtitle)
             Separator()
                 .padding(.vertical, .small)
-            heading("Title 1", style: .title1)
-            heading("Title 2", style: .title2)
-            heading("Title 3", style: .title3)
-            heading("Title 4", style: .title4)
-            heading("Title 5", style: .title5)
-            heading("TITLE 6", style: .title6)
+            heading("Title 1", style: .h1)
+            heading("Title 2", style: .h2)
+            heading("Title 3", style: .h3)
+            heading("Title 4", style: .h4)
+            heading("Title 5", style: .h5)
+            heading("TITLE 6", style: .h6)
         }
         .previewDisplayName("Styles")
     }
@@ -250,12 +323,12 @@ struct HeadingPreviews: PreviewProvider {
             heading("<ref><u>Display subtitle</u></ref> with a very large and <strong>multiline</strong> content", style: .displaySubtitle)
             Separator()
                 .padding(.vertical, .small)
-            heading("<ref><u>Title 1</u></ref> with a very large and <strong>multiline</strong> content", style: .title1)
-            heading("<ref><u>Title 2</u></ref> with a very very large and <strong>multiline</strong> content", style: .title2)
-            heading("<ref><u>Title 3</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .title3)
-            heading("<ref><u>Title 4</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .title4)
-            heading("<ref><u>Title 5</u></ref> with a very very very very very large and <strong>multiline</strong> content", style: .title5, color: .custom(.blueDarker))
-            heading("<ref><u>TITLE 6</u></ref> WITH A VERY VERY VERY VERY VERY LARGE AND <strong>MULTILINE</strong> CONTENT", style: .title6, color: nil)
+            heading("<ref><u>Title 1</u></ref> with a very large and <strong>multiline</strong> content", style: .h1)
+            heading("<ref><u>Title 2</u></ref> with a very very large and <strong>multiline</strong> content", style: .h2)
+            heading("<ref><u>Title 3</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .h3)
+            heading("<ref><u>Title 4</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .h4)
+            heading("<ref><u>Title 5</u></ref> with a very very very very very large and <strong>multiline</strong> content", style: .h5, color: .custom(.blueDarker))
+            heading("<ref><u>TITLE 6</u></ref> WITH A VERY VERY VERY VERY VERY LARGE AND <strong>MULTILINE</strong> CONTENT", style: .h6, color: nil)
         }
         .foregroundColor(.inkNormal)
         .previewDisplayName("Multiline")
@@ -263,11 +336,11 @@ struct HeadingPreviews: PreviewProvider {
 
     static var concatenated: some View {
         Group {
-            Heading("<ref><u>Title 4</u></ref> with <strong>multiline</strong>", style: .title4)
+            Heading("<ref><u>Title 4</u></ref> with <strong>multiline</strong>", style: .h4)
             +
-            Heading(" <ref><u>Title 5</u></ref> with <strong>multiline</strong>", style: .title5, color: .custom(.greenDark), accentColor: .blueDarker)
+            Heading(" <ref><u>Title 5</u></ref> with <strong>multiline</strong>", style: .h5, color: .custom(.greenDark), accentColor: .blueDarker)
             +
-            Heading(" <ref><u>TITLE 6</u></ref> WITH <strong>MULTILINE</strong> CONTENT", style: .title6, color: nil)
+            Heading(" <ref><u>TITLE 6</u></ref> WITH <strong>MULTILINE</strong> CONTENT", style: .h6, color: nil)
         }
         .foregroundColor(.inkNormal)
         .previewDisplayName("Concatenated")

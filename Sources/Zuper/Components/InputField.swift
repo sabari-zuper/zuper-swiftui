@@ -421,7 +421,7 @@ struct InputFieldPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Heading("Zuper Input Field", style: .title2)
+            Heading("Zuper Input Field", style: .h2)
             
             InputField(label + " prefix icon",value: .constant(""),prefix: gridIcon, prefixContent: "USD", placeholder: "placeholder", message: .none, style: .default)
             
@@ -573,7 +573,7 @@ struct InputFieldLivePreviews: PreviewProvider {
         var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: .medium) {
-                    Heading("Heading", style: .title2)
+                    Heading("Heading", style: .h2)
 
                     Text("Some text, but also very long and multi-line to test that it works.")
 
@@ -646,7 +646,7 @@ struct InputFieldLivePreviews: PreviewProvider {
     static var securedWrapper: some View {
         StateWrapper(initialState: "textfield-should-respect-long-password-and-screen-bounds-1234567890") { state in
             VStack(alignment: .leading, spacing: .medium) {
-                Heading("Secured TextField with long init value", style: .title2)
+                Heading("Secured TextField with long init value", style: .h2)
 
                 InputField(
                     value: state,

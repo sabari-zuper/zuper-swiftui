@@ -361,12 +361,12 @@ struct IconPreviews: PreviewProvider {
     
     static var snapshotSizesHeading: some View {
         VStack(alignment: .leading, spacing: .small) {
-            headingStack(.title6)
-            headingStack(.title5)
-            headingStack(.title4)
-            headingStack(.title3)
-            headingStack(.title2)
-            headingStack(.title1)
+            headingStack(.h6)
+            headingStack(.h5)
+            headingStack(.h4)
+            headingStack(.h3)
+            headingStack(.h2)
+            headingStack(.h1)
             headingStack(.displaySubtitle)
             headingStack(.display)
         }
@@ -375,12 +375,12 @@ struct IconPreviews: PreviewProvider {
     
     static var snapshotSizesLabelHeading: some View {
         VStack(alignment: .leading, spacing: .small) {
-            labelHeadingStack(.title6)
-            labelHeadingStack(.title5)
-            labelHeadingStack(.title4)
-            labelHeadingStack(.title3)
-            labelHeadingStack(.title2)
-            labelHeadingStack(.title1)
+            labelHeadingStack(.h6)
+            labelHeadingStack(.h5)
+            labelHeadingStack(.h4)
+            labelHeadingStack(.h3)
+            labelHeadingStack(.h2)
+            labelHeadingStack(.h1)
             labelHeadingStack(.displaySubtitle)
             labelHeadingStack(.display)
         }

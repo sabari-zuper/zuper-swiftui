@@ -191,7 +191,7 @@ public extension Tile {
         showBorder: Bool = true,
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
-        titleStyle: Heading.Style = .title4,
+        titleStyle: Heading.Style = .h6,
         descriptionColor: Text.Color = .inkNormal,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
@@ -221,7 +221,7 @@ public extension Tile {
         showBorder: Bool = true,
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
-        titleStyle: Heading.Style = .title4,
+        titleStyle: Heading.Style = .h6,
         descriptionColor: Text.Color = .inkNormal,
         action: @escaping () -> Void = {}
     ) where Content == EmptyView {

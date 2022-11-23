@@ -86,7 +86,7 @@ public extension Label {
 
     enum Style {
     
-        case heading(_ style: Heading.Style = .title4, color: Heading.Color? = .inkDark)
+        case heading(_ style: Heading.Style = .h4, color: Heading.Color? = .inkDark)
         case text(
             _ size: Text.Size = .normal,
             weight: Font.Weight = .regular,
@@ -99,13 +99,13 @@ public extension Label {
         /// 22 pts.
         public static let displaySubtitle = Self.heading(.displaySubtitle)
         /// 28 pts.
-        public static let title1 = Self.heading(.title1)
+        public static let title1 = Self.heading(.h2)
         /// 22 pts.
-        public static let title2 = Self.heading(.title2)
+        public static let title2 = Self.heading(.h3)
         /// 18 pts.
-        public static let title3 = Self.heading(.title3)
+        public static let title3 = Self.heading(.h5)
         /// 16 pts.
-        public static let title4 = Self.heading(.title4)
+        public static let title4 = Self.heading(.h6)
         /// 14 pts.
         public static let title5 = Self.heading(.title5)
         /// 12 pts.
@@ -244,7 +244,7 @@ struct LabelPreviews: PreviewProvider {
             Icon(content: gridIcon, size: .label(.title2))
 
             VStack(alignment: .leading, spacing: .xSmall) {
-                Heading("Label with long multiline text", style: .title2)
+                Heading("Label with long multiline text", style: .h2)
                 Text("Description very very very very verylong multiline text", color: .inkNormal)
                 contentPlaceholder
             }
