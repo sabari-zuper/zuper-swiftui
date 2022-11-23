@@ -155,10 +155,10 @@ struct ScreenLayoutModifierPreviews: PreviewProvider {
 
     static var snapshot: some View {
         VStack(alignment: .leading, spacing: .medium) {
-//            Alert(AlertPreviews.title, description: AlertPreviews.description, icon: .grid, buttons: AlertPreviews.primaryAndSecondaryConfiguration) {
-//                Illustration(.accommodation)
-//                    .padding(.horizontal, .xxLarge)
-//            }
+            Alert(AlertPreviews.title, description: AlertPreviews.description, icon: gridIcon, buttons: AlertPreviews.primaryAndSecondaryConfiguration) {
+                Illustration("ic_time", bundle: .current)
+                    .padding(.horizontal, .xxLarge)
+            }
 
             Text(TextPreviews.multilineFormattedText)
 
