@@ -5,6 +5,8 @@ public struct FieldLabel: View {
 
     let label: String
     let accentColor: UIColor?
+    let linkColor: TextLink.Color
+    let linkAction: TextLink.Action
 
     public var body: some View {
         Text(label, size: .normal, weight: .medium, accentColor: accentColor)
@@ -15,10 +17,14 @@ public struct FieldLabel: View {
     /// Create Zuper form field label.
     public init(
         _ label: String,
-        accentColor: UIColor? = nil
+        accentColor: UIColor? = nil,
+        linkColor: TextLink.Color = .primary,
+        linkAction: @escaping TextLink.Action = { _, _ in }
     ) {
         self.label = label
         self.accentColor = accentColor
+        self.linkColor = linkColor
+        self.linkAction = linkAction
     }
 }
 

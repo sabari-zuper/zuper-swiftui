@@ -16,6 +16,8 @@ public struct Text: View {
     let lineSpacing: CGFloat?
     let alignment: TextAlignment
     let accentColor: UIColor
+    let linkColor: TextLink.Color
+    let linkAction: TextLink.Action
     let isSelectable: Bool
     let kerning: CGFloat
     let strikethrough: Bool
@@ -26,43 +28,64 @@ public struct Text: View {
                 .lineSpacing(lineSpacing ?? 0)
                 .multilineTextAlignment(alignment)
                 .fixedSize(horizontal: false, vertical: true)
-            //  .overlay(selectableText)
-                .accessibility(removeTraits:[])
+                .overlay(selectableText)
+                .accessibility(removeTraits: showTextLinks ? .isStaticText : [])
+                .accessibility(hidden: showTextLinks)
+                .overlay(textLinks)
         }
     }
-    
-    //    @ViewBuilder var selectableText: some View {
-    //        if isSelectable {
-    //            GeometryReader { geometry in
-    //                SelectableLabelWrapper(text: attributedText.string)
-    //                    .frame(
-    //                        width: geometry.size.width,
-    //                        height: geometry.size.height
-    //                    )
-    //            }
-    //        }
-    //    }
-    
-    func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
-        return textContent {
-            plainTextContent {
-                SwiftUI.Text(verbatim: content)
+
+    @ViewBuilder var textLinks: some View {
+        if showTextLinks {
+            GeometryReader { geometry in
+                TextLink(content: textLinkContent, bounds: geometry.size, color: linkColor) { url, text in
+                    HapticsProvider.sendHapticFeedback(.light(0.5))
+                    linkAction(url, text)
+                }
+                .accessibility(addTraits: .isLink)
+                .accessibility(label: .init(content))
             }
         }
-        .zuperFont(
-            size: size.value,
-            weight: weight,
-            style: size.textStyle,
-            sizeCategory: sizeCategory
-        )
     }
-    
+
+    @ViewBuilder var selectableText: some View {
+        if isSelectable {
+            GeometryReader { geometry in
+                SelectableLabelWrapper(text: attributedText.string)
+                    .frame(
+                        width: geometry.size.width,
+                        height: geometry.size.height
+                    )
+            }
+        }
+    }
+
+    func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
+        if content.containsHtmlFormatting {
+            return textContent {
+                SwiftUI.Text(attributedText)
+            }
+        } else {
+            return textContent {
+                plainTextContent {
+                    SwiftUI.Text(verbatim: content)
+                }
+            }
+            .zuperFont(
+                size: size.value,
+                weight: weight,
+                style: size.textStyle,
+                sizeCategory: sizeCategory
+            )
+        }
+    }
+
     func textContent(@ViewBuilder content: () -> SwiftUI.Text) -> SwiftUI.Text {
         content()
             .strikethrough(strikethrough, color: foregroundColor.map(SwiftUI.Color.init))
             .kerning(kerning)
     }
-    
+
     func plainTextContent(@ViewBuilder content: () -> SwiftUI.Text) -> SwiftUI.Text {
         if let foregroundColor = foregroundColor {
             return content()
@@ -71,11 +94,40 @@ public struct Text: View {
             return content()
         }
     }
-    
+
+    var showTextLinks: Bool {
+        content.containsHtmlFormatting && content.containsTextLinks
+    }
+
+    var textLinkContent: NSAttributedString {
+        TagAttributedStringBuilder.all.attributedStringForLinks(
+            content,
+            fontSize: attributedTextScaledSize,
+            fontWeight: weight,
+            lineSpacing: lineSpacing,
+            alignment: alignment
+        )
+    }
+
     var foregroundColor: UIColor? {
         color?.uiValue
     }
-    
+
+    var attributedText: NSAttributedString {
+        TagAttributedStringBuilder.all.attributedString(
+            content,
+            fontSize: attributedTextScaledSize,
+            fontWeight: weight,
+            lineSpacing: lineSpacing,
+            color: foregroundColor,
+            linkColor: .clear,
+            accentColor: accentColor
+        )
+    }
+
+    var attributedTextScaledSize: CGFloat {
+        size.value * sizeCategory.ratio
+    }
 }
 
 // MARK: - Inits
@@ -104,9 +156,11 @@ public extension Text {
         lineSpacing: CGFloat? = nil,
         alignment: TextAlignment = .leading,
         accentColor: UIColor? = nil,
+        linkColor: TextLink.Color = .primary,
         isSelectable: Bool = false,
         strikethrough: Bool = false,
-        kerning: CGFloat = 0
+        kerning: CGFloat = 0,
+        linkAction: @escaping TextLink.Action = { _, _ in }
     ) {
         self.content = content
         self.size = size
@@ -115,9 +169,11 @@ public extension Text {
         self.lineSpacing = lineSpacing
         self.alignment = alignment
         self.accentColor = accentColor ?? color?.uiValue ?? .inkDark
+        self.linkColor = linkColor
         self.isSelectable = isSelectable
         self.strikethrough = strikethrough
         self.kerning = kerning
+        self.linkAction = linkAction
     }
 }
 

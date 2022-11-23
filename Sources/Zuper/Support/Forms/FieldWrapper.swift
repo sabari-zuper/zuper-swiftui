@@ -80,6 +80,8 @@ public extension FieldWrapper where Label == FieldLabel {
     init(
         _ label: String,
         labelAccentColor: UIColor? = nil,
+        labelLinkColor: TextLink.Color = .primary,
+        labelLinkAction: @escaping TextLink.Action = { _, _ in },
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content,
@@ -90,7 +92,7 @@ public extension FieldWrapper where Label == FieldLabel {
             messageHeight: messageHeight,
             content: content,
             label: {
-                FieldLabel(label, accentColor: labelAccentColor)
+                FieldLabel(label, accentColor: labelAccentColor, linkColor: labelLinkColor, linkAction: labelLinkAction)
             },
             footer: footer
         )
@@ -103,6 +105,8 @@ public extension FieldWrapper where Label == FieldLabel, Footer == EmptyView {
     init(
         _ label: String,
         labelAccentColor: UIColor? = nil,
+        labelLinkColor: TextLink.Color = .primary,
+        labelLinkAction: @escaping TextLink.Action = { _, _ in },
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content
@@ -110,6 +114,8 @@ public extension FieldWrapper where Label == FieldLabel, Footer == EmptyView {
         self.init(
             label,
             labelAccentColor: labelAccentColor,
+            labelLinkColor: labelLinkColor,
+            labelLinkAction: labelLinkAction,
             message: message,
             messageHeight: messageHeight,
             content: content,
@@ -136,7 +142,7 @@ struct FieldWrapperPreviews: PreviewProvider {
             FieldWrapper {
                 contentPlaceholder
             } label: {
-                FieldLabel("Form Field Label with <ref>accent</ref> and <applink1>TextLink</applink1>", accentColor: .orangeNormal)
+                FieldLabel("Form Field Label with <ref>accent</ref> and <applink1>TextLink</applink1>", accentColor: .orangeNormal, linkColor: .status(.info))
             }
 
             FieldWrapper("", message: .none) {

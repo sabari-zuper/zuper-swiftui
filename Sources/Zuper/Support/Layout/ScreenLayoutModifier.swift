@@ -90,105 +90,105 @@ public extension View {
 }
 
 // MARK: - Previews
-//struct ScreenLayoutModifierPreviews: PreviewProvider {
-//
-//    static var previews: some View {
-//        PreviewWrapper {
-//            Group {
-//                fullDefault
-//                fullCompact
-//                fullCustom
-//                horizontal
-//                horizontalAndBottom
-//                noPaddingCustomWidth
-//                snapshot
-//            }
-//            .previewLayout(.sizeThatFits)
-//
-//            ScrollView {
-//                snapshot
-//            }
-//        }
-//    }
-//
-//    static var fullDefault: some View {
-//        Color.white
-//            .screenLayout()
-//            .background(Color.greenLight)
-//            .previewDisplayName("Full Default")
-//    }
-//
-//    static var fullCompact: some View {
-//        Color.white
-//            .screenLayout(padding: .compact)
-//            .background(Color.greenLight)
-//            .previewDisplayName("Full Compact")
-//    }
-//
-//    static var fullCustom: some View {
-//        Color.white
-//            .screenLayout(padding: .custom(horizontal: .xxSmall, top: .xxxLarge, bottom: .medium))
-//            .background(Color.greenLight)
-//            .previewDisplayName("Full Custom")
-//    }
-//
-//    static var horizontal: some View {
-//        Color.white
-//            .screenLayout(.horizontal)
-//            .background(Color.greenLight)
-//            .previewDisplayName("Horizontal")
-//    }
-//
-//    static var horizontalAndBottom: some View {
-//        Color.white
-//            .screenLayout([.horizontal, .bottom])
-//            .background(Color.greenLight)
-//            .previewDisplayName("Horizontal and Bottom")
-//    }
-//
-//    static var noPaddingCustomWidth: some View {
-//        Color.white
-//            .screenLayout([], maxContentWidth: 200)
-//            .background(Color.greenLight)
-//            .previewDisplayName("No padding")
-//    }
-//
-//    static var snapshot: some View {
-//        VStack(alignment: .leading, spacing: .medium) {
+struct ScreenLayoutModifierPreviews: PreviewProvider {
+
+    static var previews: some View {
+        PreviewWrapper {
+            Group {
+                fullDefault
+                fullCompact
+                fullCustom
+                horizontal
+                horizontalAndBottom
+                noPaddingCustomWidth
+                snapshot
+            }
+            .previewLayout(.sizeThatFits)
+
+            ScrollView {
+                snapshot
+            }
+        }
+    }
+
+    static var fullDefault: some View {
+        Color.white
+            .screenLayout()
+            .background(Color.greenLight)
+            .previewDisplayName("Full Default")
+    }
+
+    static var fullCompact: some View {
+        Color.white
+            .screenLayout(padding: .compact)
+            .background(Color.greenLight)
+            .previewDisplayName("Full Compact")
+    }
+
+    static var fullCustom: some View {
+        Color.white
+            .screenLayout(padding: .custom(horizontal: .xxSmall, top: .xxxLarge, bottom: .medium))
+            .background(Color.greenLight)
+            .previewDisplayName("Full Custom")
+    }
+
+    static var horizontal: some View {
+        Color.white
+            .screenLayout(.horizontal)
+            .background(Color.greenLight)
+            .previewDisplayName("Horizontal")
+    }
+
+    static var horizontalAndBottom: some View {
+        Color.white
+            .screenLayout([.horizontal, .bottom])
+            .background(Color.greenLight)
+            .previewDisplayName("Horizontal and Bottom")
+    }
+
+    static var noPaddingCustomWidth: some View {
+        Color.white
+            .screenLayout([], maxContentWidth: 200)
+            .background(Color.greenLight)
+            .previewDisplayName("No padding")
+    }
+
+    static var snapshot: some View {
+        VStack(alignment: .leading, spacing: .medium) {
 //            Alert(AlertPreviews.title, description: AlertPreviews.description, icon: .grid, buttons: AlertPreviews.primaryAndSecondaryConfiguration) {
 //                Illustration(.accommodation)
 //                    .padding(.horizontal, .xxLarge)
 //            }
-//
-//            Text(TextPreviews.multilineFormattedText)
-//
-//            Illustration(.accommodation)
-//                .padding(.horizontal, .xxLarge)
-//
-//            Button("Button", icon: .grid)
-//
-//            Card("Card title", description: "Card description", icon: .grid, action: .buttonLink("ButtonLink")) {
-//                TileGroup {
-//                    Tile("Tile 1")
-//                    Tile("Tile 2")
-//                }
-//                Tile("Tile 3")
-//                contentPlaceholder
-//            }
-//
-//            TileGroup {
-//                Tile(TilePreviews.title, description: TilePreviews.description, icon: .grid)
-//                Tile(TilePreviews.title, description: TilePreviews.description, icon: .grid)
-//            }
-//
-//            Tile(TilePreviews.title, description: TilePreviews.description, icon: .grid)
-//
-//            Card("Card", contentLayout: .fill) {
-//                ListChoice(ListChoicePreviews.title, value: ListChoicePreviews.value)
-//                ListChoice(ListChoicePreviews.title, description: ListChoicePreviews.description)
-//            }
-//        }
-//        .screenLayout()
-//        .background(Color.screen)
-//    }
-//}
+
+            Text(TextPreviews.multilineFormattedText)
+
+            Illustration("ic_time", bundle: .current)
+                .padding(.horizontal, .xxLarge)
+
+            Button("Button", icon: gridIcon)
+
+            Card("Card title", description: "Card description", icon: gridIcon, action: .buttonLink("ButtonLink")) {
+                TileGroup {
+                    Tile("Tile 1")
+                    Tile("Tile 2")
+                }
+                Tile("Tile 3")
+                contentPlaceholder
+            }
+
+            TileGroup {
+                Tile(TilePreviews.title, description: TilePreviews.description, icon: gridIcon)
+                Tile(TilePreviews.title, description: TilePreviews.description, icon: gridIcon)
+            }
+
+            Tile(TilePreviews.title, description: TilePreviews.description, icon: gridIcon)
+
+            Card("Card", contentLayout: .fill) {
+                ListChoice(ListChoicePreviews.title, value: ListChoicePreviews.value)
+                ListChoice(ListChoicePreviews.title, description: ListChoicePreviews.description)
+            }
+        }
+        .screenLayout()
+        .background(Color.screen)
+    }
+}

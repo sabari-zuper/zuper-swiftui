@@ -46,13 +46,15 @@ public struct Label: View {
         switch style {
             case .heading(let style, let color):
                 Heading(title, style: style, color: color)
-            case .text(let size, let weight, let color, let accentColor):
+            case .text(let size, let weight, let color, let accentColor, let linkColor, let linkAction):
                 Text(
                     title,
                     size: size,
                     color: color,
                     weight: weight,
-                    accentColor: accentColor
+                    accentColor: accentColor,
+                    linkColor: linkColor,
+                    linkAction: linkAction
                 )
         }
     }
@@ -91,7 +93,9 @@ public extension Label {
             _ size: Text.Size = .normal,
             weight: Font.Weight = .regular,
             color: Text.Color? = .inkDark,
-            accentColor: UIColor = .inkDark
+            accentColor: UIColor = .inkDark,
+            linkColor: TextLink.Color = .primary,
+            linkAction: TextLink.Action = { _, _ in }
         )
     
         /// 40 pts.
@@ -114,28 +118,28 @@ public extension Label {
         var size: CGFloat {
             switch self {
                 case .heading(let style, _):            return style.size
-                case .text(let size, _, _, _):    return size.value
+                case .text(let size, _, _, _, _, _):    return size.value
             }
         }
 
         var textStyle: Font.TextStyle {
             switch self {
                 case .heading(let style, _):            return style.textStyle
-                case .text(let size, _, _, _):    return size.textStyle
+                case .text(let size, _, _, _, _, _):    return size.textStyle
             }
         }
         
         var iconSize: CGFloat {
             switch self {
                 case .heading(let style, _):            return style.iconSize
-                case .text(let size, _, _, _):    return size.iconSize
+                case .text(let size, _, _, _, _, _):    return size.iconSize
             }
         }
         
         var lineHeight: CGFloat {
             switch self {
                 case .heading(let style, _):            return style.lineHeight
-                case .text(let size, _, _, _):    return size.lineHeight
+                case .text(let size, _, _, _, _, _):    return size.lineHeight
             }
         }
         
@@ -146,7 +150,7 @@ public extension Label {
         var color: Color? {
             switch self {
                 case .heading(_ , let color):           return color?.value
-                case .text(_, _, let color, _):   return color?.value
+                case .text(_, _, let color, _, _, _):   return color?.value
             }
         }
     }
