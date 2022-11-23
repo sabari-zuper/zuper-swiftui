@@ -89,11 +89,11 @@ struct StorybookDetail: View {
             case (.alert, 0):               StorybookAlert.basic
             case (.alert, 2):               StorybookAlert.mix
             case (.alert, 3):               StorybookAlert.live
-       //     case (.badge, 0):               StorybookBadge.basic
+            case (.badge, 0):               StorybookBadge.basic
          //   case (.badge, 1):               StorybookBadge.gradient
-         //   case (.badge, 2):               StorybookBadge.mix
-        //    case (.badgeList, 0):           StorybookBadgeList.basic
-        //    case (.badgeList, 1):           StorybookBadgeList.mix
+            case (.badge, 1):               StorybookBadge.mix
+            case (.badgeList, 0):           StorybookBadgeList.basic
+            case (.badgeList, 1):           StorybookBadgeList.mix
             case (.button, 0):              StorybookButton.basic
             case (.button, 1):              StorybookButton.status
          //   case (.button, 2):              StorybookButton.gradient
