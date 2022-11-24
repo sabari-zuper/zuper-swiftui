@@ -148,7 +148,7 @@ extension Tag {
                 case (true, false, false):      return .blueLight
                 case (true, true, false):       return .blueNormal
                 case (false, false, false):     return .cloudNormal
-                case (false, true, false):      return .inkLightHover
+                case (false, true, false):      return .inkLight
                 // Pressed
                 case (true, false, true):       return .blueLightActive
                 case (true, true, true):        return .blueNormalActive

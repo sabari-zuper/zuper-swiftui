@@ -1,8 +1,6 @@
 import SwiftUI
 
 /// Prompts users to take or complete an action.
-///
-/// - Note: [Orbit definition](https://orbit.kiwi/components/overlay/dialog/)
 public struct Dialog: View {
 
     public static let shadowColor = Color.inkNormal
@@ -82,7 +80,7 @@ public struct Dialog: View {
 // MARK: - Inits
 extension Dialog {
 
-    /// Creates Orbit Dialog component.
+    /// Creates Zuper Dialog component.
     public init(
         imgName: String = "",
         bundle:Bundle = .current,

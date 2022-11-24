@@ -137,7 +137,7 @@ struct StorybookDetail: View {
             case (.skeleton, 1):            StorybookSkeleton.atomic
          //   case (.socialButton, _):        StorybookSocialButton.basic
             case (.`switch`, _):            StorybookSwitch.basic
-          //  case (.tag, _):                 StorybookTag.basic
+            case (.tag, _):                 StorybookTag.basic
             case (.text, _):                StorybookText.basic
             case (.textLink, 0):            StorybookTextLink.basic
             case (.textLink, 1):            StorybookTextLink.live
