@@ -14,11 +14,11 @@ public extension UIFont {
         /// Size 16. Equals to `Title 3`.
         case large = 16
         /// Size 12
-        static let body3 = Size.small
+        public static let body3 = Size.small
         /// Size 14
-        static let body2 = Size.normal
+        public static let body2 = Size.normal
         /// Size 16
-        static let body1 = Size.large
+        public static let body1 = Size.large
         /// Size 16
         static let h6 = Size.large
 

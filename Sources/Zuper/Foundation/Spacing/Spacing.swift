@@ -12,6 +12,8 @@ public enum Spacing: CGFloat {
     case xSmall = 8
     /// 12 pts.
     case small = 12
+    /// 14 pts.
+    case normal = 14
     /// 16 pts.
     case medium = 16
     /// 20 pts.
@@ -35,6 +37,8 @@ public extension CGFloat {
     static let xSmall = Spacing.xSmall.rawValue
     /// 12 pts.
     static let small = Spacing.small.rawValue
+    /// 14 pts.
+    static let normal = Spacing.normal.rawValue
     /// 16 pts.
     static let medium = Spacing.medium.rawValue
     /// 20 pts.

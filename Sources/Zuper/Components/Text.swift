@@ -191,9 +191,9 @@ public extension Text {
         case xLarge
         case custom(CGFloat)
         
-        static let body3 = Size.small
-        static let body2 = Size.normal
-        static let body1 = Size.large
+        public static let body3 = Size.small
+        public static let body2 = Size.normal
+        public static let body1 = Size.large
         
         public var value: CGFloat {
             switch self {
