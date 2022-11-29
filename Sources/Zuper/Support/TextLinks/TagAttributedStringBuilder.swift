@@ -246,7 +246,7 @@ private extension TagAttributedStringBuilder.Tag {
                 } else if let font = textAttributes[.font] as? UIFont {
                     boldFont = .zuper(size: font.pointSize, weight: .bold)
                 } else {
-                    boldFont = .zuper(size: UIFont.Size.normal, weight: .bold)
+                    boldFont = .zuper(size: UIFont.Size.normal.cgFloat, weight: .bold)
                 }
 
                 return stringByAddingAttributes([.font: boldFont], to: currentAttributedString, at: result.ranges[1])
