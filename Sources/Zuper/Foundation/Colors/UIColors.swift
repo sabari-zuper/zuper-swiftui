@@ -152,12 +152,8 @@ public extension UIColor {
     // MARK: - White
     /// Zuper White color.
     static var whiteNormal = fromResource(named: "White")
-    /// Zuper White Active color.
-    static var whiteActive = fromResource(named: "White Active")
     /// Zuper White Darker color.
     static var whiteDarker = fromResource(named: "White Darker")
-    /// Zuper White Hover color.
-    static var whiteHover = fromResource(named: "White Hover")
     /// Zuper White Lighter color.
     static var whiteLighter = fromResource(named: "White Lighter")
     

@@ -31,7 +31,7 @@ public struct TileButtonStyle: SwiftUI.ButtonStyle {
         switch (backgroundColor, isPressed) {
             case (let backgroundColor?, true):          return backgroundColor.active
             case (let backgroundColor?, false):         return backgroundColor.normal
-            case (.none, true):                         return .whiteHover
+            case (.none, true):                         return .whiteNormal
             case (.none, false):                        return .whiteDarker
         }
     }

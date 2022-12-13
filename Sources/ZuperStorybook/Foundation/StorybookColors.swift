@@ -11,8 +11,8 @@ struct StorybookBasicColors: View {
 
                 HStack(spacing: 0) {
                     ColorContent(color: &.whiteNormal, uiColor: &.whiteNormal, label: "White")
-                    ColorContent(color: &.whiteHover, uiColor: &.whiteHover, label: "White", variant: "hover")
-                    ColorContent(color: &.whiteActive, uiColor: &.whiteActive, label: "White", variant: "active")
+//                    ColorContent(color: &.whiteHover, uiColor: &.whiteHover, label: "White", variant: "hover")
+//                    ColorContent(color: &.whiteActive, uiColor: &.whiteActive, label: "White", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
 

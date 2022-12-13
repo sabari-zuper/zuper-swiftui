@@ -148,12 +148,8 @@ public extension Color {
     // MARK: - White
     /// Zuper White color.
     static var whiteNormal = Color("White", bundle: .current)
-    /// Zuper White Active color.
-    static var whiteActive = Color("White Active", bundle: .current)
     /// Zuper White Darker color.
     static var whiteDarker = Color("White Darker", bundle: .current)
-    /// Zuper White Hover color.
-    static var whiteHover = Color("White Hover", bundle: .current)
     /// Zuper White Lighter color.
     static var whiteLighter = Color("White Lighter", bundle: .current)
     
