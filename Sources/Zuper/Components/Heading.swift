@@ -327,7 +327,7 @@ struct HeadingPreviews: PreviewProvider {
             heading("<ref><u>Title 2</u></ref> with a very very large and <strong>multiline</strong> content", style: .h2)
             heading("<ref><u>Title 3</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .h3)
             heading("<ref><u>Title 4</u></ref> with a very very very very large and <strong>multiline</strong> content", style: .h4)
-            heading("<ref><u>Title 5</u></ref> with a very very very very very large and <strong>multiline</strong> content", style: .h5, color: .custom(.blueDarker))
+            heading("<ref><u>Title 5</u></ref> with a very very very very very large and <strong>multiline</strong> content", style: .h5, color: .custom(.blueDark))
             heading("<ref><u>TITLE 6</u></ref> WITH A VERY VERY VERY VERY VERY LARGE AND <strong>MULTILINE</strong> CONTENT", style: .h6, color: nil)
         }
         .foregroundColor(.inkNormal)
@@ -338,7 +338,7 @@ struct HeadingPreviews: PreviewProvider {
         Group {
             Heading("<ref><u>Title 4</u></ref> with <strong>multiline</strong>", style: .h4)
             +
-            Heading(" <ref><u>Title 5</u></ref> with <strong>multiline</strong>", style: .h5, color: .custom(.greenDark), accentColor: .blueDarker)
+            Heading(" <ref><u>Title 5</u></ref> with <strong>multiline</strong>", style: .h5, color: .custom(.greenDark), accentColor: .blueDark)
             +
             Heading(" <ref><u>TITLE 6</u></ref> WITH <strong>MULTILINE</strong> CONTENT", style: .h6, color: nil)
         }

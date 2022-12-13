@@ -46,22 +46,22 @@ struct StorybookBasicColors: View {
             ColorCard(title: "Ink") {
                 HStack(spacing: 0) {
                     ColorContent(color: &.inkLight, uiColor: &.inkLight, label: "Ink Light")
-                    ColorContent(color: &.inkLightHover, uiColor: &.inkLightHover, label: "Ink Light", variant: "hover")
-                    ColorContent(color: &.inkLightActive, uiColor: &.inkLightActive, label: "Ink Light", variant: "active")
+//                    ColorContent(color: &.inkLightHover, uiColor: &.inkLightHover, label: "Ink Light", variant: "hover")
+//                    ColorContent(color: &.inkLightActive, uiColor: &.inkLightActive, label: "Ink Light", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: 0) {
                     ColorContent(color: &.inkNormal, uiColor: &.inkNormal, label: "Ink Normal")
                     ColorContent(color: &.inkNormalHover, uiColor: &.inkNormalHover, label: "Ink Normal", variant: "hover")
-                    ColorContent(color: &.inkNormalActive, uiColor: &.inkNormalActive, label: "Ink Normal", variant: "active")
+//                    ColorContent(color: &.inkNormalActive, uiColor: &.inkNormalActive, label: "Ink Normal", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
                 HStack(spacing: 0) {
                     ColorContent(color: &.inkDark, uiColor: &.inkDark, label: "Ink Dark")
-                    ColorContent(color: &.inkDarkHover, uiColor: &.inkDarkHover, label: "Ink Dark", variant: "hover")
-                    ColorContent(color: &.inkDarkActive, uiColor: &.inkDarkActive, label: "Ink Dark", variant: "active")
+//                    ColorContent(color: &.inkDarkHover, uiColor: &.inkDarkHover, label: "Ink Dark", variant: "hover")
+//                    ColorContent(color: &.inkDarkActive, uiColor: &.inkDarkActive, label: "Ink Dark", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
             }
@@ -95,8 +95,8 @@ struct StorybookProductColors: View {
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
-                ColorContent(color: &.productDarker, uiColor: &.productDarker, label: "Product Darker")
-                    .fixedSize(horizontal: false, vertical: true)
+//                ColorContent(color: &.productDarker, uiColor: &.productDarker, label: "Product Darker")
+//                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
@@ -128,8 +128,8 @@ struct StorybookStatusColors: View {
                 }
                 .fixedSize(horizontal: false, vertical: true)
 
-                ColorContent(color: &.blueDarker, uiColor: &.blueDarker, label: "Blue Darker")
-                    .fixedSize(horizontal: false, vertical: true)
+//                ColorContent(color: &.blueDarker, uiColor: &.blueDarker, label: "Blue Darker")
+//                    .fixedSize(horizontal: false, vertical: true)
             }
 
             ColorCard(title: "Red") {
@@ -153,9 +153,6 @@ struct StorybookStatusColors: View {
                     ColorContent(color: &.redDarkActive, uiColor: &.redDarkActive, label: "Red Dark", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
-
-                ColorContent(color: &.redDarker, uiColor: &.redDarker, label: "Red Darker")
-                    .fixedSize(horizontal: false, vertical: true)
             }
 
             ColorCard(title: "Green") {
@@ -179,9 +176,6 @@ struct StorybookStatusColors: View {
                     ColorContent(color: &.greenDarkActive, uiColor: &.greenDarkActive, label: "Green Dark", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
-
-                ColorContent(color: &.greenDarker, uiColor: &.greenDarker, label: "Green Darker")
-                    .fixedSize(horizontal: false, vertical: true)
             }
 
             ColorCard(title: "Orange") {
@@ -205,35 +199,7 @@ struct StorybookStatusColors: View {
                     ColorContent(color: &.orangeDarkActive, uiColor: &.orangeDarkActive, label: "Orange Dark", variant: "active")
                 }
                 .fixedSize(horizontal: false, vertical: true)
-
-                ColorContent(color: &.orangeDarker, uiColor: &.orangeDarker, label: "Orange Darker")
-                    .fixedSize(horizontal: false, vertical: true)
             }
-        }
-    }
-}
-
-struct StorybookBundleColors: View {
-
-    var body: some View {
-        ColorCard(title: "Bundle") {
-            HStack(spacing: 0) {
-                ColorContent(color: &.bundleBasicStart, uiColor: &.bundleBasicStart, label: "Bundle Basic", variant: "start")
-                ColorContent(color: &.bundleBasicEnd, uiColor: &.bundleBasicEnd, label: "Bundle Basic", variant: "end")
-            }
-            .fixedSize(horizontal: false, vertical: true)
-
-            HStack(spacing: 0) {
-                ColorContent(color: &.bundleMediumStart, uiColor: &.bundleMediumStart, label: "Bundle Medium", variant: "start")
-                ColorContent(color: &.bundleMediumEnd, uiColor: &.bundleMediumEnd, label: "Bundle Medium", variant: "end")
-            }
-            .fixedSize(horizontal: false, vertical: true)
-
-            HStack(spacing: 0) {
-                ColorContent(color: &.bundleTopStart, uiColor: &.bundleTopStart, label: "Bundle Top", variant: "start")
-                ColorContent(color: &.bundleTopEnd, uiColor: &.bundleTopEnd, label: "Bundle Top", variant: "end")
-            }
-            .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
@@ -413,8 +379,6 @@ struct StorybookColorsPreviews: PreviewProvider {
                 .previewDisplayName("Status")
             StorybookProductColors()
                 .previewDisplayName("Product")
-            StorybookBundleColors()
-                .previewDisplayName("Bundle")
         }
         .previewLayout(.sizeThatFits)
     }

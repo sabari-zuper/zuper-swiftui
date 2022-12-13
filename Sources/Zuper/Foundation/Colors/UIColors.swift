@@ -10,8 +10,6 @@ public extension UIColor {
     static var blueDarkActive = fromResource(named: "Blue Dark Active")
     /// Zuper Blue Dark Hover color.
     static var blueDarkHover = fromResource(named: "Blue Dark Hover")
-    /// Zuper Blue Darker color.
-    static var blueDarker = fromResource(named: "Blue Darker")
     /// Zuper Blue Light color.
     static var blueLight = fromResource(named: "Blue Light")
     /// Zuper Blue Light Active color.
@@ -58,8 +56,6 @@ public extension UIColor {
     static var greenDarkActive = fromResource(named: "Green Dark Active")
     /// Zuper Green Dark Hover color.
     static var greenDarkHover = fromResource(named: "Green Dark Hover")
-    /// Zuper Green Darker color.
-    static var greenDarker = fromResource(named: "Green Darker")
     /// Zuper Green Light color.
     static var greenLight = fromResource(named: "Green Light")
     /// Zuper Green Light Active color.
@@ -100,8 +96,6 @@ public extension UIColor {
     static var orangeDarkActive = fromResource(named: "Orange Dark Active")
     /// Zuper Orange Dark Hover color.
     static var orangeDarkHover = fromResource(named: "Orange Dark Hover")
-    /// Zuper Orange Darker color.
-    static var orangeDarker = fromResource(named: "Orange Darker")
     /// Zuper Orange Light color.
     static var orangeLight = fromResource(named: "Orange Light")
     /// Zuper Orange Light Active color.
@@ -122,8 +116,6 @@ public extension UIColor {
     static var productDarkActive = fromResource(named: "Product Dark Active")
     /// Zuper Product Dark Hover color.
     static var productDarkHover = fromResource(named: "Product Dark Hover")
-    /// Zuper Product Darker color.
-    static var productDarker = fromResource(named: "Product Darker")
     /// Zuper Product Light color.
     static var productLight = fromResource(named: "Product Light")
     /// Zuper Product Light Active color.
@@ -144,8 +136,6 @@ public extension UIColor {
     static var redDarkActive = fromResource(named: "Red Dark Active")
     /// Zuper Red Dark Hover color.
     static var redDarkHover = fromResource(named: "Red Dark Hover")
-    /// Zuper Red Darker color.
-    static var redDarker = fromResource(named: "Red Darker")
     /// Zuper Red Light color.
     static var redLight = fromResource(named: "Red Light")
     /// Zuper Red Light Active color.

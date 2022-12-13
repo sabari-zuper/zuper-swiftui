@@ -75,7 +75,7 @@ struct StorybookDetail: View {
             case (.colors, 0):              StorybookBasicColors()
             case (.colors, 1):              StorybookStatusColors()
             case (.colors, 2):              StorybookProductColors()
-            case (.colors, 3):              StorybookBundleColors()
+         //   case (.colors, 3):              StorybookBundleColors()
            // case (.icons, _):               StorybookIcons.storybook(filter: filter)
          //   case (.illustrations, _):       StorybookIllustrations.storybook(filter: filter)
             case (.typography, 0):          StorybookTypography.storybook

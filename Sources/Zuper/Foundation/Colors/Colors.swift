@@ -10,8 +10,6 @@ public extension Color {
     static var blueDarkActive = Color("Blue Dark Active", bundle: .current)
     /// Zuper Blue Dark Hover color.
     static var blueDarkHover = Color("Blue Dark Hover", bundle: .current)
-    /// Zuper Blue Darker color.
-    static var blueDarker = Color("Blue Darker", bundle: .current)
     /// Zuper Blue Light color.
     static var blueLight = Color("Blue Light", bundle: .current)
     /// Zuper Blue Light Active color.
@@ -24,12 +22,6 @@ public extension Color {
     static var blueNormalActive = Color("Blue Normal Active", bundle: .current)
     /// Zuper Blue Normal Hover color.
     static var blueNormalHover = Color("Blue Normal Hover", bundle: .current)
-
-    // MARK: - Bundle
-    /// Zuper Bundle Basic color.
-    static var bundleBasic = Color("Bundle Basic", bundle: .current)
-    /// Zuper Bundle Medium color.
-    static var bundleMedium = Color("Bundle Medium", bundle: .current)
 
     // MARK: - Cloud
     /// Zuper Cloud Dark color.
@@ -58,8 +50,6 @@ public extension Color {
     static var greenDarkActive = Color("Green Dark Active", bundle: .current)
     /// Zuper Green Dark Hover color.
     static var greenDarkHover = Color("Green Dark Hover", bundle: .current)
-    /// Zuper Green Darker color.
-    static var greenDarker = Color("Green Darker", bundle: .current)
     /// Zuper Green Light color.
     static var greenLight = Color("Green Light", bundle: .current)
     /// Zuper Green Light Active color.
@@ -77,19 +67,19 @@ public extension Color {
     /// Zuper Ink Dark color.
     static var inkDark = Color("Ink Dark", bundle: .current)
     /// Zuper Ink Dark Active color.
-    static var inkDarkActive = Color("Ink Dark Active", bundle: .current)
+//    static var inkDarkActive = Color("Ink Dark Active", bundle: .current) // Not used
     /// Zuper Ink Dark Hover color.
-    static var inkDarkHover = Color("Ink Dark Hover", bundle: .current)
+//    static var inkDarkHover = Color("Ink Dark Hover", bundle: .current) // Not Used
     /// Zuper Ink Light color.
     static var inkLight = Color("Ink Light", bundle: .current)
     /// Zuper Ink Light Active color.
-    static var inkLightActive = Color("Ink Light Active", bundle: .current)
+//    static var inkLightActive = Color("Ink Light Active", bundle: .current) // not used
     /// Zuper Ink Light Hover color.
-    static var inkLightHover = Color("Ink Light Hover", bundle: .current)
+//    static var inkLightHover = Color("Ink Light Hover", bundle: .current) // not used
     /// Zuper Ink Normal color.
     static var inkNormal = Color("Ink Normal", bundle: .current)
     /// Zuper Ink Normal Active color.
-    static var inkNormalActive = Color("Ink Normal Active", bundle: .current)
+ //   static var inkNormalActive = Color("Ink Normal Active", bundle: .current) // not used
     /// Zuper Ink Normal Hover color.
     static var inkNormalHover = Color("Ink Normal Hover", bundle: .current)
 
@@ -100,8 +90,6 @@ public extension Color {
     static var orangeDarkActive = Color("Orange Dark Active", bundle: .current)
     /// Zuper Orange Dark Hover color.
     static var orangeDarkHover = Color("Orange Dark Hover", bundle: .current)
-    /// Zuper Orange Darker color.
-    static var orangeDarker = Color("Orange Darker", bundle: .current)
     /// Zuper Orange Light color.
     static var orangeLight = Color("Orange Light", bundle: .current)
     /// Zuper Orange Light Active color.
@@ -144,8 +132,6 @@ public extension Color {
     static var redDarkActive = Color("Red Dark Active", bundle: .current)
     /// Zuper Red Dark Hover color.
     static var redDarkHover = Color("Red Dark Hover", bundle: .current)
-    /// Zuper Red Darker color.
-    static var redDarker = Color("Red Darker", bundle: .current)
     /// Zuper Red Light color.
     static var redLight = Color("Red Light", bundle: .current)
     /// Zuper Red Light Active color.
@@ -178,25 +164,4 @@ public extension Color {
     static var iconSecondary = Color("Icon Secondary", bundle: .current)
     /// Zuper Icon Primary color.
     static var iconTertiary = Color("Icon Tertiary", bundle: .current)
-}
-
-
-public extension Color {
-    
-    static var bundleBasicStart = Color(red: 0.882, green: 0.243, blue: 0.231)
-    static var bundleBasicEnd = Color(red: 0.91, green: 0.494, blue: 0.035)
-    static var bundleMediumStart = Color(red: 0.216, green: 0.098, blue: 0.671)
-    static var bundleMediumEnd = Color(red: 0.522, green: 0.224, blue: 0.859)
-    static var bundleTopStart = Color(red: 0.176, green: 0.176, blue: 0.18)
-    static var bundleTopEnd = Color(red: 0.412, green: 0.431, blue: 0.451)
-}
-
-public extension UIColor {
-    
-    static var bundleBasicStart = UIColor(red: 0.882, green: 0.243, blue: 0.231, alpha: 1)
-    static var bundleBasicEnd = UIColor(red: 0.91, green: 0.494, blue: 0.035, alpha: 1)
-    static var bundleMediumStart = UIColor(red: 0.216, green: 0.098, blue: 0.671, alpha: 1)
-    static var bundleMediumEnd = UIColor(red: 0.522, green: 0.224, blue: 0.859, alpha: 1)
-    static var bundleTopStart = UIColor(red: 0.176, green: 0.176, blue: 0.18, alpha: 1)
-    static var bundleTopEnd = UIColor(red: 0.412, green: 0.431, blue: 0.451, alpha: 1)
 }

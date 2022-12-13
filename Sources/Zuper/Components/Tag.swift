@@ -125,7 +125,7 @@ extension Tag {
         var labelColor: Color {
             switch (isFocused, isSelected) {
                 case (_, true):                 return .whiteNormal
-                case (true, false):             return .blueDarker
+                case (true, false):             return .blueDark
                 case (false, false):            return .inkDark
             }
         }
@@ -160,10 +160,10 @@ extension Tag {
         func iconColor(isPressed: Bool) -> Color {
             switch (isSelected, isFocused, isPressed || isActive) {
                 case (true, _, _):              return .whiteNormal
-                case (false, true, false):      return .blueDarker.opacity(0.3)
+                case (false, true, false):      return .blueDark.opacity(0.3)
                 case (false, false, false):     return .inkDark.opacity(0.3)
                 // Pressed
-                case (false, true, true):       return .blueDarker
+                case (false, true, true):       return .blueDark
                 case (false, false, true):      return .inkDark
             }
         }
