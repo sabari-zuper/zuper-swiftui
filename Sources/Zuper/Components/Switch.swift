@@ -68,12 +68,12 @@ public struct Switch: View {
     }
     
     var tint: Color {
-        (isOn ? .blueNormal : capsuleBackgroundColor)
+        (isOn ? .indicoNormal : capsuleBackgroundColor)
             .opacity(isEnabled ? 1 : 0.5)
     }
     
     var iconTint: Color {
-        (isOn ? Color.blueNormal : Color.inkNormal)
+        (isOn ? Color.indicoNormal : Color.inkNormal)
             .opacity(isEnabled ? 1 : 0.5)
     }
     

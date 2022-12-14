@@ -144,6 +144,22 @@ public extension Color {
     static var redNormalActive = Color("Red Normal Active", bundle: .current)
     /// Zuper Red Normal Hover color.
     static var redNormalHover = Color("Red Normal Hover", bundle: .current)
+    
+    // MARK: - Indico
+    /// Zuper Indico Dark color.
+    static var indicoDark = Color("Indico Dark Hover", bundle: .current)
+    /// Zuper Indico Dark Hover color.
+    static var indicoDarkHover = Color("Indico Dark", bundle: .current)
+    /// Zuper Indico Light color.
+    static var indicoLight = Color("Indico Light", bundle: .current)
+    /// Zuper Indico Light Active color.
+    static var indicoLightActive = Color("Indico Light Active", bundle: .current)
+    /// Zuper Indico Light Hover color.
+    static var indicoLightHover = Color("Indico Light Hoverr", bundle: .current)
+    /// Zuper Indico Normal color.
+    static var indicoNormal = Color("Indico Normal", bundle: .current)
+    /// Zuper Indico Normal Hover color.
+    static var indicoNormalHover = Color("Indico Normal Hover", bundle: .current)
 
     // MARK: - White
     /// Zuper White color.
@@ -158,6 +174,4 @@ public extension Color {
     static var iconPrimary = Color("Icon Primary", bundle: .current)
     /// Zuper Icon Primary color.
     static var iconSecondary = Color("Icon Secondary", bundle: .current)
-    /// Zuper Icon Primary color.
-    static var iconTertiary = Color("Icon Tertiary", bundle: .current)
 }

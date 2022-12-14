@@ -70,7 +70,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                         .textContentType(textContent)
                         .keyboardType(keyboard)
                         .zuperFont(size: Text.Size.normal.value, style: .body)
-                        .accentColor(.blueNormal)
+                        .accentColor(.indicoNormal)
                         .background(textFieldPlaceholder, alignment: .leading)
                         .disabled(state == .disabled)
                         .accessibility(.inputValue)

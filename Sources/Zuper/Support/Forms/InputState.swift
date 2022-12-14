@@ -11,7 +11,7 @@ public enum InputState {
         switch self {
             case .disabled:         return .cloudDarkActive
             case .default:          return .inkDark
-            case .modified:         return .blueDark
+            case .modified:         return .indicoDark
         }
     }
     
@@ -26,7 +26,7 @@ public enum InputState {
         switch self {
             case .disabled:         return .cloudDarkActive
             case .default:          return .inkDark
-            case .modified:         return .blueDark
+            case .modified:         return .indicoDark
         }
     }
 

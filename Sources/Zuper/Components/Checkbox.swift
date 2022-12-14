@@ -149,16 +149,16 @@ public extension Checkbox {
 
         func indicatorStrokeColor(isPressed: Bool) -> some ShapeStyle {
             switch (state, isChecked, isPressed) {
-                case (.normal, true, false):     return Color.blueNormal
-                case (.normal, true, true):       return Color.blueLightActive
+                case (.normal, true, false):     return Color.indicoNormal
+                case (.normal, true, true):       return Color.indicoLightActive
                 case (_, _, _):                                         return Color.cloudDark
             }
         }
 
         func indicatorBackgroundColor(isPressed: Bool) -> some ShapeStyle {
             switch (state, isChecked, isPressed) {
-                case (.normal, true, false):     return Color.blueNormal
-                case (.normal, true, true):       return Color.blueLightActive
+                case (.normal, true, false):     return Color.indicoNormal
+                case (.normal, true, true):       return Color.indicoLightActive
                 case (.disabled, false, _):                             return Color.cloudNormal
                 case (.disabled, true, _):                              return Color.cloudDark
                 case (_, _, _):                                         return Color.clear
@@ -167,7 +167,7 @@ public extension Checkbox {
 
         func indicatorOverlayStrokeColor(isPressed: Bool) -> some ShapeStyle {
             switch (state, isPressed) {
-                case (.normal, true):                       return Color.blueNormal
+                case (.normal, true):                       return Color.indicoNormal
                 case (_, _):                                return Color.clear
             }
         }

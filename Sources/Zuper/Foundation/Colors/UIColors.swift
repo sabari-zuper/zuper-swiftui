@@ -148,6 +148,22 @@ public extension UIColor {
     static var redNormalActive = fromResource(named: "Red Normal Active")
     /// Zuper Red Normal Hover color.
     static var redNormalHover = fromResource(named: "Red Normal Hover")
+    
+    // MARK: - Indico
+    /// Zuper Indico Dark color.
+    static var indicoDark = fromResource(named:"Indico Dark Hover")
+    /// Zuper Indico Dark Hover color.
+    static var indicoDarkHover = fromResource(named:"Indico Dark")
+    /// Zuper Indico Light color.
+    static var indicoLight = fromResource(named:"Indico Light")
+    /// Zuper Indico Light Active color.
+    static var indicoLightActive = fromResource(named:"Indico Light Active")
+    /// Zuper Indico Light Hover color.
+    static var indicoLightHover = fromResource(named:"Indico Light Hoverr")
+    /// Zuper Indico Normal color.
+    static var indicoNormal = fromResource(named:"Indico Normal")
+    /// Zuper Indico Normal Hover color.
+    static var indicoNormalHover = fromResource(named:"Indico Normal Hover")
 
     // MARK: - White
     /// Zuper White color.
@@ -162,6 +178,4 @@ public extension UIColor {
     static var iconPrimary = fromResource(named:"Icon Primary")
     /// Zuper Icon Primary color.
     static var iconSecondary = fromResource(named:"Icon Secondary")
-    /// Zuper Icon Primary color.
-    static var iconTertiary = fromResource(named:"Icon Tertiary")
 }

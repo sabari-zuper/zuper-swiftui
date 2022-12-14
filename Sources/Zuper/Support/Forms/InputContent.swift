@@ -67,15 +67,15 @@ struct InputContent<Content: View>: View {
             case (.disabled, _):        return .cloudLight
             case (.default, true):      return .cloudNormalHover
             case (.default, false):     return .cloudNormal
-            case (.modified, true):     return .blueLight
-            case (.modified, false):    return .blueLight.opacity(0.7)
+            case (.modified, true):     return .indicoLight
+            case (.modified, false):    return .indicoLight.opacity(0.7)
         }
     }
 
     private var prefixColor: Color {
         switch state {
             case .disabled:             return .cloudDarkActive
-            case .modified:             return .blueDark
+            case .modified:             return .indicoDark
             case .default:              return .inkDark
         }
     }
@@ -83,7 +83,7 @@ struct InputContent<Content: View>: View {
     private var suffixColor: Color {
         switch state {
             case .disabled:             return .cloudDarkActive
-            case .modified:             return .blueDark
+            case .modified:             return .indicoDark
             case .default:              return .inkNormal
         }
     }
@@ -92,9 +92,9 @@ struct InputContent<Content: View>: View {
         switch (message, state, isEditing) {
             case (.error, _, _):        return .redNormal
             case (.warning, _, _):      return .orangeNormal
-            case (.help, _, _):         return .blueNormal
-            case (_, .modified, _):     return .blueDark
-            case (_, .default, true):   return .blueNormal
+            case (.help, _, _):         return .indicoNormal
+            case (_, .modified, _):     return .indicoDark
+            case (_, .default, true):   return .indicoNormal
             default:                    return backgroundColor(isPressed: isPressed)
         }
     }

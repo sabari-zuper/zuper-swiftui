@@ -3,7 +3,7 @@ import SwiftUI
 public enum Message: Equatable, CustomStringConvertible {
 
     case normal(String, icon: Icon.Content = .none)
-    case help(String, icon: Icon.Content = .sfSymbol("info.circle.fill", color: .blueNormal))
+    case help(String, icon: Icon.Content = .sfSymbol("info.circle.fill", color: .indicoNormal))
     case warning(String, icon: Icon.Content = .sfSymbol("exclamationmark.triangle.fill", color: .orangeNormal))
     case error(String, icon: Icon.Content = .sfSymbol("exclamationmark.circle.fill", color: .redNormal))
 
@@ -33,7 +33,7 @@ public enum Message: Equatable, CustomStringConvertible {
     public var color: Color {
         switch self {
             case .normal:   return .inkNormal
-            case .help:     return .blueNormal
+            case .help:     return .indicoNormal
             case .warning:  return .orangeNormal
             case .error:    return .redNormal
         }
@@ -42,7 +42,7 @@ public enum Message: Equatable, CustomStringConvertible {
     public var uiColor: UIColor {
         switch self {
             case .normal:   return .inkNormal
-            case .help:     return .blueNormal
+            case .help:     return .indicoNormal
             case .warning:  return .orangeNormal
             case .error:    return .redNormal
         }
@@ -51,7 +51,7 @@ public enum Message: Equatable, CustomStringConvertible {
     public var darkColor: Color {
         switch self {
             case .normal:   return .inkDark
-            case .help:     return .blueDark
+            case .help:     return .indicoDark
             case .warning:  return .orangeDark
             case .error:    return .redDark
         }

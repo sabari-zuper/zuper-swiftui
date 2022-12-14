@@ -142,8 +142,8 @@ extension Radio {
 
         func indicatorStrokeColor(isPressed: Bool) -> some ShapeStyle {
             switch (state, isChecked, isPressed) {
-                case (.normal, true, false):     return Color.blueNormal
-                case (.normal, true, true):       return Color.blueLightActive
+                case (.normal, true, false):     return Color.indicoNormal
+                case (.normal, true, true):       return Color.indicoLightActive
                 case (_, _, _):                                         return Color.cloudDark
             }
         }
@@ -157,7 +157,7 @@ extension Radio {
 
         func indicatorOverlayStrokeColor(isPressed: Bool) -> some ShapeStyle {
             switch (state, isPressed) {
-                case (.normal, true):                       return Color.blueNormal
+                case (.normal, true):                       return Color.indicoNormal
                 case (_, _):                                return Color.clear
             }
         }
