@@ -27,7 +27,7 @@ struct TimelineIndicator: View {
         switch type {
             case .future, .present(nil):
                 icon
-            case .present(.warning), .present(.critical), .present(.success):
+        case .present(.warning), .present(.critical), .present(.success), .present(.neutral):
                 Circle()
                     .frame(
                         width: (animationLoopTrigger ? .medium : .xMedium) * sizeCategory.ratio,
@@ -73,7 +73,7 @@ struct TimelineIndicator: View {
                     .animation(animation, value: animationLoopTrigger)
                 
             }
-        case .present(.warning), .present(.critical), .present(.success), .past:
+        case .present(.warning), .present(.critical), .present(.success), .present(.neutral), .past:
             type.iconSymbol
                 .background(Circle().fill(Color.whiteNormal).padding(2))
         }

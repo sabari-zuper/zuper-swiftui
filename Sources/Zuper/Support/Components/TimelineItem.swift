@@ -114,6 +114,7 @@ public enum TimelineItemType: Equatable {
 
     public enum Status {
         case success
+        case neutral
         case warning
         case critical
     }
@@ -129,6 +130,7 @@ public enum TimelineItemType: Equatable {
         case .present(.warning):     return Icon(sfSymbol:"exclamationmark.circle.fill", color: Zuper.Status.warning.color)
             //.alertCircle
         case .present(.success):     return Icon(sfSymbol:"checkmark.circle.fill", color: Zuper.Status.success.color)
+        case .present(.neutral):     return Icon(sfSymbol:"checkmark.circle.fill", color: Zuper.Status.warning.color)
             //.checkCircle
         case .present:               return Icon(content: .none)
             //.none
@@ -141,7 +143,7 @@ public enum TimelineItemType: Equatable {
         switch self {
             case .past:                  return Zuper.Status.success.color
             case .present(.critical):    return Zuper.Status.critical.color
-            case .present(.warning):     return Zuper.Status.warning.color
+        case .present(.warning), .present(.neutral):     return Zuper.Status.warning.color
             case .present(.success):     return Zuper.Status.success.color
             case .present:               return Zuper.Status.success.color
             case .future:                return .cloudNormalHover
@@ -289,8 +291,8 @@ struct TimelineItemCustomContentPreviews: PreviewProvider {
                 }
             }
             TimelineItem(
-                type: .present(.warning),
-                description: "We’ve assigned your request to one of our agents."
+                type: .present(.neutral),
+                description: "**We’ve assigned your request to one of our agents**"
             ) {
                 Circle()
                     .fill(.red)
