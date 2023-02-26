@@ -27,7 +27,7 @@ public struct ButtonLink: View {
                                 label,
                                 size: .normal,
                                 color: nil,
-                                weight: .medium,
+                                weight: .semibold,
                                 accentColor: colorStyle.color.normal)
                             .padding(.vertical, verticalPadding)
                         }
@@ -174,11 +174,12 @@ struct ButtonLinkPreviews: PreviewProvider {
     }
     
     static var zuper: some View {
-        VStack(alignment:.leading, spacing:20) {
+        VStack(alignment:.center, spacing:20) {
             ButtonLink("Text Button", style: .text, colorStyle: .primary)
             HStack {
-                Text("Icon Button - ")
+                Spacer()
                 ButtonLink("", style: .icon, colorStyle: .primary, icon: gridIcon)
+                Spacer()
             }
         }.previewDisplayName("Zuper Buttons")
     }

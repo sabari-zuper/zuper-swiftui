@@ -56,14 +56,14 @@ public struct Button: View {
                 label,
                 size: size.textSize,
                 color: .custom(style.foregroundUIColor),
-                weight: .medium
+                weight: .semibold
             )
         } else {
             Text(
                 label,
                 size: size.textSize,
                 color: .custom(style.foregroundUIColor),
-                weight: .medium
+                weight: .semibold
             )
             // Prevents text value animation issue due to different iOS13 behavior
             .animation(nil)
