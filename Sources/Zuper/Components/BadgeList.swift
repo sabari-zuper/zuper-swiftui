@@ -13,6 +13,7 @@ public struct BadgeList: View {
     let labelColor: LabelColor
     let size: Size
     let linkAction: TextLink.Action
+    let allowTruncate: Bool
 
     public var body: some View {
         if isEmpty == false {
@@ -21,15 +22,18 @@ public struct BadgeList: View {
                     .foregroundColor(.init(style.iconColor))
                     .padding(.xxSmall)
                     .background(badgeBackground)
-
-                Text(
-                    label,
-                    size: size.textSize,
-                    color: .custom(labelColor.color),
-                    accentColor: style.iconColor,
-                    linkColor: .custom(labelColor.color),
-                    linkAction: linkAction
-                )
+                if allowTruncate {
+                    ExpandableText(label, labelColor: labelColor, size: size, lineLimit: 2, font: .zuper, linkAction: linkAction)
+                } else {
+                    Text(
+                        label,
+                        size: size.textSize,
+                        color: .custom(labelColor.color),
+                        accentColor: style.iconColor,
+                        linkColor: .custom(labelColor.color),
+                        linkAction: linkAction
+                    )
+                }
             }
         }
     }
@@ -69,6 +73,7 @@ public extension BadgeList {
         style: Style = .neutral,
         labelColor: LabelColor = .primary,
         size: Size = .normal,
+        allowTruncate: Bool = true,
         linkAction: @escaping TextLink.Action = { _, _ in }
     ) {
         self.label = label
@@ -77,6 +82,7 @@ public extension BadgeList {
         self.labelColor = labelColor
         self.size = size
         self.linkAction = linkAction
+        self.allowTruncate = allowTruncate
     }
 }
 
@@ -160,14 +166,14 @@ struct BadgeListPreviews: PreviewProvider {
 
     static var standalone: some View {
         VStack(alignment: .leading, spacing: 0) {
-            BadgeList("Neutral BadgeList", icon: .grid)
+            BadgeList("Neutral BadgeList df, sd f dsnf kds fk kds f dsk fk sdkf ksd fk dsk fkds kf kds fk dskf fk wekj fkew efn ew fk ewkjf kew fk ewkjjf kjjew fk wekf kjewje kj ewfk ewk fkew fk ewkf kwe fk wekf f jlwe fk wefk ", icon: .grid, style: .status(.info))
             BadgeList()   // EmptyView
             BadgeList("") // EmptyView
         }
     }
 
     static var standaloneSmallSecondary: some View {
-        BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .small)
+        BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .custom(.large))
     }
 
     static var storybook: some View {
