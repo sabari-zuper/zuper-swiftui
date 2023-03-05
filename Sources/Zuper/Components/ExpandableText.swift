@@ -42,11 +42,8 @@ public struct ExpandableText: View {
                 + Text(moreLessText, color: .inkDark, weight: .bold)
                 
             }
-            .transaction({ transaction in
-                transaction.animation = .easeInOut
-            })
             .lineLimit(expanded ? nil : lineLimit)
-            .background(
+            .overlay(
                 // Render the limited text and measure its size
                 Text(label).lineLimit(lineLimit)
                     .background(GeometryReader { visibleTextGeometry in
