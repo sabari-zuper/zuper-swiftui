@@ -63,7 +63,7 @@ public extension Checkbox {
 }
 //MARK: - Inits With description
 /// If descrition is added in our Zuper app, we can change this to public
-fileprivate extension Checkbox {
+public extension Checkbox {
     
     /// Creates Zuper Checkbox component.
     init(
