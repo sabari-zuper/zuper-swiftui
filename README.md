@@ -1,3 +1,3 @@
 # zuper-swiftui
 
-A description of this package.
+Zuper design system for iOS built with SwiftUI 🎉
