@@ -6,6 +6,7 @@ struct InputStyle: ButtonStyle {
 
     var prefix: Icon.Content = .none
     var suffix: Icon.Content = .none
+    var sufixContent: String? = nil
     var state: InputState = .default
     var message: Message? = nil
     var isEditing = false
@@ -14,6 +15,7 @@ struct InputStyle: ButtonStyle {
         InputContent(
             prefix: prefix,
             suffix: suffix,
+            sufixContent: sufixContent,
             state: state,
             message: message,
             isPressed: configuration.isPressed,

@@ -12,6 +12,7 @@ public struct DropDown: View {
     let value: String?
     let placeholder: String
     let suffix: Icon.Content
+    let sufixContent: String?
     let state: InputState
     let message: Message?
     let action: () -> Void
@@ -38,6 +39,7 @@ public struct DropDown: View {
                 InputStyle(
                     prefix: prefix,
                     suffix: suffix,
+                    sufixContent: sufixContent,
                     state: state,
                     message: message
                 )
@@ -73,6 +75,7 @@ public extension DropDown {
         value: String?,
         placeholder: String = "",
         suffix: Icon.Content = .chevronDown,
+        sufixContent: String? = nil,
         state: InputState = .default,
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
@@ -84,6 +87,7 @@ public extension DropDown {
         self.value = value
         self.placeholder = placeholder
         self.suffix = suffix
+        self.sufixContent = sufixContent
         self.state = state
         self.message = message
         self._messageHeight = messageHeight

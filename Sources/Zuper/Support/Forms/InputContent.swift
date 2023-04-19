@@ -7,6 +7,7 @@ struct InputContent<Content: View>: View {
 
     var prefix: Icon.Content = .none
     var suffix: Icon.Content = .none
+    var sufixContent: String? = nil
     var state: InputState = .default
     var message: Message? = nil
     var isPressed: Bool = false
@@ -36,6 +37,7 @@ struct InputContent<Content: View>: View {
             } else {
                 suffixIcon
             }
+            sufixContentLabel
         }
         .foregroundColor(state.textColor)
         .background(backgroundColor(isPressed: isPressed).animation(.default, value: message))
@@ -60,6 +62,13 @@ struct InputContent<Content: View>: View {
             .padding(.horizontal, .xSmall)
             .contentShape(Rectangle())
             .accessibility(.inputSuffix)
+    }
+    
+    @ViewBuilder var sufixContentLabel: some View {
+         if let sufixContent = self.sufixContent, !sufixContent.isEmpty && self.suffix == .none {
+            Text(sufixContent, color: .inkNormal, weight: .regular)
+                 .padding(.trailing, 6)
+        }
     }
     
     private func backgroundColor(isPressed: Bool) -> Color {
@@ -105,12 +114,12 @@ struct InputContentPreviews: PreviewProvider {
 
     static var previews: some View {
         PreviewWrapper {
-            InputContent(prefix: .sfSymbol("exclamationmark.triangle.fill", color: nil), suffix: .sfSymbol("exclamationmark.bubble.circle.fill", color: nil), state: .default) {
+            InputContent(prefix: .sfSymbol("exclamationmark.triangle.fill", color: nil), suffix: .sfSymbol("exclamationmark.bubble.circle.fill", color: nil), sufixContent: nil, state: .default) {
                 contentPlaceholder
             }
             .padding(.medium)
 
-            InputContent(prefix: .sfSymbol("exclamationmark.triangle.fill", color: nil), suffix: .sfSymbol("exclamationmark.bubble.circle.fill", color: nil), state: .default, message: .error("", icon: .sfSymbol("exclamationmark.circle.fill", color: nil))) {
+            InputContent(prefix: .sfSymbol("exclamationmark.triangle.fill", color: nil), suffix: .sfSymbol("exclamationmark.bubble.circle.fill", color: nil), sufixContent: nil, state: .default, message: .error("", icon: .sfSymbol("exclamationmark.circle.fill", color: nil))) {
                 contentPlaceholder
             }
             .padding(.medium)
