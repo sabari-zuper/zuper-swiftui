@@ -13,8 +13,7 @@ public struct BadgeList: View {
     let labelColor: LabelColor
     let size: Size
     let linkAction: TextLink.Action
-    let allowTruncate: Bool
-
+    
     public var body: some View {
         if isEmpty == false {
             HStack(alignment: .firstTextBaseline, spacing: Self.spacing) {
@@ -22,18 +21,14 @@ public struct BadgeList: View {
                     .foregroundColor(.init(style.iconColor))
                     .padding(.xxSmall)
                     .background(badgeBackground)
-                if allowTruncate {
-                    ExpandableText(label, labelColor: labelColor, size: size, lineLimit: 2, font: .zuper, linkAction: linkAction)
-                } else {
-                    Text(
-                        label,
-                        size: size.textSize,
-                        color: .custom(labelColor.color),
-                        accentColor: style.iconColor,
-                        linkColor: .custom(labelColor.color),
-                        linkAction: linkAction
-                    )
-                }
+                Text(
+                    label,
+                    size: size.textSize,
+                    color: .custom(labelColor.color),
+                    accentColor: style.iconColor,
+                    linkColor: .custom(labelColor.color),
+                    linkAction: linkAction
+                )
             }
         }
     }
@@ -73,7 +68,6 @@ public extension BadgeList {
         style: Style = .neutral,
         labelColor: LabelColor = .primary,
         size: Size = .normal,
-        allowTruncate: Bool = true,
         linkAction: @escaping TextLink.Action = { _, _ in }
     ) {
         self.label = label
@@ -82,7 +76,6 @@ public extension BadgeList {
         self.labelColor = labelColor
         self.size = size
         self.linkAction = linkAction
-        self.allowTruncate = allowTruncate
     }
 }
 
