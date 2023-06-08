@@ -197,10 +197,10 @@ public extension Text {
         
         public var value: CGFloat {
             switch self {
-            case .small:                return  UIDevice.current.userInterfaceIdiom == .phone ? 12 : 13
-            case .normal:               return  UIDevice.current.userInterfaceIdiom == .phone ? 14 : 15
-            case .large:                return  UIDevice.current.userInterfaceIdiom == .phone ? 16 : 17
-            case .xLarge:               return  UIDevice.current.userInterfaceIdiom == .phone ? 18 : 19
+            case .small:                return 12
+            case .normal:               return 14
+            case .large:                return 16
+            case .xLarge:               return 18
             case .custom(let size):     return size
             }
         }
@@ -321,7 +321,7 @@ struct TextPreviews: PreviewProvider {
             Group {
                 Text("Plain text with no formatting")
                 Text("Selectable text (on long tap)", isSelectable: true)
-                Text("Text <u>formatted</u> <strong>and</strong> <ref>accented</ref>", accentColor: .orangeNormal)
+                Text("Text <ref>*</ref>", accentColor: .redNormal)
                 Text("Text with strikethrough and kerning", strikethrough: true, kerning: 6)
             }
             .border(Color.cloudDark, width: .hairline)

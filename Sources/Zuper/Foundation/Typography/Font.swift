@@ -90,19 +90,19 @@ public extension ContentSizeCategory {
     /// Effective font size ratio.
     var ratio: CGFloat {
         switch self {
-        case .extraSmall:                           return UIDevice.current.userInterfaceIdiom == .phone ? 0.8 : 0.85
-        case .small:                                return UIDevice.current.userInterfaceIdiom == .phone ? 0.85 : 0.9
-        case .medium:                               return UIDevice.current.userInterfaceIdiom == .phone ? 0.9 : 1
-        case .large:                                return UIDevice.current.userInterfaceIdiom == .phone ? 1 : 1.1        // Default
-        case .extraLarge:                           return UIDevice.current.userInterfaceIdiom == .phone ? 1.1 : 1.2
-        case .extraExtraLarge:                      return UIDevice.current.userInterfaceIdiom == .phone ? 1.2 : 1.3
-        case .extraExtraExtraLarge:                 return UIDevice.current.userInterfaceIdiom == .phone ? 1.35 : 1.5
-        case .accessibilityMedium:                  return UIDevice.current.userInterfaceIdiom == .phone ? 1.6 : 1.8
-        case .accessibilityLarge:                   return UIDevice.current.userInterfaceIdiom == .phone ? 1.9 : 2.1
-        case .accessibilityExtraLarge:              return UIDevice.current.userInterfaceIdiom == .phone ? 2.35 : 2.5
-        case .accessibilityExtraExtraLarge:         return UIDevice.current.userInterfaceIdiom == .phone ? 2.75 : 3.0
-        case .accessibilityExtraExtraExtraLarge:    return UIDevice.current.userInterfaceIdiom == .phone ? 3.1 : 3.2
-        @unknown default:                           return UIDevice.current.userInterfaceIdiom == .phone ? 1 : 1.1
+        case .extraSmall:                           return 0.8
+        case .small:                                return 0.85
+        case .medium:                               return 0.9
+        case .large:                                return 1   // Default
+        case .extraLarge:                           return 1.1
+        case .extraExtraLarge:                      return 1.2
+        case .extraExtraExtraLarge:                 return 1.35
+        case .accessibilityMedium:                  return 1.6
+        case .accessibilityLarge:                   return 1.9
+        case .accessibilityExtraLarge:              return 2.35
+        case .accessibilityExtraExtraLarge:         return 2.75
+        case .accessibilityExtraExtraExtraLarge:    return 3.1
+        @unknown default:                           return 1
         }
     }
     
