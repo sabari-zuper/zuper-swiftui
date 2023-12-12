@@ -46,6 +46,7 @@ public enum AccessibilityID: String {
     case tileDescription                = "zuper.tile.description"
     case tileDisclosureButtonLink       = "zuper.tile.disclosure.buttonlink"
     case tileDisclosureIcon             = "zuper.tile.disclosure.icon"
+    case collapseHeader                 = "zuper.collapse.header"
 }
 
 extension View {

@@ -29,6 +29,7 @@ extension Storybook {
       //  case collapse
       //  case countryFlag
       //  case coupon
+        case collapse
         case dialog
         case emptyState
       //  case featureIcon
@@ -87,6 +88,7 @@ extension Storybook {
                 case .checkbox:             return ["Basic"]
               //  case .choiceTile:           return ["Basic", "Centered", "Mix"]
               //  case .countryFlag:          return ["Basic"]
+                case .collapse:             return ["Basic"]
                 case .dialog:               return ["Basic"]
                 case .emptyState:           return ["Basic"]
                 case .heading:              return ["Basic"]

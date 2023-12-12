@@ -103,6 +103,7 @@ struct StorybookDetail: View {
             case (.buttonLink, 2):          StorybookButtonLink.sizes
             case (.card, _):                StorybookCard.basic
             case (.checkbox, _):            StorybookCheckbox.basic
+            case (.collapse, _):            StorybookCollapse.basic
             case (.dialog, _):              StorybookDialog.basic
             case (.emptyState, _):          StorybookEmptyState.basic
             case (.heading, _):             StorybookTypography.storybookHeading
