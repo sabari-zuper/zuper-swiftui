@@ -46,7 +46,6 @@ public struct Button: View {
                 .padding(.trailing, trailingPadding)
             }
         )
-        .disableMultiTap()
         .buttonStyle(ButtonStyle(style: style, size: size))
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity)
     }
@@ -459,9 +458,9 @@ struct ButtonDynamicTypePreviews: PreviewProvider {
     }
 }
 
-struct SingleTapButtonModifier: ViewModifier {
+public struct SingleTapButtonModifier: ViewModifier {
   @State private var tapped = false
-  func body(content: Content) -> some View {
+  public func body(content: Content) -> some View {
     content.simultaneousGesture(
       TapGesture()
         .onEnded { _ in
@@ -471,7 +470,7 @@ struct SingleTapButtonModifier: ViewModifier {
         }).disabled(tapped)
   }
   private func buttonAction() {
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
       tapped = false
     }
   }

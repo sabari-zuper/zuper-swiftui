@@ -38,7 +38,6 @@ public struct ButtonLink: View {
                 }
             }
         )
-        .disableMultiTap()
         .buttonStyle(ZuperStyle(style: colorStyle, size: size))
     }
     
