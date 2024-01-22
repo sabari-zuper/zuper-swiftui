@@ -471,7 +471,7 @@ struct SingleTapButtonModifier: ViewModifier {
         }).disabled(tapped)
   }
   private func buttonAction() {
-    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       tapped = false
     }
   }
