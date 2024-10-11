@@ -14,12 +14,19 @@ public struct Badge: View {
     var style: Style
     var textSize:Text.Size
     var iconSize:Icon.Size
+    var isStatus: Bool
 
     public var body: some View {
         if isEmpty == false {
             HStack(spacing: 0) {
                 HStack(spacing: .xxSmall) {
-                    Icon(content: iconContent, size: iconSize)
+                    if isStatus {
+                        Circle()
+                            .foregroundColor(style.outlineColor)
+                            .frame(width: 8, height: 8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    } else {
+                        Icon(content: iconContent, size: iconSize)
+                    }
 
                     Text(
                         label,
@@ -59,12 +66,13 @@ public struct Badge: View {
 public extension Badge {
     
     /// Creates Zuper Badge component.
-    init(_ label: String = "", icon: Icon.Content = .none, style: Style = .neutral,textSize:Text.Size = .small,iconSize:Icon.Size = .small) {
+    init(_ label: String = "", icon: Icon.Content = .none, style: Style = .neutral,textSize:Text.Size = .small,iconSize:Icon.Size = .small, isStatus: Bool = false) {
         self.label = label
         self.iconContent = icon
         self.style = style
         self.textSize = textSize
         self.iconSize = iconSize
+        self.isStatus = isStatus
     }
 }
 
@@ -152,6 +160,7 @@ struct BadgePreviews: PreviewProvider {
             Badge("label", icon: gridIcon)
             Badge()    // EmptyView
             Badge("")  // EmptyView
+            Badge("Zuper", style: .custom(labelColor: .blueDark, outlineColor: .blueDark, backgroundColor: .blueLight), textSize: .normal, iconSize: .large, isStatus: true)
         }
     }
 
