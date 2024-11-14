@@ -25,6 +25,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
     @Binding private var messageHeight: CGFloat
     @State private var isEditing: Bool = false
     @State private var isSecureTextRedacted: Bool = true
+    @FocusState private var inputFocus: Bool
 
     let label: String
     let labelAccentColor: UIColor?
@@ -73,6 +74,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                         .accentColor(.indicoNormal)
                         .background(textFieldPlaceholder, alignment: .leading)
                         .disabled(state == .disabled)
+                        .focused($inputFocus)
                         .accessibility(.inputValue)
                     
                     sufixContentLabel
@@ -81,6 +83,9 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
         } footer: {
             PasswordStrengthIndicator(passwordStrength: passwordStrength)
                 .padding(.top, .xxSmall)
+        }
+        .onTapGesture {
+            inputFocus = true
         }
         .accessibilityElement(children: .ignore)
         .accessibility(label: .init(label))
