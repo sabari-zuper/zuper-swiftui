@@ -27,4 +27,14 @@ public enum Status {
             case .critical:     return .redNormal
         }
     }
+    
+    /// Default color associated with status.
+    var uiColor: UIColor {
+        switch self {
+            case .info:         return .blueNormal
+            case .success:      return .greenNormal
+            case .warning:      return .orangeNormal
+            case .critical:     return .redNormal
+        }
+    }
 }

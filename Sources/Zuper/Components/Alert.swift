@@ -35,6 +35,7 @@ public struct Alert<Content: View>: View {
     let status: Status
     let isSuppressed: Bool
     let descriptionLinkAction: TextLink.Action
+    let applyStatusColor: Bool
     @ViewBuilder let content: Content
 
     public var body: some View {
@@ -46,9 +47,9 @@ public struct Alert<Content: View>: View {
             VStack(alignment: .leading, spacing: .medium) {
                 if isHeaderEmpty == false {
                     VStack(alignment: .leading, spacing: .xxSmall) {
-                        Text(title, weight: .bold)
+                        Text(title, color: applyStatusColor ? .custom(status.uiColor) : .inkDark, weight: .bold)
                             .accessibility(.alertTitle)
-                        Text(description, linkColor: .secondary, linkAction: descriptionLinkAction)
+                        Text(description, color: applyStatusColor ? .custom(status.uiColor) : .inkDark, linkColor: .secondary, linkAction: descriptionLinkAction)
                             .accessibility(.alertDescription)
                     }
                 }
@@ -56,11 +57,11 @@ public struct Alert<Content: View>: View {
                 content
                 
                 switch buttons {
-                    case .primary, .secondary, .primaryAndSecondary:
-                        // Keeping the identity of buttons for correct animations
-                        buttonsView
-                    case .none:
-                        EmptyView()
+                case .primary, .secondary, .primaryAndSecondary:
+                    // Keeping the identity of buttons for correct animations
+                    buttonsView
+                case .none:
+                    EmptyView()
                 }
             }
         }
@@ -162,6 +163,7 @@ public extension Alert {
         buttons: AlertButtons = .none,
         status: Status = .info,
         isSuppressed: Bool = false,
+        applyStatusColor: Bool = false,
         descriptionLinkAction: @escaping TextLink.Action = { _, _ in },
         @ViewBuilder content: () -> Content
     ) {
@@ -173,6 +175,7 @@ public extension Alert {
         self.isSuppressed = isSuppressed
         self.descriptionLinkAction = descriptionLinkAction
         self.content = content()
+        self.applyStatusColor = applyStatusColor
     }
     
     /// Creates Zuper Alert component.
@@ -183,6 +186,7 @@ public extension Alert {
         buttons: AlertButtons = .none,
         status: Status = .info,
         isSuppressed: Bool = false,
+        applyStatusColor: Bool = false,
         descriptionLinkAction: @escaping TextLink.Action = { _, _ in }
     ) where Content == EmptyView {
         self.init(
@@ -192,8 +196,10 @@ public extension Alert {
             buttons: buttons,
             status: status,
             isSuppressed: isSuppressed,
+            applyStatusColor: applyStatusColor,
             descriptionLinkAction: descriptionLinkAction,
             content: { EmptyView() }
+            
         )
     }
 }
