@@ -87,11 +87,11 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
         .onTapGesture {
             inputFocus = true
         }
-        .accessibilityElement(children: .ignore)
+        .accessibilityElement(children: .contain)
         // .accessibility(label: .init(label))
        // .accessibility(value: .init(value.description))
        // .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
-        .accessibility(addTraits: .isButton)
+      //  .accessibility(addTraits: .isButton)
     }
 
     @ViewBuilder var input: some View {
