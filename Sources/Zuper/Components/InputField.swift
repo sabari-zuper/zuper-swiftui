@@ -75,7 +75,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                         .background(textFieldPlaceholder, alignment: .leading)
                         .disabled(state == .disabled)
                         .focused($inputFocus)
-                        .accessibility(.inputValue)
+                       // .accessibility(.inputValue)
                     
                     sufixContentLabel
                 }
@@ -143,7 +143,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                     isSecureTextRedacted.toggle()
                 }
                 .accessibility(addTraits: .isButton)
-                .accessibility(.inputFieldPasswordToggle)
+               // .accessibility(.inputFieldPasswordToggle)
                 .opacity(state == .disabled ? 0 : 1)
         }
     }

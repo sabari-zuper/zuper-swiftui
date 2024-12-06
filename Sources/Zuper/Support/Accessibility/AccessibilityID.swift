@@ -52,8 +52,7 @@ public enum AccessibilityID: String {
 extension View {
 
     /// Uses the specified Zuper identifier to identify the view inside a component.
-    @ViewBuilder
     func accessibility(_ identifier: AccessibilityID) -> some View {
-        // self.accessibility(identifier: identifier.rawValue)
+        self.accessibility(identifier: identifier.rawValue)
     }
 }

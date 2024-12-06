@@ -32,7 +32,7 @@ public struct DropDown: View {
                 label: {
                     Text(value ?? placeholder, color: .none)
                         .foregroundColor(textColor)
-                        .accessibility(.inputValue)
+                       // .accessibility(.inputValue)
                 }
             )
             .buttonStyle(

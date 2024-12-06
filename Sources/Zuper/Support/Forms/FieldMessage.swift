@@ -13,12 +13,12 @@ public struct FieldMessage: View {
             // A Label should be used instead when Zuper fixes the non-matching icon to label sizing
             HStack(alignment: .firstTextBaseline, spacing: spacing) {
                 Icon(content: message.icon, size: .small)
-                    .accessibility(.fieldMessageIcon)
+                   // .accessibility(.fieldMessageIcon)
                     .alignmentGuide(.firstTextBaseline) { _ in
                         Icon.Size.small.value * sizeCategory.ratio * 0.82 - 2 * (sizeCategory.ratio - 1)
                     }
                 Text(message.description, color: .custom(message.uiColor))
-                    .accessibility(.fieldMessage)
+                   // .accessibility(.fieldMessage)
             }
             .transition(.opacity.animation(.easeOut(duration: 0.2)))
         }

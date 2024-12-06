@@ -11,10 +11,10 @@ public struct KeyValueField<Content: View>: View {
     public var body: some View {
         VStack(alignment: alignment, spacing: 0) {
             Text(key, size: size.keySize, color: .inkNormal, alignment: .init(alignment))
-                .accessibility(.keyValueKey)
+               // .accessibility(.keyValueKey)
 
             content
-                .accessibility(.keyValueValue)
+               // .accessibility(.keyValueValue)
         }
     }
 }
