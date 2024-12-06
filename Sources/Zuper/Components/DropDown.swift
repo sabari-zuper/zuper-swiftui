@@ -46,9 +46,9 @@ public struct DropDown: View {
             )
         }
         .accessibilityElement(children: .ignore)
-        .accessibility(label: .init(label))
-        .accessibility(value: .init(value ?? ""))
-        .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
+        // .accessibility(label: .init(label))
+       // .accessibility(value: .init(value ?? ""))
+       // .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
         .accessibility(addTraits: .isButton)
         .disabled(state == .disabled)
     }

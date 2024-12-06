@@ -43,7 +43,7 @@ public struct Text: View {
                     linkAction(url, text)
                 }
                 .accessibility(addTraits: .isLink)
-                .accessibility(label: .init(content))
+               // .accessibility(label: .init(content))
             }
         }
     }

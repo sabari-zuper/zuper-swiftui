@@ -88,9 +88,9 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
             inputFocus = true
         }
         .accessibilityElement(children: .ignore)
-        .accessibility(label: .init(label))
-        .accessibility(value: .init(value.description))
-        .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
+        // .accessibility(label: .init(label))
+       // .accessibility(value: .init(value.description))
+       // .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
         .accessibility(addTraits: .isButton)
     }
 
