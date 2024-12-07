@@ -75,7 +75,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                         .background(textFieldPlaceholder, alignment: .leading)
                         .disabled(state == .disabled)
                         .focused($inputFocus)
-                       // .accessibility(.inputValue)
+                        .accessibility(.inputValue)
                     
                     sufixContentLabel
                 }
@@ -88,10 +88,10 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
             inputFocus = true
         }
         .accessibilityElement(children: .contain)
-        // .accessibility(label: .init(label))
-       // .accessibility(value: .init(value.description))
-       // .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
-      //  .accessibility(addTraits: .isButton)
+        .accessibility(label: .init(label))
+        .accessibility(value: .init(value.description))
+        .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
+        .accessibility(addTraits: .isButton)
     }
 
     @ViewBuilder var input: some View {
@@ -143,7 +143,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                     isSecureTextRedacted.toggle()
                 }
                 .accessibility(addTraits: .isButton)
-               // .accessibility(.inputFieldPasswordToggle)
+                .accessibility(.inputFieldPasswordToggle)
                 .opacity(state == .disabled ? 0 : 1)
         }
     }

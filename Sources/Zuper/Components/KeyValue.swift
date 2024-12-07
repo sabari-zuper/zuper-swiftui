@@ -13,8 +13,8 @@ public struct KeyValue: View {
             Text(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
         }
         .accessibilityElement(children: .ignore)
-       // .accessibility(label: .init(key))
-       // .accessibility(value: .init(value))
+        .accessibility(label: .init(key))
+        .accessibility(value: .init(value))
         .accessibility(addTraits: .isStaticText)
     }
 }

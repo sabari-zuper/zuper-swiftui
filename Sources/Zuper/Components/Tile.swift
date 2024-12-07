@@ -81,8 +81,8 @@ public struct Tile<Content: View>: View {
         )
         .buttonStyle(TileButtonStyle(style: tileBorderStyle, status: status, backgroundColor: backgroundColor))
         .accessibilityElement(children: .ignore)
-       // .accessibility(label: .init(title))
-       // .accessibility(hint: .init(description))
+        .accessibility(label: .init(title))
+        .accessibility(hint: .init(description))
         .accessibility(addTraits: .isButton)
     }
 

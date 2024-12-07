@@ -55,11 +55,11 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
             )
             .buttonStyle(ListChoiceButtonStyle())
             .accessibilityElement(children: .ignore)
-           // .accessibility(label: .init(title))
-           // .accessibility(value: .init(value))
-           // .accessibility(hint: .init(description))
+            .accessibility(label: .init(title))
+            .accessibility(value: .init(value))
+            .accessibility(hint: .init(description))
             .accessibility(addTraits: .isButton)
-          //  .accessibility(addTraits: accessibilityTraitsToAdd)
+            .accessibility(addTraits: accessibilityTraitsToAdd)
         }
     }
 

@@ -53,7 +53,7 @@ struct InputContent<Content: View>: View {
         Icon(content: prefix, size: .large)
             .foregroundColor(prefixColor)
             .padding(.horizontal, .xSmall)
-           // .accessibility(.inputPrefix)
+            .accessibility(.inputPrefix)
     }
 
     @ViewBuilder var suffixIcon: some View {
@@ -61,7 +61,7 @@ struct InputContent<Content: View>: View {
             .foregroundColor(suffixColor)
             .padding(.horizontal, .xSmall)
             .contentShape(Rectangle())
-           // .accessibility(.inputSuffix)
+            .accessibility(.inputSuffix)
     }
     
     @ViewBuilder var sufixContentLabel: some View {
