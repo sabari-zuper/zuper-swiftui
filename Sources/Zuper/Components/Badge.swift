@@ -22,7 +22,7 @@ public struct Badge: View {
                 HStack(spacing: .xxSmall) {
                     if isStatus {
                         Circle()
-                            .foregroundColor(style.outlineColor)
+                            .foregroundColor(Color(uiColor: style.labelColor))
                             .frame(width: 8, height: 8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     } else {
                         Icon(content: iconContent, size: iconSize)
