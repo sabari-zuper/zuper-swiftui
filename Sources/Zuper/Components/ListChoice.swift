@@ -1,5 +1,10 @@
 import SwiftUI
 
+public enum ListChoiceDisclosurePosition: Equatable {
+    case leading
+    case trailing
+}
+
 public enum ListChoiceDisclosure: Equatable {
     
     public enum ButtonType {
@@ -40,6 +45,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let showSeparator: Bool
     let content: Content
     let action: () -> Void
+    let position: ListChoiceDisclosurePosition
     @ViewBuilder let headerContent: HeaderContent
 
     public var body: some View {
@@ -65,18 +71,30 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
 
     @ViewBuilder var buttonContent: some View {
         HStack(spacing: 0) {
+            // If position is leading
+            if position == .leading {
+                disclosureIndicator
+            }
             VStack(alignment: .leading, spacing: 0) {
                 header
                 content
             }
-
-            disclosureView
-                .padding(.horizontal, .medium)
-                .padding(.vertical, .small)
-                .disabled(true)
+            // If position is trailing
+            if position == .trailing {
+                disclosureIndicator
+            }
         }
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
         .overlay(separator, alignment: .bottom)
+    }
+    
+    // Extracted reusable view
+    @ViewBuilder
+    private var disclosureIndicator: some View {
+        disclosureView
+            .padding(.horizontal, .medium)
+            .padding(.vertical, .small)
+            .disabled(true)
     }
     
     @ViewBuilder var header: some View {
@@ -207,6 +225,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         value: String = "",
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content,
         @ViewBuilder headerContent: () -> HeaderContent
@@ -220,6 +239,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.action = action
         self.content = content()
         self.headerContent = headerContent()
+        self.position = disclosurePosition
     }
 }
 
@@ -233,6 +253,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content,
         @ViewBuilder headerContent: () -> HeaderContent
@@ -244,6 +265,7 @@ public extension ListChoice {
             value: "",
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: content,
             headerContent: headerContent
