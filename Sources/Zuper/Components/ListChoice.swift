@@ -73,7 +73,10 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         HStack(spacing: 0) {
             // If position is leading
             if position == .leading {
-                disclosureIndicator
+                disclosureView
+                    .padding(.leading, .medium)
+                    .padding(.vertical, .small)
+                    .disabled(true)
             }
             VStack(alignment: .leading, spacing: 0) {
                 header
@@ -81,20 +84,14 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
             }
             // If position is trailing
             if position == .trailing {
-                disclosureIndicator
+                disclosureView
+                    .padding(.horizontal, .medium)
+                    .padding(.vertical, .small)
+                    .disabled(true)
             }
         }
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
         .overlay(separator, alignment: .bottom)
-    }
-    
-    // Extracted reusable view
-    @ViewBuilder
-    private var disclosureIndicator: some View {
-        disclosureView
-            .padding(.horizontal, .medium)
-            .padding(.vertical, .small)
-            .disabled(true)
     }
     
     @ViewBuilder var header: some View {
