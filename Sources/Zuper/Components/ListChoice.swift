@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum ListChoiceDisclosurePosition: Equatable {
+public enum ListChoiceDisclosurePosition {
     case leading
     case trailing
 }
@@ -601,6 +601,14 @@ struct ListChoicePreviews: PreviewProvider {
                 contentPlaceholder
             } headerContent: {
                 headerContent
+            }
+            ListChoice(
+                title,
+                disclosure: .radio(isChecked: true, state: .normal),
+                showSeparator: false,
+                disclosurePosition: .leading
+            ) {
+                
             }
         }
     }
