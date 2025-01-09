@@ -279,6 +279,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder headerContent: () -> HeaderContent
     ) where Content == EmptyView {
@@ -288,6 +289,7 @@ public extension ListChoice {
             icon: icon,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() },
             headerContent: headerContent
@@ -301,6 +303,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
     ) where HeaderContent == EmptyView {
@@ -310,6 +313,7 @@ public extension ListChoice {
             icon: icon,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: content,
             headerContent: { EmptyView() }
@@ -323,6 +327,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {}
     ) where HeaderContent == EmptyView, Content == EmptyView {
         self.init(
@@ -331,6 +336,7 @@ public extension ListChoice {
             icon: icon,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() },
             headerContent: { EmptyView() }
@@ -348,6 +354,7 @@ public extension ListChoice where HeaderContent == Text {
         value: String,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
     ) {
@@ -358,6 +365,7 @@ public extension ListChoice where HeaderContent == Text {
             value: value,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: content
         ) {
@@ -373,6 +381,7 @@ public extension ListChoice where HeaderContent == Text {
         value: String,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {}
     ) where Content == EmptyView {
         self.init(
@@ -382,6 +391,7 @@ public extension ListChoice where HeaderContent == Text {
             value: value,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() }
         )
@@ -586,6 +596,7 @@ struct ListChoicePreviews: PreviewProvider {
             ListChoice(title, description: description, disclosure: .none, headerContent: {
                 badge
             })
+            ListChoice(title, description: description, disclosure: .checkbox(isChecked: true, state: .normal), showSeparator: true, disclosurePosition: .leading)
             ListChoice(disclosure: .none) {
                 contentPlaceholder
             } headerContent: {
