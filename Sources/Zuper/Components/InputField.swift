@@ -43,6 +43,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
     let message: Message?
     let style: InputFieldStyle
     let suffixAction: (() -> Void)?
+    let isFocus: Bool
 
     private let mode: Mode
 
@@ -92,6 +93,12 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
         .accessibility(value: .init(value.description))
         .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
         .accessibility(addTraits: .isButton)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { isEditing = true }
+            if isFocus {
+                inputFocus = true
+            }
+        }
     }
 
     @ViewBuilder var input: some View {
@@ -246,6 +253,7 @@ public extension InputField {
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
+        isFocus: Bool = false,
         onEditingChanged: @escaping (Bool) -> Void = { _ in },
         onCommit: @escaping () -> Void = {},
         suffixAction: (() -> Void)? = nil
@@ -268,7 +276,7 @@ public extension InputField {
             message: message,
             messageHeight: messageHeight,
             style: style,
-            mode: .actionsHandler(onEditingChanged: onEditingChanged, onCommit: onCommit, isSecure: isSecure),
+            mode: .actionsHandler(onEditingChanged: onEditingChanged, onCommit: onCommit, isSecure: isSecure), isFocus: isFocus,
             suffixAction: suffixAction
         )
     }
@@ -301,6 +309,7 @@ public extension InputField {
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
+        isFocus: Bool = false,
         formatter: Formatter,
         suffixAction: (() -> Void)? = nil
     ) {
@@ -323,6 +332,7 @@ public extension InputField {
             messageHeight: messageHeight,
             style: style,
             mode: .formatter(formatter: formatter),
+            isFocus: isFocus,
             suffixAction: suffixAction
         )
     }
@@ -349,6 +359,7 @@ extension InputField {
         messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         mode: Mode,
+        isFocus: Bool = false,
         suffixAction: (() -> Void)? = nil
     ) {
         self.label = label
@@ -370,6 +381,7 @@ extension InputField {
         self.style = style
         self.mode = mode
         self.suffixAction = suffixAction
+        self.isFocus = isFocus
     }
 }
 
