@@ -190,6 +190,11 @@ public extension Icon {
             round(dynamicTextLineHeight(sizeCategory: sizeCategory) * 0.2)
         }
     }
+    
+    enum Placement {
+        case leading
+        case trailing
+    }
 }
 
 // MARK: - TextRepresentable

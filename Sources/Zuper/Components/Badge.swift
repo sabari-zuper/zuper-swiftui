@@ -15,6 +15,7 @@ public struct Badge: View {
     var textSize:Text.Size
     var iconSize:Icon.Size
     var isStatus: Bool
+    var iconPlacement: Icon.Placement
 
     public var body: some View {
         if isEmpty == false {
@@ -24,7 +25,8 @@ public struct Badge: View {
                         Circle()
                             .foregroundColor(Color(uiColor: style.labelColor))
                             .frame(width: 8, height: 8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    } else {
+                    }
+                    if iconPlacement == .leading && !isStatus &&  !iconContent.isEmpty {
                         Icon(content: iconContent, size: iconSize)
                     }
 
@@ -35,6 +37,9 @@ public struct Badge: View {
                         weight: .medium
                     )
                     .padding(.vertical, Self.verticalPadding)
+                    if iconPlacement == .trailing && !isStatus && !iconContent.isEmpty{
+                        Icon(content: iconContent, size: iconSize)
+                    }
                 }
                 .foregroundColor(Color(style.labelColor))
 
@@ -66,13 +71,22 @@ public struct Badge: View {
 public extension Badge {
     
     /// Creates Zuper Badge component.
-    init(_ label: String = "", icon: Icon.Content = .none, style: Style = .neutral,textSize:Text.Size = .small,iconSize:Icon.Size = .small, isStatus: Bool = false) {
+    init(
+        _ label: String = "",
+        icon: Icon.Content = .none,
+        style: Style = .neutral,
+        textSize:Text.Size = .small,
+        iconSize:Icon.Size = .small,
+        isStatus: Bool = false,
+        iconPlacement: Icon.Placement = .leading
+    ) {
         self.label = label
         self.iconContent = icon
         self.style = style
         self.textSize = textSize
         self.iconSize = iconSize
         self.isStatus = isStatus
+        self.iconPlacement = iconPlacement
     }
 }
 
