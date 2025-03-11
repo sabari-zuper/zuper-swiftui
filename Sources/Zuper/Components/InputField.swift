@@ -94,8 +94,10 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
         .accessibility(hint: .init(messageDescription.isEmpty ? placeholder : messageDescription))
         .accessibility(addTraits: .isButton)
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { isEditing = true }
             if isFocus {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    isEditing = true
+                }
                 inputFocus = true
             }
         }
