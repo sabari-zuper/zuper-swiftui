@@ -21,7 +21,6 @@ public struct ButtonLink: View {
                     HStack(alignment: .firstTextBaseline, spacing: .xSmall) {
                         if style != .text {
                             Icon(content: iconContent, size: iconSize)
-                                .padding(.xxSmall)
                         }
                         if style != .icon {
                             Text(
