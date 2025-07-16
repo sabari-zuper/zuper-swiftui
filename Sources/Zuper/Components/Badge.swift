@@ -30,7 +30,7 @@ public struct Badge: View {
                         Icon(content: iconContent, size: iconSize)
                     }
 
-                    Text(
+                    ZText(
                         label,
                         size: textSize,
                         color: .none,
