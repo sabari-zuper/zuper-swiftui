@@ -33,7 +33,7 @@ public struct Badge: View {
                     ZText(
                         label,
                         size: textSize,
-                        color: .none,
+                        color: .custom(style.labelColor),
                         weight: .medium
                     )
                     .padding(.vertical, Self.verticalPadding)
