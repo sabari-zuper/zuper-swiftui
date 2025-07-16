@@ -167,7 +167,7 @@ struct ScreenLayoutModifierPreviews: PreviewProvider {
 
             Button("Button", icon: gridIcon)
 
-            Card("Card title", description: "Card description", icon: gridIcon, action: .buttonLink("ButtonLink")) {
+            Card() {
                 TileGroup {
                     Tile("Tile 1")
                     Tile("Tile 2")
@@ -183,7 +183,7 @@ struct ScreenLayoutModifierPreviews: PreviewProvider {
 
             Tile(TilePreviews.title, description: TilePreviews.description, icon: gridIcon)
 
-            Card("Card", contentLayout: .fill) {
+            Card(contentLayout: .fill) {
                 ListChoice(ListChoicePreviews.title, value: ListChoicePreviews.value)
                 ListChoice(ListChoicePreviews.title, description: ListChoicePreviews.description)
             }

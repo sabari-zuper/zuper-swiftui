@@ -9,7 +9,7 @@ struct TutorialScreen: View {
     
     var body: some View {
         VStack(spacing: .large) {
-            Card("Card Title", action: .buttonLink("Edit")) {
+            Card() {
                 List {
                     ListItem("List Item 1", icon: .check, style: .custom(color: .greenNormal))
                     ListItem("List Item 2 with a <a href=\"...\">TextLink</a>", icon: .check)

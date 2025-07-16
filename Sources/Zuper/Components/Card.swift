@@ -21,164 +21,277 @@ public enum CardContentLayout {
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
 public struct Card<Content: View>: View {
     
-    @Environment(\.idealSize) var idealSize
-    
-    let title: String
-    let description: String
-    let iconContent: Icon.Content
-    let action: CardAction
-    let headerSpacing: CGFloat
+    let content: Content
     let contentLayout: CardContentLayout
     let contentAlignment: HorizontalAlignment
     let showBorder: Bool
-    let titleStyle: Heading.Style
-    let status: Status?
     let backgroundColor: Color?
-    @ViewBuilder let content: Content
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: headerSpacing) {
-            header
-            
-            if isContentEmpty == false {
-                VStack(alignment: contentAlignment, spacing: contentSpacing) {
-                    content
-                }
-                .padding(.top, isHeaderEmpty ? contentPadding : 0)
-                .padding([.horizontal, .bottom], contentPadding)
-            }
+        VStack(alignment: contentAlignment, spacing: contentSpacing) {
+            content
         }
-        .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
-        .background(backgroundColor)
-        .tileBorder(
-            showBorder ? .iOS : .none,
-            status: status
+        .padding(contentPadding)
+        .background(backgroundColor ?? .white)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(showBorder ? Color.gray.opacity(0.2) : Color.clear, lineWidth: 1)
         )
-        .ignoreScreenLayoutHorizontalPadding()
-        .accessibilityElement(children: .contain)
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
     }
     
-    @ViewBuilder var header: some View {
-        if isHeaderEmpty == false {
-            HStack(alignment: .firstTextBaseline, spacing: 0) {
-                Icon(content: iconContent, size: .heading(titleStyle))
-                    .padding(.trailing, .xSmall)
-                    .accessibility(.cardIcon)
-                
-                VStack(alignment: .leading, spacing: .xxSmall) {
-                    Heading(title, style: titleStyle)
-                        .accessibility(.cardTitle)
-                    Text(description, color: .inkNormal)
-                        .accessibility(.cardDescription)
-                }
-                
-                if idealSize.horizontal == nil {
-                    Spacer(minLength: 0)
-                }
-                
-                switch action {
-                case .buttonLink(let label, let action):
-                    if label.isEmpty == false {
-                        ButtonLink(label, action: action)
-                            .padding(.leading, .xxxSmall)
-                            .accessibility(.cardActionButtonLink)
-                    }
-                case .none:
-                    EmptyView()
-                }
-            }
-            .padding([.horizontal, .top], .medium)
-            .padding(.bottom, isContentEmpty ? .medium : 0)
-        }
-    }
-    
-    var isHeaderEmpty: Bool {
-        if case .none = action, iconContent.isEmpty, title.isEmpty, description.isEmpty {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    var isContentEmpty: Bool {
-        content is EmptyView
-    }
-    
-    var contentPadding: CGFloat {
+    // SIMPLIFIED COMPUTED PROPERTIES (only what you use)
+    private var contentPadding: EdgeInsets {
         switch contentLayout {
-        case .fill:                         return 0
-        case .default:                      return .medium
-        case .custom(let padding, _):       return padding
+        case .fill:
+            return EdgeInsets()
+        case .default:
+            return EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        case .custom(let padding, _):
+            return EdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
         }
     }
     
-    var contentSpacing: CGFloat {
+    private var contentSpacing: CGFloat {
         switch contentLayout {
-        case .fill:                         return 0
-        case .default(let spacing):         return spacing
-        case .custom(_, let spacing):       return spacing
+        case .fill:
+            return 0
+        case .default(let spacing):
+            return spacing
+        case .custom(_, let spacing):
+            return spacing
         }
     }
 }
 
-// MARK: - Inits
+// MARK: - Inits matching your usage patterns
 public extension Card {
     
-    /// Creates Zuper Card wrapper component over a custom content.
+    // PATTERN 1: Custom padding/spacing
     init(
-        _ title: String = "",
-        description: String = "",
-        icon: Icon.Content = .none,
-        action: CardAction = .none,
-        headerSpacing: CGFloat = .medium,
-        showBorder: Bool = true,
-        titleStyle: Heading.Style = .h6,
-        status: Status? = nil,
-        backgroundColor: Color? = .whiteDarker,
-        contentLayout: CardContentLayout = .default(),
+        contentLayout: CardContentLayout,
         contentAlignment: HorizontalAlignment = .leading,
+        showBorder: Bool = true,
+        backgroundColor: Color? = .white,
         @ViewBuilder content: () -> Content
     ) {
-        self.title = title
-        self.description = description
-        self.iconContent = icon
-        self.action = action
-        self.headerSpacing = headerSpacing
-        self.showBorder = showBorder
-        self.titleStyle = titleStyle
-        self.status = status
-        self.backgroundColor = backgroundColor
         self.contentLayout = contentLayout
         self.contentAlignment = contentAlignment
+        self.showBorder = showBorder
+        self.backgroundColor = backgroundColor
         self.content = content()
     }
     
-    /// Creates Zuper Card wrapper component with empty content.
+    // PATTERN 2: Fill layout
     init(
-        _ title: String = "",
-        description: String = "",
-        icon: Icon.Content = .none,
-        action: CardAction = .none,
-        headerSpacing: CGFloat = .medium,
         showBorder: Bool = true,
-        titleStyle: Heading.Style = .h6,
-        status: Status? = nil,
-        backgroundColor: Color? = .whiteDarker
-    ) where Content == EmptyView {
-        self.init(
-            title,
-            description: description,
-            icon: icon,
-            action: action,
-            headerSpacing: headerSpacing,
-            showBorder: showBorder,
-            titleStyle: titleStyle,
-            status: status,
-            backgroundColor: backgroundColor,
-            content: { EmptyView() }
-        )
+        contentLayout: CardContentLayout = .fill,
+        backgroundColor: Color? = .white,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.contentLayout = contentLayout
+        self.contentAlignment = .leading
+        self.showBorder = showBorder
+        self.backgroundColor = backgroundColor
+        self.content = content()
+    }
+    
+    // PATTERN 3: Background color focus
+    init(
+        backgroundColor: Color?,
+        showBorder: Bool = true,
+        contentLayout: CardContentLayout = .default(),
+        @ViewBuilder content: () -> Content
+    ) {
+        self.backgroundColor = backgroundColor
+        self.showBorder = showBorder
+        self.contentLayout = contentLayout
+        self.contentAlignment = .leading
+        self.content = content()
+    }
+    
+    // PATTERN 4: Content alignment
+    init(
+        contentAlignment: HorizontalAlignment,
+        showBorder: Bool = true,
+        backgroundColor: Color? = .white,
+        contentLayout: CardContentLayout = .default(),
+        @ViewBuilder content: () -> Content
+    ) {
+        self.contentAlignment = contentAlignment
+        self.showBorder = showBorder
+        self.backgroundColor = backgroundColor
+        self.contentLayout = contentLayout
+        self.content = content()
     }
 }
+
+/// Separates content into sections.
+///
+/// Card is a wrapping component around a custom content.
+/// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
+// public struct Card<Content: View>: View {
+//
+//    @Environment(\.idealSize) var idealSize
+//    
+//    let title: String
+//    let description: String
+//    let iconContent: Icon.Content
+//    let action: CardAction
+//    let headerSpacing: CGFloat
+//    let contentLayout: CardContentLayout
+//    let contentAlignment: HorizontalAlignment
+//    let showBorder: Bool
+//    let titleStyle: Heading.Style
+//    let status: Status?
+//    let backgroundColor: Color?
+//    @ViewBuilder let content: Content
+//    
+//    public var body: some View {
+//        VStack(alignment: .leading, spacing: headerSpacing) {
+//            header
+//            
+//            if isContentEmpty == false {
+//                VStack(alignment: contentAlignment, spacing: contentSpacing) {
+//                    content
+//                }
+//                .padding(.top, isHeaderEmpty ? contentPadding : 0)
+//                .padding([.horizontal, .bottom], contentPadding)
+//            }
+//        }
+//        .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
+//        .background(backgroundColor)
+//        .tileBorder(
+//            showBorder ? .iOS : .none,
+//            status: status
+//        )
+//        .ignoreScreenLayoutHorizontalPadding()
+//        .accessibilityElement(children: .contain)
+//    }
+//    
+//    @ViewBuilder var header: some View {
+//        if isHeaderEmpty == false {
+//            HStack(alignment: .firstTextBaseline, spacing: 0) {
+//                Icon(content: iconContent, size: .heading(titleStyle))
+//                    .padding(.trailing, .xSmall)
+//                    .accessibility(.cardIcon)
+//                
+//                VStack(alignment: .leading, spacing: .xxSmall) {
+//                    Heading(title, style: titleStyle)
+//                        .accessibility(.cardTitle)
+//                    Text(description, color: .inkNormal)
+//                        .accessibility(.cardDescription)
+//                }
+//                
+//                if idealSize.horizontal == nil {
+//                    Spacer(minLength: 0)
+//                }
+//                
+//                switch action {
+//                case .buttonLink(let label, let action):
+//                    if label.isEmpty == false {
+//                        ButtonLink(label, action: action)
+//                            .padding(.leading, .xxxSmall)
+//                            .accessibility(.cardActionButtonLink)
+//                    }
+//                case .none:
+//                    EmptyView()
+//                }
+//            }
+//            .padding([.horizontal, .top], .medium)
+//            .padding(.bottom, isContentEmpty ? .medium : 0)
+//        }
+//    }
+//    
+//    var isHeaderEmpty: Bool {
+//        if case .none = action, iconContent.isEmpty, title.isEmpty, description.isEmpty {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
+//    
+//    var isContentEmpty: Bool {
+//        content is EmptyView
+//    }
+//    
+//    var contentPadding: CGFloat {
+//        switch contentLayout {
+//        case .fill:                         return 0
+//        case .default:                      return .medium
+//        case .custom(let padding, _):       return padding
+//        }
+//    }
+//    
+//    var contentSpacing: CGFloat {
+//        switch contentLayout {
+//        case .fill:                         return 0
+//        case .default(let spacing):         return spacing
+//        case .custom(_, let spacing):       return spacing
+//        }
+//    }
+//}
+//
+//// MARK: - Inits
+//public extension Card {
+//    
+//    /// Creates Zuper Card wrapper component over a custom content.
+//    init(
+//        _ title: String = "",
+//        description: String = "",
+//        icon: Icon.Content = .none,
+//        action: CardAction = .none,
+//        headerSpacing: CGFloat = .medium,
+//        showBorder: Bool = true,
+//        titleStyle: Heading.Style = .h6,
+//        status: Status? = nil,
+//        backgroundColor: Color? = .whiteDarker,
+//        contentLayout: CardContentLayout = .default(),
+//        contentAlignment: HorizontalAlignment = .leading,
+//        @ViewBuilder content: () -> Content
+//    ) {
+//        self.title = title
+//        self.description = description
+//        self.iconContent = icon
+//        self.action = action
+//        self.headerSpacing = headerSpacing
+//        self.showBorder = showBorder
+//        self.titleStyle = titleStyle
+//        self.status = status
+//        self.backgroundColor = backgroundColor
+//        self.contentLayout = contentLayout
+//        self.contentAlignment = contentAlignment
+//        self.content = content()
+//    }
+//    
+//    /// Creates Zuper Card wrapper component with empty content.
+//    init(
+//        _ title: String = "",
+//        description: String = "",
+//        icon: Icon.Content = .none,
+//        action: CardAction = .none,
+//        headerSpacing: CGFloat = .medium,
+//        showBorder: Bool = true,
+//        titleStyle: Heading.Style = .h6,
+//        status: Status? = nil,
+//        backgroundColor: Color? = .whiteDarker
+//    ) where Content == EmptyView {
+//        self.init(
+//            title,
+//            description: description,
+//            icon: icon,
+//            action: action,
+//            headerSpacing: headerSpacing,
+//            showBorder: showBorder,
+//            titleStyle: titleStyle,
+//            status: status,
+//            backgroundColor: backgroundColor,
+//            content: { EmptyView() }
+//        )
+//    }
+// }
 
 // MARK: - Previews
 struct CardPreviews: PreviewProvider {
@@ -199,7 +312,6 @@ struct CardPreviews: PreviewProvider {
     }
     
     @ViewBuilder static var content: some View {
-        cardWithoutContent
         cardWithFillLayoutContent
         cardWithFillLayoutContentNoHeader
         cardWithOnlyCustomContent
@@ -216,7 +328,7 @@ struct CardPreviews: PreviewProvider {
     }
     
     static var standalone: some View {
-        Card("Card title", description: "Card description", icon: gridIcon, action: .buttonLink("ButtonLink")) {
+        Card() {
             contentPlaceholder
             contentPlaceholder
         }
@@ -225,12 +337,12 @@ struct CardPreviews: PreviewProvider {
     
     static var standaloneIntrinsic: some View {
         HStack(spacing: .medium) {
-            Card("Card", description: "Intrinsic", icon: gridIcon) {
+            Card() {
                 intrinsicContentPlaceholder
             }
             .idealSize(horizontal: true, vertical: false)
             
-            Card("Card with SF Symbol", description: "Intrinsic", icon: .sfSymbol("info.circle.fill", color: .greenNormal)) {
+            Card() {
                 intrinsicContentPlaceholder
             }
             .idealSize(horizontal: true, vertical: false)
@@ -240,12 +352,8 @@ struct CardPreviews: PreviewProvider {
         .previewDisplayName("Standalone Intrinsic width")
     }
     
-    static var cardWithoutContent: some View {
-        Card("Card with no content", action: .buttonLink("Edit"))
-    }
-    
     static var cardWithFillLayoutContent: some View {
-        Card("Card with fill layout content", action: .buttonLink("Edit"), contentLayout: .fill) {
+        Card(contentLayout: .fill) {
             contentPlaceholder
             Separator()
             contentPlaceholder
@@ -268,7 +376,7 @@ struct CardPreviews: PreviewProvider {
     }
     
     static var cardWithTiles: some View {
-        Card("Card with mixed content", description: "Card description", icon: gridIcon, action: .buttonLink("ButtonLink")) {
+        Card() {
             contentPlaceholder
                 .frame(height: 30).clipped()
             Tile("Tile")
@@ -304,12 +412,9 @@ struct CardPreviews: PreviewProvider {
     }
     
     static var clear: some View {
-        Card(
-            "Card without borders and background",
-            headerSpacing: .xSmall,
-            showBorder: true,
-            backgroundColor: .clear,
-            contentLayout: .fill
+        Card(showBorder: true,
+             contentLayout: .fill,
+             backgroundColor: .clear
         ) {
             VStack(spacing: 0) {
                 ListChoice("ListChoice")

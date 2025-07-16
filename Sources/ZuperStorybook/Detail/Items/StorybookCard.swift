@@ -12,14 +12,13 @@ struct StorybookCard {
     }
 
     static var standalone: some View {
-        Card("Card title", description: "Card description", icon: .grid, action: .buttonLink("ButtonLink")) {
+        Card() {
             contentPlaceholder
             contentPlaceholder
         }
     }
 
     @ViewBuilder static var content: some View {
-        cardWithoutContent
         cardWithFillLayoutContent
         cardWithFillLayoutContentNoHeader
         cardWithOnlyCustomContent
@@ -28,12 +27,8 @@ struct StorybookCard {
         clear
     }
 
-    static var cardWithoutContent: some View {
-        Card("Card with no content", action: .buttonLink("Edit"))
-    }
-
     static var cardWithFillLayoutContent: some View {
-        Card("Card with fill layout content", action: .buttonLink("Edit"), contentLayout: .fill) {
+        Card(contentLayout: .fill) {
             contentPlaceholder
             Separator()
             contentPlaceholder
@@ -56,7 +51,7 @@ struct StorybookCard {
     }
 
     static var cardWithTiles: some View {
-        Card("Card with mixed content", description: "Card description", icon: .grid, action: .buttonLink("ButtonLink")) {
+        Card() {
             contentPlaceholder
                 .frame(height: 30).clipped()
             Tile("Tile")
@@ -82,24 +77,13 @@ struct StorybookCard {
     }
 
     static var cardMultilineCritical: some View {
-        Card(
-            "Card with very very very very very very long and multi-line title",
-            description: "Very very very very very long and multi-line description",
-            action: .buttonLink("ButtonLink with a long description"),
-            status: .critical
-        ) {
+        Card() {
             contentPlaceholder
         }
     }
 
     static var clear: some View {
-        Card(
-            "Card without borders and background",
-            headerSpacing: .xSmall,
-            showBorder: false,
-            backgroundColor: .clear,
-            contentLayout: .fill
-        ) {
+        Card {
             VStack(spacing: 0) {
                 ListChoice("ListChoice")
                 ListChoice("ListChoice", description: "ListChoice description", icon: .alert, showSeparator: false)

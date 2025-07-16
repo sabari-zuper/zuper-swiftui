@@ -210,13 +210,7 @@ private struct ColorCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        Card(
-            title,
-            showBorder: false,
-            titleStyle: .title6,
-            backgroundColor: .clear,
-            contentLayout: .custom(padding: .xSmall, spacing: 0)
-        ) {
+        Card(showBorder: false, contentLayout: .custom(padding: .xSmall, spacing: 0), backgroundColor: .clear) {
             VStack(spacing: .xxxSmall) {
                 content
             }

@@ -5,12 +5,12 @@ struct StorybookIllustration {
 
     static var basic: some View {
         VStack(alignment: .leading, spacing: .medium) {
-            Card("Default", showBorder: false) {
+            Card(showBorder: false) {
                 Illustration("ic_time", bundle: .current)
                     .border(Color.cloudNormal)
             }
 
-            Card("MaxHeight = 80", showBorder: false) {
+            Card(showBorder: false) {
                 VStack {
                     Text("Frame - Center (default)", size: .small)
                     Illustration("ic_time", bundle: .current, layout: .frame(maxHeight: 80))
@@ -37,7 +37,7 @@ struct StorybookIllustration {
                 }
             }
 
-            Card("MaxHeight = 30", showBorder: false) {
+            Card(showBorder: false) {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Leading", size: .small)
@@ -66,7 +66,7 @@ struct StorybookIllustration {
                 }
             }
 
-            Card("Resizeable", showBorder: false) {
+            Card(showBorder: false) {
                 HStack(alignment: .top, spacing: .medium) {
                     VStack(alignment: .leading) {
                         Text("Width = 80", size: .small)
