@@ -32,25 +32,21 @@ public struct Card<Content: View>: View {
             content
         }
         .padding(contentPadding)
-        .background(backgroundColor ?? .white)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(showBorder ? Color.gray.opacity(0.2) : Color.clear, lineWidth: 1)
-        )
+        .background(backgroundColor ?? .whiteDarker)
+        .tileBorder(showBorder ? .iOS : .none)
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)
     }
     
     // SIMPLIFIED COMPUTED PROPERTIES (only what you use)
-    private var contentPadding: EdgeInsets {
+    private var contentPadding: CGFloat {
         switch contentLayout {
         case .fill:
-            return EdgeInsets()
+            return 0
         case .default:
-            return EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+            return .medium
         case .custom(let padding, _):
-            return EdgeInsets(top: padding, leading: padding, bottom: padding, trailing: padding)
+            return padding
         }
     }
     
