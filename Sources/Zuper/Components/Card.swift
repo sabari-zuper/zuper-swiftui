@@ -21,6 +21,8 @@ public enum CardContentLayout {
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
 public struct Card<Content: View>: View {
     
+    @Environment(\.idealSize) var idealSize
+    
     let content: Content
     let contentLayout: CardContentLayout
     let contentAlignment: HorizontalAlignment
@@ -32,10 +34,13 @@ public struct Card<Content: View>: View {
             content
         }
         .padding(contentPadding)
+        .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
         .background(backgroundColor ?? .whiteDarker)
         .tileBorder(showBorder ? .iOS : .none)
+        .ignoreScreenLayoutHorizontalPadding()
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)
+        .accessibilityElement(children: .contain)
     }
     
     // SIMPLIFIED COMPUTED PROPERTIES (only what you use)
