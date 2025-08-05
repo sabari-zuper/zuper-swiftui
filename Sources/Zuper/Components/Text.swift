@@ -26,25 +26,34 @@ public struct Text: View {
     
     public var body: some View {
         if !content.isEmpty {
-            SwiftUI.Text(verbatim: content)
-                .zuperFont(
-                    size: size.value,
-                    weight: weight,
-                    style: size.textStyle,
-                    sizeCategory: sizeCategory
-                )
-                .foregroundColor(foregroundColor)
+            textContent()
                 .multilineTextAlignment(alignment)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineSpacing(lineSpacing ?? 0)
                 .kerning(kerning)
-                .strikethrough(strikethrough, color: foregroundColor)
+                .strikethrough(strikethrough, color: foregroundColor.map { Color(uiColor: $0) })
                 .lineLimit(lineLimit)
         }
     }
     
-    private var foregroundColor: SwiftUI.Color? {
-        color?.value
+    func textContent() -> SwiftUI.Text {
+        let baseText = SwiftUI.Text(verbatim: content)
+            .zuperFont(
+                size: size.value,
+                weight: weight,
+                style: size.textStyle,
+                sizeCategory: sizeCategory
+            )
+        
+        if let foregroundColor = foregroundColor {
+            return baseText.foregroundColor(Color(uiColor: foregroundColor))
+        } else {
+            return baseText  // No .foregroundColor() applied
+        }
+    }
+    
+    var foregroundColor: UIColor? {
+        color?.uiValue
     }
 }
 
