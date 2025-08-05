@@ -34,11 +34,11 @@ public struct Checkbox: View {
         .disabled(state == .disabled)
     }
 
-    var labelColor: Text.Color {
+    var labelColor: TextColor {
         state == .disabled ? .custom(.cloudDarkHover) : .inkDark
     }
 
-    var descriptionColor: Text.Color {
+    var descriptionColor: TextColor {
         state == .disabled ? .custom(.cloudDarkHover) : .inkNormal
     }
 }

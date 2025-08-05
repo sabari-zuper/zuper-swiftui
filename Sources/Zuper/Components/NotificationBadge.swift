@@ -4,7 +4,7 @@ import SwiftUI
 public struct NotificationBadge: View {
 
     public static let verticalPadding: CGFloat = 5
-    public static let textSize: Text.Size = .small
+    public static let textSize: TextSize = .small
 
     let content: Content
     let style: Badge.Style
@@ -34,7 +34,7 @@ public struct NotificationBadge: View {
     @ViewBuilder var contentView: some View {
         switch content {
             case .text(let text):
-                Text(
+                ZText(
                     text,
                     size: Self.textSize,
                     color: .none,

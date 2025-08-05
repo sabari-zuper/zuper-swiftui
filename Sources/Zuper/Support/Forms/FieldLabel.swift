@@ -9,7 +9,7 @@ public struct FieldLabel: View {
     let linkAction: TextLink.Action
 
     public var body: some View {
-        Text(label, size: .normal, weight: .medium, accentColor: accentColor)
+        ZText(label, size: .normal, weight: .medium, accentColor: accentColor)
             .padding(.bottom, 1)
             .accessibility(.fieldLabel)
     }

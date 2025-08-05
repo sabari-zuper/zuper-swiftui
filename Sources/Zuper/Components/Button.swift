@@ -209,7 +209,7 @@ extension Button {
         case `default`
         case small
 
-        public var textSize: Text.Size {
+        public var textSize: TextSize {
             switch self {
                 case .default:      return .normal
                 case .small:        return .small

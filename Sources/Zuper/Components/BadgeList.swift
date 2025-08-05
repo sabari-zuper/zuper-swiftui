@@ -21,7 +21,7 @@ public struct BadgeList: View {
                     .foregroundColor(.init(style.iconColor))
                     .padding(.xxSmall)
                     .background(badgeBackground)
-                Text(
+                ZText(
                     label,
                     size: size.textSize,
                     color: .custom(labelColor.color),
@@ -128,9 +128,9 @@ public extension BadgeList {
     enum Size {
         case small
         case normal
-        case custom(_ size: Text.Size)
+        case custom(_ size: TextSize)
 
-        var textSize: Text.Size {
+        var textSize: TextSize {
             switch self {
                 case .small:              	return .small
                 case .normal:               return .normal

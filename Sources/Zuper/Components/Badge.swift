@@ -7,12 +7,12 @@ import SwiftUI
 public struct Badge: View {
 
     public static let verticalPadding: CGFloat = 4 + 1/3 // Results in ±24 height at normal text size
-    public static let textSize: Text.Size = .small
+    public static let textSize: TextSize = .small
 
     let label: String
     let iconContent: Icon.Content
     var style: Style
-    var textSize:Text.Size
+    var textSize:TextSize
     var iconSize:Icon.Size
     var isStatus: Bool
     var iconPlacement: Icon.Placement
@@ -75,7 +75,7 @@ public extension Badge {
         _ label: String = "",
         icon: Icon.Content = .none,
         style: Style = .neutral,
-        textSize:Text.Size = .small,
+        textSize:TextSize = .small,
         iconSize:Icon.Size = .small,
         isStatus: Bool = false,
         iconPlacement: Icon.Placement = .leading

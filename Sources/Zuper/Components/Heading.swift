@@ -24,7 +24,7 @@ public struct Heading: View {
     }
 
     func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
-        Text(
+        ZText(
             content,
             size: .custom(style.size),
             color: color?.textColor,
@@ -89,7 +89,7 @@ public extension Heading {
             }
         }
 
-        public var textColor: Text.Color? {
+        public var textColor: TextColor? {
             switch self {
                 case .inkDark:              return .inkDark
                 case .custom(let color):    return .custom(color)
@@ -136,8 +136,8 @@ public extension Heading {
 //            case .title2:           return 22
 //            case .title3:           return Text.Size.xLarge.value
 //            case .title4:           return Text.Size.large.value
-            case .title5:           return Text.Size.normal.value
-            case .title6:           return Text.Size.small.value
+            case .title5:           return TextSize.normal.value
+            case .title6:           return TextSize.small.value
             case .h1:
                 return 36
             case .h2:
@@ -206,8 +206,8 @@ public extension Heading {
 //            case .title2:           return 28
 //            case .title3:           return Text.Size.large.lineHeight
 //            case .title4:           return Text.Size.normal.lineHeight
-            case .title5:           return Text.Size.normal.lineHeight
-            case .title6:           return Text.Size.small.lineHeight
+            case .title5:           return TextSize.normal.lineHeight
+            case .title6:           return TextSize.small.lineHeight
             case .h1:               return 42
             case .h2:               return 32
             case .h3:               return 28

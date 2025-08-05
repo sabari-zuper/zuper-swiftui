@@ -77,7 +77,7 @@ struct StorybookTypography {
         .previewDisplayName("Multiline")
     }
 
-    @ViewBuilder static func text(_ content: String, size: Zuper.Text.Size, weight: Font.Weight) -> some View {
+    @ViewBuilder static func text(_ content: String, size: Zuper.TextSize, weight: Font.Weight) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: .small) {
             Text(content, size: size, weight: weight)
             Spacer()

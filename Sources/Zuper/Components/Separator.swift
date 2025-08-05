@@ -6,7 +6,7 @@ import SwiftUI
 public struct Separator: View {
     
     let label: String
-    let labelColor: Text.Color
+    let labelColor: TextColor
     let color: Color
     let thickness: CGFloat
     
@@ -55,7 +55,7 @@ public extension Separator {
     /// Creates Zuper Separator component.
     init(
         _ label: String = "",
-        labelColor: Text.Color = .inkNormal,
+        labelColor: TextColor = .inkNormal,
         color: Color = .cloudNormal,
         thickness: Thickness = .default
     ) {

@@ -26,9 +26,8 @@ public struct ButtonLink: View {
                             Text(
                                 label,
                                 size: .normal,
-                                color: nil,
-                                weight: .semibold,
-                                accentColor: colorStyle.color.normal)
+                                color: TextColor.custom(colorStyle.color.normal),
+                                weight: .semibold)
                             .padding(.vertical, verticalPadding)
                         }
                     }

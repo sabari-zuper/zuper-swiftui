@@ -49,7 +49,7 @@ public struct Alert<Content: View>: View {
                     VStack(alignment: .leading, spacing: .xxSmall) {
                         Text(title, color: applyStatusColor ? .custom(status.uiColor) : .inkDark, weight: .bold)
                             .accessibility(.alertTitle)
-                        Text(description, color: applyStatusColor ? .custom(status.uiColor) : .inkDark, linkColor: .secondary, linkAction: descriptionLinkAction)
+                        ZText(description, color: applyStatusColor ? .custom(status.uiColor) : .inkDark, linkColor: .secondary, linkAction: descriptionLinkAction)
                             .accessibility(.alertDescription)
                     }
                 }

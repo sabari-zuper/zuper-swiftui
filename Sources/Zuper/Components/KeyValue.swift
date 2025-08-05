@@ -10,7 +10,7 @@ public struct KeyValue: View {
 
     public var body: some View {
         KeyValueField(key, size: size, alignment: alignment) {
-            Text(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
+            ZText(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
         }
         .accessibilityElement(children: .ignore)
         .accessibility(label: .init(key))
@@ -43,14 +43,14 @@ extension KeyValue {
         case normal
         case large
 
-        var keySize: Text.Size {
+        var keySize: TextSize {
             switch self {
                 case .normal:   return .small
                 case .large:    return .normal
             }
         }
 
-        var valueSize: Text.Size {
+        var valueSize: TextSize {
             switch self {
                 case .normal:   return .normal
                 case .large:    return .large

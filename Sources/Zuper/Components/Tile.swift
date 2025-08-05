@@ -65,7 +65,7 @@ public struct Tile<Content: View>: View {
     let status: Status?
     let backgroundColor: BackgroundColor?
     let titleStyle: Heading.Style
-    let descriptionColor: Text.Color
+    let descriptionColor: TextColor
     let action: () -> Void
     @ViewBuilder let content: Content
 
@@ -192,7 +192,7 @@ public extension Tile {
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
         titleStyle: Heading.Style = .h6,
-        descriptionColor: Text.Color = .inkNormal,
+        descriptionColor: TextColor = .inkNormal,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
     ) {
@@ -222,7 +222,7 @@ public extension Tile {
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
         titleStyle: Heading.Style = .h6,
-        descriptionColor: Text.Color = .inkNormal,
+        descriptionColor: TextColor = .inkNormal,
         action: @escaping () -> Void = {}
     ) where Content == EmptyView {
         self.init(

@@ -122,7 +122,7 @@ public extension Icon {
         /// Size based on Font size.
         case fontSize(CGFloat)
         /// Size based on `Text` size.
-        case text(Text.Size)
+        case text(TextSize)
         /// Size based on `Heading` style.
         case heading(Heading.Style)
         /// Size based on `Label` title style.
@@ -146,10 +146,10 @@ public extension Icon {
         
         public var textStyle: Font.TextStyle {
             switch self {
-            case .small:                            return Text.Size.small.textStyle
-            case .normal:                           return Text.Size.normal.textStyle
-            case .large:                            return Text.Size.large.textStyle
-            case .xLarge:                           return Text.Size.xLarge.textStyle
+            case .small:                            return TextSize.small.textStyle
+            case .normal:                           return TextSize.normal.textStyle
+            case .large:                            return TextSize.large.textStyle
+            case .xLarge:                           return TextSize.xLarge.textStyle
             case .fontSize:                         return .body
             case .text(let size):                   return size.textStyle
             case .heading(let style):               return style.textStyle
@@ -165,10 +165,10 @@ public extension Icon {
         /// Default text line height for icon size.
         public var textLineHeight: CGFloat {
             switch self {
-            case .small:                            return Text.Size.small.iconSize
-            case .normal:                           return Text.Size.normal.iconSize
-            case .large:                            return Text.Size.large.iconSize
-            case .xLarge:                           return Text.Size.xLarge.iconSize
+            case .small:                            return TextSize.small.iconSize
+            case .normal:                           return TextSize.normal.iconSize
+            case .large:                            return TextSize.large.iconSize
+            case .xLarge:                           return TextSize.xLarge.iconSize
             case .fontSize(let size):               return round(size * 1.31)
             case .text(let size):                   return size.iconSize
             case .heading(let style):               return style.iconSize
@@ -323,7 +323,7 @@ struct IconPreviews: PreviewProvider {
         }
     }
     
-    static func labelTextStack(_ size: Text.Size) -> some View {
+    static func labelTextStack(_ size: TextSize) -> some View {
         HStack(spacing: .xSmall) {
             Label("Label Text", icon: .sfSymbol("person.fill", color: .inkDark), style: .text(size))
                 .overlay(Separator(), alignment: .top)
@@ -331,7 +331,7 @@ struct IconPreviews: PreviewProvider {
         }
     }
     
-    static func textStack(_ size: Text.Size) -> some View {
+    static func textStack(_ size: TextSize) -> some View {
         HStack(spacing: .xSmall) {
             HStack(alignment: .firstTextBaseline, spacing: .xxSmall) {
                 Icon(content: .sfSymbol("person.fill", color: .inkDark), size: .text(size))
@@ -397,12 +397,12 @@ struct IconPreviews: PreviewProvider {
             Text("SF Symbol vs Zuper sizes (custom-font-label)", size: .small)
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(Text.Size.xLarge.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.xLarge.value), color: nil)
                     Icon(sfSymbol: sfSymbol, size: .label(.text(.xLarge)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Icon(sfSymbol:sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .fontSize(Text.Size.xLarge.value), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .fontSize(TextSize.xLarge.value), color: nil)
                     Icon(sfSymbol:sfSymbol, size: .label(.text(.xLarge)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
                     Text("XLarge", size: .xLarge, color: nil)
@@ -414,14 +414,14 @@ struct IconPreviews: PreviewProvider {
             
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(Text.Size.small.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(Text.Size.small.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.small.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.small.value), color: nil)
                     Icon(sfSymbol: sfSymbol, size: .label(.text(.small)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
                     Icon(content: .sfSymbol("", color: .clear))
-                    Icon(sfSymbol:sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
                     Text("Small", size: .small, color: nil)
                 }
@@ -511,7 +511,7 @@ struct IconPreviews: PreviewProvider {
                 .border(Color.cloudLightActive, width: .hairline)
             }
             
-            Text("Concatenated")
+            ZText("Concatenated")
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: 0)
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: .xxxSmall)
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: -.xxxSmall)

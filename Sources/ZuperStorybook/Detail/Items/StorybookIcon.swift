@@ -69,7 +69,7 @@ struct StorybookIcon {
         }
     }
 
-    static func labelTextStack(_ size: Zuper.Text.Size) -> some View {
+    static func labelTextStack(_ size: Zuper.TextSize) -> some View {
         HStack(spacing: .xSmall) {
             Label("Label Text", icon: .person, style: .text(size))
                 .overlay(Separator(), alignment: .top)
@@ -77,7 +77,7 @@ struct StorybookIcon {
         }
     }
 
-    static func textStack(_ size: Zuper.Text.Size) -> some View {
+    static func textStack(_ size: Zuper.TextSize) -> some View {
         HStack(spacing: .xSmall) {
             HStack(alignment: .firstTextBaseline, spacing: .xxSmall) {
                 Icon(content: .person, size: .text(size))
@@ -143,12 +143,12 @@ struct StorybookIcon {
             Text("SF Symbol vs Zuper sizes (custom-font-label)", size: .small)
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(Text.Size.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(Text.Size.xLarge.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.xLarge.value), color: nil)
                     Icon(sfSymbol: sfSymbol, size: .label(.text(.xLarge)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Icon(content: .infoCircle, size: .custom(Text.Size.xLarge.iconSize))
-                    Icon(content: .infoCircle, size: .fontSize(Text.Size.xLarge.value))
+                    Icon(content: .infoCircle, size: .custom(TextSize.xLarge.iconSize))
+                    Icon(content: .infoCircle, size: .fontSize(TextSize.xLarge.value))
                     Icon(content: .infoCircle, size: .label(.text(.xLarge)))
                     Color.clear.frame(width: .xSmall, height: 1)
                     Text("XLarge", size: .xLarge, color: nil)
@@ -160,12 +160,12 @@ struct StorybookIcon {
 
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(Text.Size.small.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(Text.Size.small.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.small.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.small.value), color: nil)
                     Icon(sfSymbol: sfSymbol, size: .label(.text(.small)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Icon(content: .infoCircle, size: .custom(Text.Size.small.iconSize))
-                    Icon(content: .infoCircle, size: .fontSize(Text.Size.small.value))
+                    Icon(content: .infoCircle, size: .custom(TextSize.small.iconSize))
+                    Icon(content: .infoCircle, size: .fontSize(TextSize.small.value))
                     Icon(content: .infoCircle, size: .label(.text(.small)))
                     Color.clear.frame(width: .xSmall, height: 1)
                     Text("Small", size: .small)

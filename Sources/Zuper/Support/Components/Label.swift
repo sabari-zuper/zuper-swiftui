@@ -46,15 +46,12 @@ public struct Label: View {
         switch style {
             case .heading(let style, let color):
                 Heading(title, style: style, color: color)
-            case .text(let size, let weight, let color, let accentColor, let linkColor, let linkAction):
+            case .text(let size, let weight, let color, _, _, _):
                 Text(
                     title,
                     size: size,
                     color: color,
-                    weight: weight,
-                    accentColor: accentColor,
-                    linkColor: linkColor,
-                    linkAction: linkAction
+                    weight: weight
                 )
         }
     }
@@ -90,9 +87,9 @@ public extension Label {
     
         case heading(_ style: Heading.Style = .h4, color: Heading.Color? = .inkDark)
         case text(
-            _ size: Text.Size = .normal,
+            _ size: TextSize = .normal,
             weight: Font.Weight = .regular,
-            color: Text.Color? = .inkDark,
+            color: TextColor? = .inkDark,
             accentColor: UIColor = .inkDark,
             linkColor: TextLink.Color = .primary,
             linkAction: TextLink.Action = { _, _ in }

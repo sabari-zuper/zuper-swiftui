@@ -5,7 +5,7 @@ import SwiftUI
 /// Can be used to unify the height of elements that contain variable combination of icons and texts.
 public struct TextStrut: View {
     
-    let textSize: Text.Size
+    let textSize: TextSize
     
     public var body: some View {
         ZText("I", size: textSize, color: .custom(.clear))
@@ -15,7 +15,7 @@ public struct TextStrut: View {
     }
 
     /// Creates invisible strut of height of text based on provided text size.
-    public init(_ textSize: Text.Size) {
+    public init(_ textSize: TextSize) {
         self.textSize = textSize
     }
 }

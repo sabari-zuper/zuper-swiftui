@@ -9,7 +9,7 @@ public struct ListItem: View {
     let text: String
     let iconContent: Icon.Content
     let iconSize: Icon.Size?
-    let size: Text.Size
+    let size: TextSize
     let spacing: CGFloat
     let style: ListItem.Style
     let linkAction: TextLink.Action
@@ -37,7 +37,7 @@ public extension ListItem {
     init(
         _ text: String = "",
         icon: Icon.Content,
-        size: Text.Size = .normal,
+        size: TextSize = .normal,
         iconSize: Icon.Size? = nil,
         spacing: CGFloat = .xxSmall,
         style: ListItem.Style = .primary,
@@ -55,7 +55,7 @@ public extension ListItem {
     /// Creates Zuper ListItem component with default appearance, using the `circleSmall` icon.
     init(
         _ text: String = "",
-        size: Text.Size = .normal,
+        size: TextSize = .normal,
         spacing: CGFloat = .xSmall,
         style: ListItem.Style = .primary,
         linkAction: @escaping TextLink.Action = { _, _ in }
@@ -80,7 +80,7 @@ public extension ListItem {
         case secondary
         case custom(color: UIColor = .inkDark, weight: Font.Weight = .regular)
 
-        public var textColor: Text.Color {
+        public var textColor: TextColor {
             switch self {
                 case .primary:                      return .inkDark
                 case .secondary:                    return .inkNormal
