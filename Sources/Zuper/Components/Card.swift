@@ -75,7 +75,7 @@ public extension Card {
         contentLayout: CardContentLayout,
         contentAlignment: HorizontalAlignment = .leading,
         showBorder: Bool = true,
-        backgroundColor: Color? = .white,
+        backgroundColor: Color? = .whiteDarker,
         @ViewBuilder content: () -> Content
     ) {
         self.contentLayout = contentLayout
@@ -89,7 +89,7 @@ public extension Card {
     init(
         showBorder: Bool = true,
         contentLayout: CardContentLayout = .fill,
-        backgroundColor: Color? = .white,
+        backgroundColor: Color? = .whiteDarker,
         @ViewBuilder content: () -> Content
     ) {
         self.contentLayout = contentLayout
@@ -117,7 +117,7 @@ public extension Card {
     init(
         contentAlignment: HorizontalAlignment,
         showBorder: Bool = true,
-        backgroundColor: Color? = .white,
+        backgroundColor: Color? = .whiteDarker,
         contentLayout: CardContentLayout = .default(),
         @ViewBuilder content: () -> Content
     ) {
