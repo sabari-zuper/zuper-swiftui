@@ -22,7 +22,6 @@ public struct Text: View {
     let alignment: TextAlignment
     let kerning: CGFloat
     let strikethrough: Bool
-    let lineLimit: Int?
     
     public var body: some View {
         if !content.isEmpty {
@@ -32,7 +31,6 @@ public struct Text: View {
                 .lineSpacing(lineSpacing ?? 0)
                 .kerning(kerning)
                 .strikethrough(strikethrough, color: foregroundColor.map { Color(uiColor: $0) })
-                .lineLimit(lineLimit)
         }
     }
     
@@ -72,7 +70,6 @@ public extension Text {
     ///   - alignment: Text alignment
     ///   - kerning: Character spacing
     ///   - strikethrough: Strikethrough style
-    ///   - lineLimit: Maximum number of lines
     init(
         _ content: String,
         size: TextSize = .normal,
@@ -81,8 +78,7 @@ public extension Text {
         lineSpacing: CGFloat? = nil,
         alignment: TextAlignment = .leading,
         strikethrough: Bool = false,
-        kerning: CGFloat = 0,
-        lineLimit: Int? = nil
+        kerning: CGFloat = 0
     ) {
         self.content = content
         self.size = size
@@ -92,7 +88,6 @@ public extension Text {
         self.alignment = alignment
         self.kerning = kerning
         self.strikethrough = strikethrough
-        self.lineLimit = lineLimit
     }
 }
 
