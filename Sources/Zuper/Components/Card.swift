@@ -85,6 +85,16 @@ public extension Card {
         self.content = content()
     }
     
+    init(
+        @ViewBuilder content: () -> Content
+    ) {
+        self.contentLayout = .custom(padding: .small, spacing: .small)
+        self.contentAlignment = .leading
+        self.showBorder = true
+        self.backgroundColor = .whiteDarker
+        self.content = content()
+    }
+    
     // PATTERN 2: Fill layout
     init(
         showBorder: Bool = true,
@@ -329,7 +339,7 @@ struct CardPreviews: PreviewProvider {
     }
     
     static var standalone: some View {
-        Card() {
+        Card {
             contentPlaceholder
             contentPlaceholder
         }
