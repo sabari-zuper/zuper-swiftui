@@ -3,7 +3,7 @@ import SwiftUI
 public struct TimelineStepBadgeText: View {
 
     @Environment(\.horizontalSizeClass) var horisontalSizeClass
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     let label: String
     let sublabel: String
@@ -11,7 +11,7 @@ public struct TimelineStepBadgeText: View {
     let alignmentComputation: (ViewDimensions) -> CGFloat
     
     public var body: some View {
-        if horisontalSizeClass == .compact && sizeCategory.isAccessibilitySize {
+        if horisontalSizeClass == .compact && dynamicTypeSize.isAccessibilitySize {
             VStack(alignment: .leading, spacing: .xSmall) {
                 content
             }
@@ -26,7 +26,7 @@ public struct TimelineStepBadgeText: View {
         Badge(label, style: badgeStyle)
             .alignmentGuide(.timelineStepAlignment, computeValue: alignmentComputation)
         Text(sublabel, size: .small)
-            .padding(.leading, sizeCategory.isAccessibilitySize ? .xSmall : 0)
+            .padding(.leading, dynamicTypeSize.isAccessibilitySize ? .xSmall : 0)
     }
 
     var badgeStyle: Badge.Style {
