@@ -34,12 +34,11 @@ public struct NotificationBadge: View {
     @ViewBuilder var contentView: some View {
         switch content {
             case .text(let text):
-                ZText(
+                Text(
                     text,
                     size: Self.textSize,
-                    color: .none,
-                    weight: .medium,
-                    linkColor: .custom(style.labelColor)
+                    color: .custom(style.labelColor),
+                    weight: .medium
                 )
                 .padding(.vertical, Self.verticalPadding)
             case .icon(let icon):

@@ -511,7 +511,7 @@ struct IconPreviews: PreviewProvider {
                 .border(Color.cloudLightActive, width: .hairline)
             }
             
-            ZText("Concatenated")
+            Text("Concatenated")
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: 0)
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: .xxxSmall)
             + Icon(sfSymbol: sfSymbol, size: .small, baselineOffset: -.xxxSmall)
