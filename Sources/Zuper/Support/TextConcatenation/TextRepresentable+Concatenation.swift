@@ -32,13 +32,13 @@ struct TextConcatenationPreviews: PreviewProvider {
             + Heading(" San Pedro de Alcantara", style: .h1)
             + Icon(sfSymbol: "info.circle", size: .large)
             + Icon(sfSymbol: "xmark.circle.fill", size: .large, color: nil, baselineOffset: -1)
-            + Text(" (Delayed)", size: .xLarge, color: .inkNormal)
+            + ZText(" (Delayed)", size: .xLarge, color: .inkNormal)
     }
 
     static var formatting: some View {
         (
             Icon(content: gridIcon, size: .text(.xLarge))
-            + Text(" Text", size: .xLarge, color: nil)
+            + ZText(" Text", size: .xLarge, color: nil)
             + Icon(sfSymbol: "info.circle.fill", size: .large, color: nil, baselineOffset: -1)
             + Icon(sfSymbol: "info.circle.fill", size: .large, color: nil)
             + ZText(
@@ -72,7 +72,7 @@ struct TextConcatenationPreviews: PreviewProvider {
             Heading(label, style: style)
                 + Icon(sfSymbol: "airplane", size: .custom(style.size), color: .inkNormal)
                 + Heading(label, style: style)
-                + Text(" and Text", color: nil)
+                + ZText(" and Text", color: nil)
         }
         .foregroundColor(.blueDark)
     }
