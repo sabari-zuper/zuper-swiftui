@@ -130,18 +130,9 @@ View where Data: RandomAccessCollection, Data.Index: Hashable, Data.Element: Ide
     }
 
     var body: some View {
-        if #available(iOS 14.0, *) {
-            GeometryReader { proxy in
-                withLayout(layout(size: proxy.size))
-            }
-            .frame(height: height)
-        } else {
-            // Fix different iOS13 center alignment geometryReader implementation
-            GeometryReader { proxy in
-                withLayout(layout(size: proxy.size))
-                    .frame(width: proxy.size.width, height: proxy.size.height, alignment: .topLeading)
-            }
-            .frame(height: height)
+        GeometryReader { proxy in
+            withLayout(layout(size: proxy.size))
         }
+        .frame(height: height)
     }
 }

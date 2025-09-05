@@ -262,53 +262,48 @@ struct HorizontalScrollPreviews: PreviewProvider {
     static let scrollUnitPoint = UnitPoint(x: 10, y: 0)
 
     @ViewBuilder static var pagination: some View {
-        if #available(iOS 14, *) {
-            ScrollViewReader { scrollProxy in
-                VStack(spacing: .medium) {
-                    HorizontalScroll {
-                        intrinsicContent {
-                            Spacer()
-                            Color.greenLight
-                        }
-                        .id(1)
-
-                        intrinsicContent {
-                            Color.greenLight
-                            Spacer()
-                            Text("Footer")
-                        }
-                        .id(2)
-
-                        intrinsicContent {
-                            Text("No Spacer")
-                        }
-                        .id(3)
+        ScrollViewReader { scrollProxy in
+            VStack(spacing: .medium) {
+                HorizontalScroll {
+                    intrinsicContent {
+                        Spacer()
+                        Color.greenLight
                     }
-                    .border(Color.cloudDark)
+                    .id(1)
 
-                    HStack {
-                        Button("Scroll to 1", size: .small) {
-                            withAnimation {
-                                scrollProxy.scrollTo(1, anchor: .topLeading)
-                            }
-                        }
-                        Button("Scroll to 2", size: .small) {
-                            withAnimation {
-                                scrollProxy.scrollTo(2, anchor: .topLeading)
-                            }
-                        }
-                        Button("Scroll to 3", size: .small) {
-                            withAnimation {
-                                scrollProxy.scrollTo(3, anchor: .topLeading)
-                            }
-                        }
+                    intrinsicContent {
+                        Color.greenLight
+                        Spacer()
+                        Text("Footer")
                     }
-                    .padding(.medium)
+                    .id(2)
+
+                    intrinsicContent {
+                        Text("No Spacer")
+                    }
+                    .id(3)
                 }
-            }
+                .border(Color.cloudDark)
 
-        } else {
-            Text("Pagination support only for iOS >= 14")
+                HStack {
+                    Button("Scroll to 1", size: .small) {
+                        withAnimation {
+                            scrollProxy.scrollTo(1, anchor: .topLeading)
+                        }
+                    }
+                    Button("Scroll to 2", size: .small) {
+                        withAnimation {
+                            scrollProxy.scrollTo(2, anchor: .topLeading)
+                        }
+                    }
+                    Button("Scroll to 3", size: .small) {
+                        withAnimation {
+                            scrollProxy.scrollTo(3, anchor: .topLeading)
+                        }
+                    }
+                }
+                .padding(.medium)
+            }
         }
     }
 

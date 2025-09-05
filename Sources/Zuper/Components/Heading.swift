@@ -158,25 +158,13 @@ public extension Heading {
             case .display:
                 return .largeTitle
             case .displaySubtitle:
-                if #available(iOS 14.0, *) {
-                    return .title2
-                } else {
-                    return .headline
-                }
+                return .title2
                 //            case .title1:
                 //                return .title
                 //            case .title2:
-                //                if #available(iOS 14.0, *) {
-                //                    return .title2
-                //                } else {
-                //                    return .headline
-                //                }
+                //                return .title2
                 //            case .title3:
-                //                if #available(iOS 14.0, *) {
-                //                    return .title3
-                //                } else {
-                //                    return .callout
-                //                }
+                //                return .title3
 //                            case .title4:
 //                                return .callout
                             case .title5:
