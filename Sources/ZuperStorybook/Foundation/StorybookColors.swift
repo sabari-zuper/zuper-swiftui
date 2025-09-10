@@ -263,8 +263,8 @@ private struct ColorContent: View {
                 )
 
             Group {
-                Text(label, size: .small, color: .custom(.black), weight: .medium)
-                + Text(optionalText, size: .small, color: .custom(.gray))
+                ZText(label, size: .small, color: .custom(.black), weight: .medium)
+                + ZText(optionalText, size: .small, color: .custom(.gray))
             }
             .padding(.small)
 

@@ -119,7 +119,7 @@ struct StorybookDetail: View {
                 } else {
                     VStack {
                         Heading("KeyValue requires iOS 16+", style: .h3)
-                        Text("This component uses native LabeledContent", size: .small, color: .inkLight)
+                        Text("This component uses native LabeledContent", size: .small, color: .inkNormal)
                     }.padding(.large)
                 }
             default:                        HStack { Heading("🚧 WIP 🚧", style: .h3) }.padding(.large)
