@@ -22,7 +22,6 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
     }
 
     @Binding private var value: Value
-    @Binding private var messageHeight: CGFloat
     @State private var isEditing: Bool = false
     @State private var isSecureTextRedacted: Bool = true
     @FocusState private var inputFocus: Bool
@@ -52,7 +51,6 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
             fieldLabel,
             labelAccentColor: labelAccentColor,
             message: message,
-            messageHeight: $messageHeight
         ) {
             InputContent(
                 prefix: prefix,
@@ -234,7 +232,6 @@ public extension InputField {
     ///
     /// - Parameters:
     ///     - message: Message below InputField.
-    ///     - messageHeight: Binding to the current height of message.
     ///     - suffixAction: Optional separate action on suffix icon tap.
     init(
         _ label: String = "",
@@ -253,7 +250,6 @@ public extension InputField {
         isSecure: Bool = false,
         passwordStrength: PasswordStrengthIndicator.PasswordStrength = .empty,
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         isFocus: Bool = false,
         onEditingChanged: @escaping (Bool) -> Void = { _ in },
@@ -276,7 +272,6 @@ public extension InputField {
             isAutocompleteEnabled: isAutocompleteEnabled,
             passwordStrength: passwordStrength,
             message: message,
-            messageHeight: messageHeight,
             style: style,
             mode: .actionsHandler(onEditingChanged: onEditingChanged, onCommit: onCommit, isSecure: isSecure), isFocus: isFocus,
             suffixAction: suffixAction
@@ -288,7 +283,6 @@ public extension InputField {
     ///
     /// - Parameters:
     ///     - message: Message below InputField.
-    ///     - messageHeight: Binding to the current height of message.
     ///     - formatter: A formatter to use when converting between the
     ///     string the user edits and the underlying value.
     ///     If `formatter` can't perform the conversion, the text field doesn't
@@ -309,7 +303,6 @@ public extension InputField {
         autocapitalization: UITextAutocapitalizationType = .none,
         isAutocompleteEnabled: Bool = false,
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         isFocus: Bool = false,
         formatter: Formatter,
@@ -331,7 +324,6 @@ public extension InputField {
             isAutocompleteEnabled: isAutocompleteEnabled,
             passwordStrength: .empty,
             message: message,
-            messageHeight: messageHeight,
             style: style,
             mode: .formatter(formatter: formatter),
             isFocus: isFocus,
@@ -358,7 +350,6 @@ extension InputField {
         isAutocompleteEnabled: Bool = false,
         passwordStrength: PasswordStrengthIndicator.PasswordStrength = .empty,
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         mode: Mode,
         isFocus: Bool = false,
@@ -374,7 +365,6 @@ extension InputField {
         self.placeholder = placeholder
         self.state = state
         self.message = message
-        self._messageHeight = messageHeight
         self.textContent = textContent
         self.keyboard = keyboard
         self.autocapitalization = autocapitalization
