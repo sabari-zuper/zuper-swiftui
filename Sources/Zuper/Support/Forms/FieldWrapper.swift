@@ -3,8 +3,6 @@ import SwiftUI
 /// Zuper wrapper around form fields. Provides optional label and message.
 public struct FieldWrapper<Label: View, Content: View, Footer: View>: View {
 
-    @Binding private var messageHeight: CGFloat
-
     @ViewBuilder let label: Label
     @ViewBuilder let content: Content
     @ViewBuilder let footer: Footer
@@ -16,16 +14,14 @@ public struct FieldWrapper<Label: View, Content: View, Footer: View>: View {
                 .padding(.bottom, .xxSmall)
 
             content
-
-            ContentHeightReader(height: $messageHeight) {
-                VStack(alignment: .leading, spacing: 0) {
-                    footer
-
-                    FieldMessage(message)
-                        .padding(.top, .xxSmall)
-                }
-                .animation(.easeOut(duration: 0.2), value: message)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                footer
+                
+                FieldMessage(message)
+                    .padding(.top, .xxSmall)
             }
+            .animation(.easeOut(duration: 0.2), value: message)
         }
     }
 }
@@ -38,13 +34,11 @@ public extension FieldWrapper {
     /// `FieldLabel` is a default component for constructing custom label.
     init(
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content,
         @ViewBuilder label: () -> Label,
         @ViewBuilder footer: () -> Footer
     ) {
         self.message = message
-        self._messageHeight = messageHeight
         self.content = content()
         self.label = label()
         self.footer = footer()
@@ -58,13 +52,11 @@ public extension FieldWrapper where Footer == EmptyView {
     /// `FieldLabel` is a default component for constructing custom label.
     init(
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content,
         @ViewBuilder label: () -> Label
     ) {
         self.init(
             message: message,
-            messageHeight: messageHeight,
             content: content,
             label: label,
             footer: {
@@ -83,13 +75,11 @@ public extension FieldWrapper where Label == FieldLabel {
         labelLinkColor: TextLink.Color = .primary,
         labelLinkAction: @escaping TextLink.Action = { _, _ in },
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content,
         @ViewBuilder footer: () -> Footer
     ) {
         self.init(
             message: message,
-            messageHeight: messageHeight,
             content: content,
             label: {
                 FieldLabel(label, accentColor: labelAccentColor, linkColor: labelLinkColor, linkAction: labelLinkAction)
@@ -108,7 +98,6 @@ public extension FieldWrapper where Label == FieldLabel, Footer == EmptyView {
         labelLinkColor: TextLink.Color = .primary,
         labelLinkAction: @escaping TextLink.Action = { _, _ in },
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         @ViewBuilder content: () -> Content
     ) {
         self.init(
@@ -117,7 +106,6 @@ public extension FieldWrapper where Label == FieldLabel, Footer == EmptyView {
             labelLinkColor: labelLinkColor,
             labelLinkAction: labelLinkAction,
             message: message,
-            messageHeight: messageHeight,
             content: content,
             footer: {
                 EmptyView()
@@ -154,7 +142,6 @@ struct FieldWrapperPreviews: PreviewProvider {
                     FieldWrapper(
                         state.0.wrappedValue ? "Form Field Label" : "",
                         message: state.1.wrappedValue ? .error("Error message") : .none,
-                        messageHeight: state.2
                     ) {
                         contentPlaceholder
                     }
