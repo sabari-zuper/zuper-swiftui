@@ -5,12 +5,12 @@ struct StorybookTextLink {
 
     static var basic: some View {
         VStack(alignment: .leading, spacing: .large) {
-            Text(link("Primary link"), linkColor: .primary)
-            Text(link("Secondary link"), linkColor: .secondary)
-            Text(link("Info link"), linkColor: .status(.info))
-            Text(link("Success link"), linkColor: .status(.success))
-            Text(link("Warning link"), linkColor: .status(.warning))
-            Text(link("Critical link"), linkColor: .status(.critical))
+            ZText(link("Primary link"), linkColor: .primary)
+            ZText(link("Secondary link"), linkColor: .secondary)
+            ZText(link("Info link"), linkColor: .status(.info))
+            ZText(link("Success link"), linkColor: .status(.success))
+            ZText(link("Warning link"), linkColor: .status(.warning))
+            ZText(link("Critical link"), linkColor: .status(.critical))
         }
     }
 
@@ -21,7 +21,7 @@ struct StorybookTextLink {
     static var live: some View {
         StateWrapper(initialState: (0, "")) { state in
             VStack(spacing: .xLarge) {
-                Text("Text containing <a href=\"...\">Some TextLink</a> and <a href=\"...\">Another TextLink</a>") { link, text in
+                ZText("Text containing <a href=\"...\">Some TextLink</a> and <a href=\"...\">Another TextLink</a>") { link, text in
                     state.wrappedValue.0 += 1
                     state.wrappedValue.1 = text
                 }
