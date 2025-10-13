@@ -13,6 +13,7 @@ struct InputContent<Content: View>: View {
     var isPressed: Bool = false
     var isEditing: Bool = false
     var suffixAction: (() -> Void)? = nil
+    var suffixColor: Color? = nil
     @ViewBuilder let content: Content
     
     var body: some View {
@@ -58,7 +59,7 @@ struct InputContent<Content: View>: View {
 
     @ViewBuilder var suffixIcon: some View {
         Icon(content: suffix, size: .large)
-            .foregroundColor(suffixColor)
+            .foregroundColor(suffixColor ?? defaultSuffixColor)
             .padding(.horizontal, .xSmall)
             .contentShape(Rectangle())
             .accessibility(.inputSuffix)
@@ -89,7 +90,7 @@ struct InputContent<Content: View>: View {
         }
     }
 
-    private var suffixColor: Color {
+    private var defaultSuffixColor: Color {
         switch state {
             case .disabled:             return .cloudDarkActive
             case .modified:             return .indicoDark

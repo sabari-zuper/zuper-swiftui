@@ -44,6 +44,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
     let style: InputFieldStyle
     let suffixAction: (() -> Void)?
     let isFocus: Bool
+    let suffixColor: Color?
 
     private let mode: Mode
 
@@ -60,7 +61,8 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                 state: state,
                 message: message,
                 isEditing: isEditing,
-                suffixAction: suffixAction
+                suffixAction: suffixAction,
+                suffixColor: suffixColor
             ) {
                 HStack(alignment: .firstTextBaseline, spacing: .small) {
                     compactLabel
@@ -256,6 +258,7 @@ public extension InputField {
         messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         isFocus: Bool = false,
+        suffixColor: Color? = nil,
         onEditingChanged: @escaping (Bool) -> Void = { _ in },
         onCommit: @escaping () -> Void = {},
         suffixAction: (() -> Void)? = nil
@@ -279,6 +282,7 @@ public extension InputField {
             messageHeight: messageHeight,
             style: style,
             mode: .actionsHandler(onEditingChanged: onEditingChanged, onCommit: onCommit, isSecure: isSecure), isFocus: isFocus,
+            suffixColor: suffixColor,
             suffixAction: suffixAction
         )
     }
@@ -312,6 +316,7 @@ public extension InputField {
         messageHeight: Binding<CGFloat> = .constant(0),
         style: InputFieldStyle = .default,
         isFocus: Bool = false,
+        suffixColor: Color? = nil,
         formatter: Formatter,
         suffixAction: (() -> Void)? = nil
     ) {
@@ -335,6 +340,7 @@ public extension InputField {
             style: style,
             mode: .formatter(formatter: formatter),
             isFocus: isFocus,
+            suffixColor: suffixColor,
             suffixAction: suffixAction
         )
     }
@@ -362,6 +368,7 @@ extension InputField {
         style: InputFieldStyle = .default,
         mode: Mode,
         isFocus: Bool = false,
+        suffixColor: Color? = nil,
         suffixAction: (() -> Void)? = nil
     ) {
         self.label = label
@@ -384,6 +391,7 @@ extension InputField {
         self.mode = mode
         self.suffixAction = suffixAction
         self.isFocus = isFocus
+        self.suffixColor = suffixColor
     }
 }
 
@@ -444,7 +452,7 @@ struct InputFieldPreviews: PreviewProvider {
             
             InputField(label + " prefix icon",value: .constant(""),prefix: gridIcon, prefixContent: "USD", placeholder: "placeholder", message: .none, style: .default)
             
-            InputField(label + " sufix icon",value: .constant(""),prefix: .none, suffix:gridIcon, placeholder: "placeholder", message: .none, style: .default)
+            InputField(label + " sufix icon",value: .constant(""),prefix: .none, suffix:gridIcon, placeholder: "placeholder", message: .none, style: .default, suffixColor: .red)
             
             InputField(label + " prefix text" ,value: .constant(""),prefix: .none, prefixContent: "USD", placeholder: "placeholder", message: .none, style: .default)
             
