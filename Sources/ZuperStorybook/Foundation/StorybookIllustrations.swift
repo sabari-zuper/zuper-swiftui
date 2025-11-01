@@ -25,7 +25,7 @@ struct StorybookIllustrations {
             VStack(spacing: .xxSmall) {
                 Illustration(illustration, bundle: .current, layout: .resizeable)
                     .frame(height: 150)
-                Text(String(describing: illustration).titleCased, size: .small, color: .inkNormal, isSelectable: true)
+                ZText(String(describing: illustration).titleCased, size: .small, color: .inkNormal, isSelectable: true)
             }
             .padding(.horizontal, .xxSmall)
             .padding(.vertical, .xSmall)

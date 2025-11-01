@@ -19,21 +19,25 @@ public struct Badge: View {
 
     public var body: some View {
         if isEmpty == false {
+            let labelColor = style.labelColor
+            let outlineColor = style.outlineColor
+            let background = style.background
+            
             HStack(spacing: 0) {
                 HStack(spacing: .xxSmall) {
                     if isStatus {
                         Circle()
-                            .foregroundColor(Color(uiColor: style.labelColor))
-                            .frame(width: 8, height: 8, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .foregroundColor(Color(uiColor: labelColor))
+                            .frame(width: 8, height: 8, alignment: .center)
                     }
                     if iconPlacement == .leading && !isStatus &&  !iconContent.isEmpty {
                         Icon(content: iconContent, size: iconSize)
                     }
 
-                    ZText(
+                    Text(
                         label,
                         size: textSize,
-                        color: .custom(style.labelColor),
+                        color: .custom(labelColor),
                         weight: .medium
                     )
                     .padding(.vertical, Self.verticalPadding)
@@ -41,19 +45,19 @@ public struct Badge: View {
                         Icon(content: iconContent, size: iconSize)
                     }
                 }
-                .foregroundColor(Color(style.labelColor))
+                .foregroundColor(Color(uiColor: labelColor))
 
                 TextStrut(textSize)
                     .padding(.vertical, Self.verticalPadding)
             }
             .padding(.horizontal, .xSmall)
             .background(
-                style.background
+                background
                     .clipShape(shape)
             )
             .overlay(
                 shape
-                    .strokeBorder(style.outlineColor, lineWidth: BorderWidth.thin)
+                    .strokeBorder(outlineColor, lineWidth: BorderWidth.thin)
             )
         }
     }
@@ -169,11 +173,9 @@ struct BadgePreviews: PreviewProvider {
     }
 
     static var standalone: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             Badge("Zuper", icon: .sfSymbol("mail", color: .inkDark), style: .light, textSize: .large, iconSize: .large)
             Badge("label", icon: gridIcon)
-            Badge()    // EmptyView
-            Badge("")  // EmptyView
             Badge("Zuper", style: .custom(labelColor: .blueDark, outlineColor: .blueDark, backgroundColor: .blueLight), textSize: .normal, iconSize: .large, isStatus: true)
         }
     }

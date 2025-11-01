@@ -8,7 +8,7 @@ import SwiftUI
 /// - Note: [Orbit definition](https://orbit.kiwi/components/progress-indicators/timeline/)
 public struct TimelineItem<Footer: View>: View {
 
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @Environment(\.horizontalSizeClass) var horisontalSizeClass
 
     let label: String
@@ -36,7 +36,7 @@ public struct TimelineItem<Footer: View>: View {
     }
 
     @ViewBuilder var headerWithAccessibilitySizeSupport: some View {
-        if horisontalSizeClass == .compact && sizeCategory.isAccessibilitySize {
+        if horisontalSizeClass == .compact && dynamicTypeSize.isAccessibilitySize {
             VStack(alignment: .leading, spacing: .xSmall) {
                 header
             }
@@ -55,7 +55,7 @@ public struct TimelineItem<Footer: View>: View {
         }
 
         Text(sublabel, size: .small, color: .custom(type.textColor))
-            .padding(.leading, sizeCategory.isAccessibilitySize ? .xSmall : 0)
+            .padding(.leading, dynamicTypeSize.isAccessibilitySize ? .xSmall : 0)
     }
 
     @ViewBuilder var descriptionText: some View {

@@ -1,6 +1,8 @@
 import SwiftUI
 
 /// A pair of label and value to display read-only information.
+/// Now uses native iOS 16+ LabeledContent for better performance and integration.
+@available(iOS 16.0, *)
 public struct KeyValue: View {
 
     let key: String
@@ -9,13 +11,48 @@ public struct KeyValue: View {
     let alignment: HorizontalAlignment
 
     public var body: some View {
-        KeyValueField(key, size: size, alignment: alignment) {
-            ZText(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
+        if isEmpty {
+            EmptyView()
+        } else {
+            LabeledContent {
+                valueText
+                    .accessibility(.keyValueValue)
+            } label: {
+                keyText
+                    .accessibility(.keyValueKey)
+            }
+            .labeledContentStyle(ZuperKeyValueStyle(size: size, alignment: alignment))
+            .accessibilityElement(children: .ignore)
+            .accessibility(label: .init(key))
+            .accessibility(value: .init(value))
+            .accessibility(addTraits: .isStaticText)
         }
-        .accessibilityElement(children: .ignore)
-        .accessibility(label: .init(key))
-        .accessibility(value: .init(value))
-        .accessibility(addTraits: .isStaticText)
+    }
+    
+    @ViewBuilder private var keyText: some View {
+        Text(key, size: size.keySize, color: .inkNormal, alignment: .init(alignment))
+    }
+    
+    @ViewBuilder private var valueText: some View {
+        ZText(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
+    }
+    
+    private var isEmpty: Bool {
+        key.isEmpty && value.isEmpty
+    }
+}
+
+// MARK: - LabeledContent Style
+@available(iOS 16.0, *)
+struct ZuperKeyValueStyle: LabeledContentStyle {
+    let size: KeyValue.Size
+    let alignment: HorizontalAlignment
+    
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: alignment, spacing: 0) {
+            configuration.label
+            configuration.content
+        }
     }
 }
 
