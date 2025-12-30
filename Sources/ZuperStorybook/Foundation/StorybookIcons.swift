@@ -25,7 +25,7 @@ struct StorybookIcons {
         if let icon = iconSymbol(index: index, filter: filter) {
             VStack(spacing: .xxSmall) {
                 Icon(content: icon)
-                Text(String(describing: icon).titleCased, size: .custom(10), color: .inkNormal, isSelectable: true)
+                ZText(String(describing: icon).titleCased, size: .custom(10), color: .inkNormal, isSelectable: true)
             }
             .padding(.horizontal, .xxSmall)
             .padding(.vertical, .xSmall)
