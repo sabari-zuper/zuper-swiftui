@@ -27,23 +27,23 @@ struct TextConcatenationPreviews: PreviewProvider {
     }
 
     static var standalone: some View {
-        Heading("Hanoi ", style: .h1)
+        Heading("Hanoi ", style: .largeTitle)
             + Icon(sfSymbol: "airplane", size: .xLarge)
-            + Heading(" San Pedro de Alcantara", style: .h1)
+            + Heading(" San Pedro de Alcantara", style: .largeTitle)
             + Icon(sfSymbol: "info.circle", size: .large)
             + Icon(sfSymbol: "xmark.circle.fill", size: .large, color: nil, baselineOffset: -1)
-            + ZText(" (Delayed)", size: .xLarge, color: .inkNormal)
+            + ZText(" (Delayed)", size: .title3, color: .inkNormal)
     }
 
     static var formatting: some View {
         (
-            Icon(content: gridIcon, size: .text(.xLarge))
-            + ZText(" Text", size: .xLarge, color: nil)
+            Icon(content: gridIcon, size: .text(.title3))
+            + ZText(" Text", size: .title3, color: nil)
             + Icon(sfSymbol: "info.circle.fill", size: .large, color: nil, baselineOffset: -1)
             + Icon(sfSymbol: "info.circle.fill", size: .large, color: nil)
             + ZText(
                 "<ref>Text</ref> with <strong>formatting</strong>",
-                size: .small,
+                size: .caption,
                 color: nil,
                 accentColor: .orangeNormal
             )
@@ -54,16 +54,16 @@ struct TextConcatenationPreviews: PreviewProvider {
 
     static var snapshot: some View {
         VStack(alignment: .leading, spacing: .xSmall) {
-            concatenatedText("Display Title", style: .display)
-            concatenatedText("Display Subtitle", style: .displaySubtitle)
+            concatenatedText("Large Title", style: .largeTitle)
+            concatenatedText("Title", style: .title)
             Separator()
                 .padding(.vertical, .small)
-            concatenatedText("Title 1", style: .h1)
-            concatenatedText("Title 2", style: .h2)
-            concatenatedText("Title 3", style: .h3)
-            concatenatedText("Title 4", style: .h4)
-            concatenatedText("Title 5", style: .h5)
-            concatenatedText("Title 6", style: .h6)
+            concatenatedText("Title", style: .title)
+            concatenatedText("Title 2", style: .title2)
+            concatenatedText("Title 3", style: .title3)
+            concatenatedText("Headline", style: .headline)
+            concatenatedText("Headline", style: .headline)
+            concatenatedText("Headline", style: .headline)
         }
     }
 

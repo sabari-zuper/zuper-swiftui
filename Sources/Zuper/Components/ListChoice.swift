@@ -104,7 +104,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                     Spacer(minLength: 0)
                 }
 
-                TextStrut(.large)
+                TextStrut(.callout)
                     .padding(.vertical, verticalPadding)
 
                 headerContent
@@ -126,7 +126,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
                         Text(title, weight: .medium)
                             .accessibility(.listChoiceTitle)
-                        Text(description, size: .small, color: .inkNormal)
+                        Text(description, size: .caption, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
                     }
                 }

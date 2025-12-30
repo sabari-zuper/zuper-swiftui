@@ -45,15 +45,15 @@ extension KeyValue {
 
         var keySize: TextSize {
             switch self {
-                case .normal:   return .small
-                case .large:    return .normal
+                case .normal:   return .caption
+                case .large:    return .subheadline
             }
         }
 
         var valueSize: TextSize {
             switch self {
-                case .normal:   return .normal
-                case .large:    return .large
+                case .normal:   return .callout  // 16pt - Apple HIG secondary content
+                case .large:    return .body     // 17pt - Apple HIG primary content
             }
         }
     }

@@ -84,33 +84,33 @@ public extension Label {
 public extension Label {
 
     enum Style {
-    
-        case heading(_ style: Heading.Style = .h4, color: Heading.Color? = .inkDark)
+
+        case heading(_ style: Heading.Style = .title3, color: Heading.Color? = .inkDark)
         case text(
-            _ size: TextSize = .normal,
+            _ size: TextSize = .subheadline,
             weight: Font.Weight = .regular,
             color: TextColor? = .inkDark,
             accentColor: UIColor = .inkDark,
             linkColor: TextLink.Color = .primary,
             linkAction: TextLink.Action = { _, _ in }
         )
-    
-        /// 40 pts.
-        public static let display = Self.heading(.display)
-        /// 22 pts.
-        public static let displaySubtitle = Self.heading(.displaySubtitle)
-        /// 28 pts.
-        public static let title1 = Self.heading(.h2)
-        /// 22 pts.
-        public static let title2 = Self.heading(.h3)
-        /// 18 pts.
-        public static let title3 = Self.heading(.h5)
-        /// 16 pts.
-        public static let title4 = Self.heading(.h6)
-        /// 14 pts.
-        public static let title5 = Self.heading(.title5)
-        /// 12 pts.
-        public static let title6 = Self.heading(.title6)
+
+        /// 34 pts - Large Title
+        public static let display = Self.heading(.largeTitle)
+        /// 22 pts - Title 2
+        public static let displaySubtitle = Self.heading(.title2)
+        /// 28 pts - Title
+        public static let title1 = Self.heading(.title)
+        /// 22 pts - Title 2
+        public static let title2 = Self.heading(.title2)
+        /// 17 pts - Headline
+        public static let title3 = Self.heading(.headline)
+        /// 17 pts - Headline
+        public static let title4 = Self.heading(.headline)
+        /// 17 pts - Headline
+        public static let title5 = Self.heading(.headline)
+        /// 17 pts - Headline
+        public static let title6 = Self.heading(.headline)
         
         var size: CGFloat {
             switch self {

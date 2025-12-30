@@ -211,8 +211,8 @@ extension Button {
 
         public var textSize: TextSize {
             switch self {
-                case .default:      return .normal
-                case .small:        return .small
+                case .default:      return .body        // 17pt - Apple HIG primary content
+                case .small:        return .subheadline // 15pt - Apple HIG for compact buttons
             }
         }
         

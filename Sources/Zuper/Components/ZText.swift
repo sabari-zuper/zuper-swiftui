@@ -104,6 +104,7 @@ public struct ZText: View {
             content,
             fontSize: attributedTextScaledSize,
             fontWeight: weight,
+            textStyle: size.uiTextStyle,
             lineSpacing: lineSpacing,
             alignment: alignment
         )
@@ -118,6 +119,7 @@ public struct ZText: View {
             content,
             fontSize: attributedTextScaledSize,
             fontWeight: weight,
+            textStyle: size.uiTextStyle,
             lineSpacing: lineSpacing,
             color: foregroundColor,
             linkColor: .clear,
@@ -125,8 +127,12 @@ public struct ZText: View {
         )
     }
 
+    /// Returns the base font size for attributed text.
+    /// Note: UIFontMetrics handles Dynamic Type scaling in UIFont.zuper(),
+    /// so we pass the base size without manual sizeCategory.ratio multiplication
+    /// to avoid double scaling.
     var attributedTextScaledSize: CGFloat {
-        size.value * sizeCategory.ratio
+        size.value
     }
 }
 
@@ -155,7 +161,7 @@ public extension ZText {
     ///   - strikethrough: Determines if strikethrough should be applied.
     init(
         _ content: String,
-        size: Size = .normal,
+        size: Size = .body,  // 17pt - Apple HIG primary body text
         color: Color? = .inkDark,
         weight: Font.Weight = .regular,
         lineSpacing: CGFloat? = nil,
@@ -226,9 +232,9 @@ struct TextPreviews: PreviewProvider {
     
     static var standalone: some View {
         VStack {
-            Text("Plain text with no formatting",size: .body1)
-            Text("Plain text with no formatting",size: .body2)
-            Text("Plain text with no formatting",size: .body3)
+            Text("Plain text with no formatting",size: .callout)
+            Text("Plain text with no formatting",size: .subheadline)
+            Text("Plain text with no formatting",size: .caption)
         }.previewDisplayName("Standalone")
     }
     
@@ -259,28 +265,28 @@ struct TextPreviews: PreviewProvider {
     @ViewBuilder static var sizes: some View {
         VStack(alignment: .leading, spacing: .medium) {
             Group {
-                text("Text Small", size: .small, weight: .regular)
-                text("Text Normal", size: .normal, weight: .regular)
-                text("Text Large", size: .large, weight: .regular)
-                text("Text Extra Large", size: .xLarge, weight: .regular)
+                text("Text Caption", size: .caption, weight: .regular)
+                text("Text Subheadline", size: .subheadline, weight: .regular)
+                text("Text Callout", size: .callout, weight: .regular)
+                text("Text Title3", size: .title3, weight: .regular)
             }
-            
+
             Separator()
-            
+
             Group {
-                text("Text Medium Small", size: .small, weight: .medium)
-                text("Text Medium Normal", size: .normal, weight: .medium)
-                text("Text Medium Large", size: .large, weight: .medium)
-                text("Text Medium Extra Large", size: .xLarge, weight: .medium)
+                text("Text Medium Caption", size: .caption, weight: .medium)
+                text("Text Medium Subheadline", size: .subheadline, weight: .medium)
+                text("Text Medium Callout", size: .callout, weight: .medium)
+                text("Text Medium Title3", size: .title3, weight: .medium)
             }
-            
+
             Separator()
-            
+
             Group {
-                text("Text Bold Small", size: .small, weight: .bold)
-                text("Text Bold Normal", size: .normal, weight: .bold)
-                text("Text Bold Large", size: .large, weight: .bold)
-                text("Text Bold Extra Large", size: .xLarge, weight: .bold)
+                text("Text Bold Caption", size: .caption, weight: .bold)
+                text("Text Bold Subheadline", size: .subheadline, weight: .bold)
+                text("Text Bold Callout", size: .callout, weight: .bold)
+                text("Text Bold Title3", size: .title3, weight: .bold)
             }
         }
         .previewDisplayName("Sizes")
@@ -289,28 +295,28 @@ struct TextPreviews: PreviewProvider {
     @ViewBuilder static var multiline: some View {
         VStack(alignment: .leading, spacing: .medium) {
             Group {
-                text("Text Small with a very very very very large and multine content", size: .small, weight: .regular)
-                text("Text Normal with a very very very very large and multine content", size: .normal, weight: .regular)
-                text("Text Large with a very very very very large and multine content", size: .large, weight: .regular)
-                text("Text Extra Large with a very very very very large and multine content", size: .xLarge, weight: .regular)
+                text("Text Caption with a very very very very large and multine content", size: .caption, weight: .regular)
+                text("Text Subheadline with a very very very very large and multine content", size: .subheadline, weight: .regular)
+                text("Text Callout with a very very very very large and multine content", size: .callout, weight: .regular)
+                text("Text Title3 with a very very very very large and multine content", size: .title3, weight: .regular)
             }
-            
+
             Separator()
-            
+
             Group {
-                text("Text Medium Small with a very very very very large and multine content", size: .small, weight: .medium)
-                text("Text Medium Normal with a very very very very large and multine content", size: .normal, weight: .medium)
-                text("Text Medium Large with a very very very very large and multine content", size: .large, weight: .medium)
-                text("Text Medium Extra Large with a very very very very large and multine content", size: .xLarge, weight: .medium)
+                text("Text Medium Caption with a very very very very large and multine content", size: .caption, weight: .medium)
+                text("Text Medium Subheadline with a very very very very large and multine content", size: .subheadline, weight: .medium)
+                text("Text Medium Callout with a very very very very large and multine content", size: .callout, weight: .medium)
+                text("Text Medium Title3 with a very very very very large and multine content", size: .title3, weight: .medium)
             }
-            
+
             Separator()
-            
+
             Group {
-                text("Text Bold Small with a very very very very large and multine content", size: .small, weight: .bold)
-                text("Text Bold Normal with a very very very very large and multine content", size: .normal, weight: .bold)
-                text("Text Bold Large with a very very very very large and multine content", size: .large, weight: .bold)
-                text("Text Bold Extra Large with a very very very very large and multine content", size: .xLarge, weight: .bold)
+                text("Text Bold Caption with a very very very very large and multine content", size: .caption, weight: .bold)
+                text("Text Bold Subheadline with a very very very very large and multine content", size: .subheadline, weight: .bold)
+                text("Text Bold Callout with a very very very very large and multine content", size: .callout, weight: .bold)
+                text("Text Bold Title3 with a very very very very large and multine content", size: .title3, weight: .bold)
             }
         }
         .previewDisplayName("Multiline")

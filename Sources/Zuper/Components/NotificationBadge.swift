@@ -4,7 +4,7 @@ import SwiftUI
 public struct NotificationBadge: View {
 
     public static let verticalPadding: CGFloat = 5
-    public static let textSize: TextSize = .small
+    public static let textSize: TextSize = .caption
 
     let content: Content
     let style: Badge.Style
