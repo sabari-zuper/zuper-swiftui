@@ -26,7 +26,7 @@ public struct Heading: View {
     func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
         ZText(
             content,
-            size: .custom(style.size),
+            size: style.textSize,  // Use proper TextSize for correct Dynamic Type scaling
             color: color?.textColor,
             weight: style.weight,
             lineSpacing: lineSpacing,
@@ -155,6 +155,17 @@ public extension Heading {
             case .title2:           return 22
             case .title3:           return 20
             case .headline:         return 17
+            }
+        }
+
+        /// Returns the corresponding TextSize for proper Dynamic Type scaling
+        public var textSize: TextSize {
+            switch self {
+            case .largeTitle:       return .largeTitle
+            case .title:            return .title
+            case .title2:           return .title2
+            case .title3:           return .title3
+            case .headline:         return .headline
             }
         }
 

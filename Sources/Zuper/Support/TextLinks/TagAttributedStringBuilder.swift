@@ -232,9 +232,10 @@ private extension TagAttributedStringBuilder.Tag {
 
                 guard let url = URL(string: String(result.input[result.ranges[1]])) else { return nil }
 
+                // Use scaled: false because font.pointSize is already UIFontMetrics-scaled
                 let attributes = [
                     .link: url,
-                    .font: UIFont.zuper(size: font.pointSize, weight: .medium),
+                    .font: UIFont.zuper(size: font.pointSize, weight: .medium, scaled: false),
                 ].merging(tagTextAttributes, uniquingKeysWith: { $1 })
 
                 return stringByAddingAttributes(attributes, to: currentAttributedString, at: result.ranges[2])
@@ -246,9 +247,10 @@ private extension TagAttributedStringBuilder.Tag {
                 if let font = tagTextAttributes[.font] as? UIFont {
                     boldFont = font
                 } else if let font = textAttributes[.font] as? UIFont {
-                    boldFont = .zuper(size: font.pointSize, weight: .bold)
+                    // Use scaled: false because font.pointSize is already UIFontMetrics-scaled
+                    boldFont = .zuper(size: font.pointSize, weight: .bold, scaled: false)
                 } else {
-                    boldFont = .zuper(size: UIFont.Size.normal.cgFloat, weight: .bold)
+                    boldFont = .zuper(size: UIFont.Size.subheadline.cgFloat, weight: .bold)
                 }
 
                 return stringByAddingAttributes([.font: boldFont], to: currentAttributedString, at: result.ranges[1])
@@ -272,8 +274,9 @@ private extension TagAttributedStringBuilder.Tag {
                     return nil
                 }
 
+                // Use scaled: false because font.pointSize is already UIFontMetrics-scaled
                 return stringByAddingAttributes(
-                    [.foregroundColor: color, .font: UIFont.zuper(size: font.pointSize, weight: .bold)],
+                    [.foregroundColor: color, .font: UIFont.zuper(size: font.pointSize, weight: .bold, scaled: false)],
                     to: currentAttributedString,
                     at: result.ranges[1]
                 )

@@ -87,7 +87,12 @@ public extension UIFont {
         // MARK: - Computed Properties
 
         public static func < (lhs: Size, rhs: Size) -> Bool {
-            lhs.cgFloat < rhs.cgFloat
+            // Compare by cgFloat first, then use rawValue as tiebreaker
+            // This ensures consistent ordering for special cases (tabBar/navigationBar)
+            if lhs.cgFloat != rhs.cgFloat {
+                return lhs.cgFloat < rhs.cgFloat
+            }
+            return lhs.rawValue < rhs.rawValue
         }
 
         public var cgFloat: CGFloat {
@@ -134,8 +139,9 @@ extension UIFont {
     ///   - size: Base font size in points
     ///   - weight: Font weight
     ///   - textStyle: UIFont.TextStyle for Dynamic Type scaling (default: .body)
-    /// - Returns: A font that scales with Dynamic Type settings
-    static func zuper(size: CGFloat, weight: Weight = .regular, textStyle: UIFont.TextStyle = .body) -> UIFont {
+    ///   - scaled: Whether to apply UIFontMetrics scaling. Set to false when deriving from an already-scaled font.
+    /// - Returns: A font that scales with Dynamic Type settings (if scaled is true)
+    static func zuper(size: CGFloat, weight: Weight = .regular, textStyle: UIFont.TextStyle = .body, scaled: Bool = true) -> UIFont {
 
         let baseFont: UIFont
 
@@ -146,6 +152,11 @@ extension UIFont {
         } else {
             assertionFailure("Unsupported font weight")
             baseFont = .systemFont(ofSize: size, weight: weight)
+        }
+
+        // Skip scaling if size is already scaled (e.g., derived from font.pointSize)
+        guard scaled else {
+            return baseFont
         }
 
         // Apply Dynamic Type scaling using UIFontMetrics

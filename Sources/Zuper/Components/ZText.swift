@@ -161,7 +161,7 @@ public extension ZText {
     ///   - strikethrough: Determines if strikethrough should be applied.
     init(
         _ content: String,
-        size: Size = .body,  // 17pt - Apple HIG primary body text
+        size: Size = .subheadline,  // 15pt - Minimal change from old .normal (14pt)
         color: Color? = .inkDark,
         weight: Font.Weight = .regular,
         lineSpacing: CGFloat? = nil,

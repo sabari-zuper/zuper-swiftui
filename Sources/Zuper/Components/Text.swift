@@ -72,7 +72,7 @@ public extension Text {
     ///   - strikethrough: Strikethrough style
     init(
         _ content: String,
-        size: TextSize = .body,  // 17pt - Apple HIG primary body text
+        size: TextSize = .subheadline,  // 15pt - Minimal change from old .normal (14pt)
         color: TextColor? = .inkDark,
         weight: Font.Weight = .regular,
         lineSpacing: CGFloat? = nil,
