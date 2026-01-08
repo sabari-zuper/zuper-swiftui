@@ -4,7 +4,7 @@ import SwiftUI
 public struct Tag: View {
 
     public static let horizontalPadding: CGFloat = .xSmall
-    public static let verticalPadding: CGFloat = 7
+    public static let verticalPadding: CGFloat = .small // 12pt for 44pt+ total height
 
     @Environment(\.idealSize) var idealSize
 
@@ -36,7 +36,7 @@ public struct Tag: View {
                         }
                         .fixedSize(horizontal: true, vertical: false)
 
-                        TextStrut(.normal)
+                        TextStrut(.subheadline)
                             .padding(.vertical, Self.verticalPadding)
 
                         if idealSize.horizontal == false {
@@ -108,13 +108,14 @@ extension Tag {
                     .lineLimit(1)
 
                 if case .removable(let removeAction) = style {
-                    Icon(content: .sfSymbol("xmark.circle", color: iconColor(isPressed: configuration.isPressed)), size: .small )
+                    Icon(content: .sfSymbol("xmark.circle", color: iconColor(isPressed: configuration.isPressed)), size: .compact)
                         .onTapGesture(perform: removeAction)
                         .accessibility(addTraits: .isButton)
                 }
             }
             .foregroundColor(labelColor)
             .padding(.horizontal, Tag.horizontalPadding)
+            .frame(minHeight: .touchTarget)
             .background(
                 backgroundColor(isPressed: configuration.isPressed)
                     .animation(nil)

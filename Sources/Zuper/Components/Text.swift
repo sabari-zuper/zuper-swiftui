@@ -261,22 +261,63 @@ public enum TextSize {
     }
 }
     
+/// Text color options aligned with Apple Human Interface Guidelines.
+///
+/// ## Apple HIG Semantic Colors
+/// Use semantic names for better code clarity:
+/// - `.primary` - Main content text (maps to `.inkDark`)
+/// - `.secondary` - Supporting text (maps to `.inkNormal`)
+/// - `.tertiary` - Placeholder/disabled text (maps to `.inkLight`)
+/// - `.inverse` - Text on dark backgrounds (maps to `.white`)
+///
 public enum TextColor: Equatable {
+
+    // MARK: - Apple HIG Semantic Names (Recommended)
+
+    /// Primary text color - Use for main content and titles.
+    /// Maps to Apple HIG's `.label` semantic color.
+    case primary
+
+    /// Secondary text color - Use for subtitles and supporting text.
+    /// Maps to Apple HIG's `.secondaryLabel` semantic color.
+    case secondary
+
+    /// Tertiary text color - Use for placeholder text and disabled states.
+    /// Maps to Apple HIG's `.tertiaryLabel` semantic color.
+    case tertiary
+
+    /// Inverse text color - Use for text on dark backgrounds.
+    case inverse
+
+    // MARK: - Legacy Names (Backward Compatibility)
+
+    /// Zuper Ink Dark color (same as `.primary`).
     case inkDark
+
+    /// Zuper Ink Normal color (same as `.secondary`).
     case inkNormal
+
+    /// White color for dark backgrounds (same as `.inverse`).
     case white
+
+    // MARK: - Custom
+
+    /// Custom color using UIColor.
     case custom(UIColor)
-    
+
+    // MARK: - Color Values
+
     public var value: SwiftUI.Color {
         SwiftUI.Color(uiValue)
     }
-    
+
     public var uiValue: UIColor {
         switch self {
-        case .inkDark:              return .inkDark
-        case .inkNormal:            return .inkNormal
-        case .white:                return .whiteNormal
-        case .custom(let color):    return color
+        case .primary, .inkDark:        return .inkDark
+        case .secondary, .inkNormal:    return .inkNormal
+        case .tertiary:                 return .inkLight
+        case .inverse, .white:          return .whiteNormal
+        case .custom(let color):        return color
         }
     }
 }

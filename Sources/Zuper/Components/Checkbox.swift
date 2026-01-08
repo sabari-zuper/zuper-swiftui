@@ -22,7 +22,7 @@ public struct Checkbox: View {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(title, color: labelColor, weight: .medium)
                             .accessibility(.checkboxTitle)
-                        Text(description, size: .small, color: descriptionColor)
+                        Text(description, size: .caption, color: descriptionColor)
                             .accessibility(.checkboxDescription)
                     }
                 }
@@ -109,6 +109,8 @@ public extension Checkbox {
                 indicator(isPressed: configuration.isPressed)
                 configuration.label
             }
+            .frame(minHeight: .touchTarget)
+            .contentShape(Rectangle())
         }
 
         func indicator(isPressed: Bool) -> some View {
@@ -122,7 +124,7 @@ public extension Checkbox {
                         .fill(indicatorBackgroundColor(isPressed: isPressed))
                 )
                 .overlay(
-                    Icon(content: .check, size: .small)
+                    Icon(content: .check, size: .compact)
                         .foregroundColor(state == .disabled ? .cloudNormal : .whiteNormal)
                         .opacity(isChecked ? 1 : 0)
                 )

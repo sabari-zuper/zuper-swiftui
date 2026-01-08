@@ -22,7 +22,7 @@ public struct Radio: View {
                     VStack(alignment: .leading, spacing: 1) {
                         Text(title, color: labelColor, weight: .medium)
                             .accessibility(.radioTitle)
-                        Text(description, size: .small, color: descriptionColor)
+                        Text(description, size: .caption, color: descriptionColor)
                             .accessibility(.radioDescription)
                     }
                 }
@@ -110,6 +110,8 @@ extension Radio {
                 indicator(isPressed: configuration.isPressed)
                 configuration.label
             }
+            .frame(minHeight: .touchTarget)
+            .contentShape(Rectangle())
         }
 
         func indicator(isPressed: Bool) -> some View {

@@ -21,7 +21,7 @@ public struct Dialog: View {
                 .padding(.top, .medium)
 
             VStack(alignment: alignment, spacing: .xSmall) {
-                Heading(title, style: .h5, alignment: .init(alignment))
+                Heading(title, style: .headline, alignment: .init(alignment))
                     .accessibility(.dialogTitle)
 
                 Text(description, color: .inkNormal, alignment: .init(alignment))
@@ -36,7 +36,7 @@ public struct Dialog: View {
         .padding(.medium)
         .background(Color.whiteDarker)
         .clipShape(shape)
-        .elevation(.level4, shape: .roundedRectangle(borderRadius: .small))
+        .elevation(.modal, shape: .roundedRectangle(borderRadius: .small))
         .padding(.xLarge)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.inkDark.opacity(0.45).edgesIgnoringSafeArea(.all))

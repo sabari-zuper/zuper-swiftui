@@ -16,10 +16,10 @@ public struct Separator: View {
         } else {
             HStack(spacing: .xxxSmall) {
                 leadingLine
-                
-                Text(label, size: .small, color: labelColor, weight: .medium, alignment: .center)
+
+                Text(label, size: .caption, color: labelColor, weight: .medium, alignment: .center)
                     .layoutPriority(1)
-                
+
                 trailingLine
             }
         }

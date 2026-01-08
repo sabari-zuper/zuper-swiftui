@@ -35,10 +35,10 @@ public struct BadgeList: View {
 
     @ViewBuilder var badgeOrEmptySpace: some View {
         if iconContent.isEmpty {
-            Icon(content: .grid, size: .small)
+            Icon(content: .grid, size: .compact)
                 .opacity(0)
         } else {
-            Icon(content: iconContent, size: .small)
+            Icon(content: iconContent, size: .compact)
         }
     }
 
@@ -54,7 +54,7 @@ public struct BadgeList: View {
     }
 
     var textLeadingPadding: CGFloat {
-        iconContent.isEmpty ? (Icon.Size.small.value + Self.spacing) : 0
+        iconContent.isEmpty ? (Icon.Size.compact.value + Self.spacing) : 0
     }
 }
 

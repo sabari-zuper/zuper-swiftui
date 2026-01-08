@@ -32,14 +32,14 @@ public struct Icon: View {
                 .aspectRatio(contentMode: mode)
                 .frame(width: size.value, height: size.value * sizeCategory.ratio)
                 .accessibility(hidden: true)
-        case .sfSymbol(let systemName, let color?):
+        case .sfSymbol(let systemName, let color?, let weight):
             Image(systemName: systemName)
                 .foregroundColor(color)
-                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
-        case .sfSymbol(let systemName, nil):
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio, weight: weight))
+        case .sfSymbol(let systemName, nil, let weight):
             Image(systemName: systemName)
             // foregroundColor(nil) prevents further overrides
-                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio, weight: weight))
         case .none:
             EmptyView()
         }
@@ -57,28 +57,45 @@ public extension Icon {
     ///
     /// - Parameters:
     ///     - content: Icon content. Can optionally include the color override.
-    init(content: Icon.Content, size: Size = .normal, baselineOffset: CGFloat = 0) {
+    ///     - size: Icon size. Defaults to `.default` (20pt).
+    ///     - baselineOffset: Manual baseline adjustment. Defaults to `0`.
+    init(content: Icon.Content, size: Size = .default, baselineOffset: CGFloat = 0) {
         self.content = content
         self.size = size
         self.baselineOffset = baselineOffset
     }
-    
+
     /// Creates Zuper Icon component for provided Image.
-    init(image: Image, size: Size = .normal, baselineOffset: CGFloat = 0) {
+    ///
+    /// - Parameters:
+    ///   - image: The Image to display.
+    ///   - size: Icon size. Defaults to `.default` (20pt).
+    ///   - baselineOffset: Manual baseline adjustment. Defaults to `0`.
+    init(image: Image, size: Size = .default, baselineOffset: CGFloat = 0) {
         self.init(
             content: .image(image),
             size: size,
             baselineOffset: baselineOffset
         )
     }
-    
-    /// Creates Zuper Icon component for provided SF Symbol with specified color.
+
+    /// Creates Zuper Icon component for provided SF Symbol with specified color and weight.
     ///
     /// - Parameters:
-    ///     - color: SF Symbol color. Can be set to `nil` and specified later using `.foregroundColor()` modifier.
-    init(sfSymbol: String, size: Size = .normal, color: Color? = .inkDark, baselineOffset: CGFloat = 0) {
+    ///   - sfSymbol: The SF Symbol name (e.g., "chevron.right", "checkmark.circle.fill").
+    ///   - size: Icon size. Defaults to `.default` (20pt).
+    ///   - color: SF Symbol color. Can be set to `nil` and specified later using `.foregroundColor()` modifier.
+    ///   - weight: SF Symbol weight to match text weight per Apple HIG. Defaults to `.regular`.
+    ///   - baselineOffset: Manual baseline adjustment. Defaults to `0`.
+    init(
+        sfSymbol: String,
+        size: Size = .default,
+        color: Color? = .inkDark,
+        weight: Font.Weight = .regular,
+        baselineOffset: CGFloat = 0
+    ) {
         self.init(
-            content: .sfSymbol(sfSymbol, color: color),
+            content: .sfSymbol(sfSymbol, color: color, weight: weight),
             size: size,
             baselineOffset: baselineOffset
         )
@@ -95,47 +112,96 @@ public extension Icon {
     enum Content: Equatable {
         /// Icon using custom Image with overridable size.
         case image(Image, mode: ContentMode = .fit)
-        /// SFSymbol
-        case sfSymbol(String, color: Color? = nil)
-        
+        /// SF Symbol with optional color and weight.
+        /// Weight parameter allows matching icon weight with text weight per Apple HIG.
+        case sfSymbol(String, color: Color? = nil, weight: Font.Weight = .regular)
+
         case none
-        
+
         public var isEmpty: Bool {
             switch self {
             case .image:                            return false
-            case .sfSymbol(let sfSymbol, _):        return sfSymbol.isEmpty
+            case .sfSymbol(let sfSymbol, _, _):     return sfSymbol.isEmpty
             case .none:
                 return true
             }
         }
+
+        /// The SF Symbol weight for this content.
+        public var weight: Font.Weight {
+            switch self {
+            case .sfSymbol(_, _, let weight):       return weight
+            default:                                return .regular
+            }
+        }
     }
     
+    /// Icon sizes aligned with Apple Human Interface Guidelines.
+    ///
+    /// ## Apple HIG Recommendations
+    /// Icons should match the size of accompanying text for visual harmony.
+    /// Use `.text(TextSize)` for automatic alignment with text components.
+    ///
+    /// ## Semantic Sizes (Recommended)
+    /// - `.default` (20pt) - Standard icon size for body text
+    /// - `.compact` (16pt) - Smaller icons for captions/footnotes
+    /// - `.comfortable` (24pt) - Larger icons for titles
+    ///
     enum Size: Equatable {
-        /// Size 16.
-        case small
-        /// Size 20.
-        case normal
-        /// Size 24.
-        case large
-        /// Size 28.
-        case xLarge
-        /// Size based on Font size.
+
+        // MARK: - Apple HIG Semantic Sizes (Recommended)
+
+        /// 16pt - Compact icon for captions, footnotes, small UI elements.
+        case compact
+
+        /// 20pt - Default icon size, pairs well with body/subheadline text.
+        case `default`
+
+        /// 24pt - Comfortable icon for callouts and secondary headings.
+        case comfortable
+
+        /// 28pt - Large icon for titles and prominent UI elements.
+        case prominent
+
+        // MARK: - Dynamic Sizes (Text-Aligned)
+
+        /// Size based on Font size (multiplied by 1.31 for visual balance).
         case fontSize(CGFloat)
-        /// Size based on `Text` size.
+        /// Size automatically matched to `Text` size.
         case text(TextSize)
-        /// Size based on `Heading` style.
+        /// Size automatically matched to `Heading` style.
         case heading(Heading.Style)
-        /// Size based on `Label` title style.
+        /// Size automatically matched to `Label` title style.
         case label(Label.Style)
-        /// Custom size
+        /// Custom size in points.
         case custom(CGFloat)
-        
+
+        // MARK: - Legacy Sizes (Backward Compatibility)
+
+        /// 16pt - Use `.compact` instead.
+        @available(*, deprecated, renamed: "compact", message: "Use .compact for Apple HIG alignment")
+        case small
+
+        /// 20pt - Use `.default` instead.
+        @available(*, deprecated, renamed: "default", message: "Use .default for Apple HIG alignment")
+        case normal
+
+        /// 24pt - Use `.comfortable` instead.
+        @available(*, deprecated, renamed: "comfortable", message: "Use .comfortable for Apple HIG alignment")
+        case large
+
+        /// 28pt - Use `.prominent` instead.
+        @available(*, deprecated, renamed: "prominent", message: "Use .prominent for Apple HIG alignment")
+        case xLarge
+
+        // MARK: - Computed Properties
+
         public var value: CGFloat {
             switch self {
-            case .small:                            return 16
-            case .normal:                           return 20
-            case .large:                            return 24
-            case .xLarge:                           return 28
+            case .compact, .small:                  return 16
+            case .default, .normal:                 return 20
+            case .comfortable, .large:              return 24
+            case .prominent, .xLarge:               return 28
             case .fontSize(let size):               return round(size * 1.31)
             case .text(let size):                   return size.iconSize
             case .heading(let style):               return style.iconSize
@@ -143,13 +209,13 @@ public extension Icon {
             case .custom(let size):                 return size
             }
         }
-        
+
         public var textStyle: Font.TextStyle {
             switch self {
-            case .small:                            return TextSize.caption.textStyle
-            case .normal:                           return TextSize.subheadline.textStyle
-            case .large:                            return TextSize.callout.textStyle
-            case .xLarge:                           return TextSize.title3.textStyle
+            case .compact, .small:                  return TextSize.caption.textStyle
+            case .default, .normal:                 return TextSize.subheadline.textStyle
+            case .comfortable, .large:              return TextSize.callout.textStyle
+            case .prominent, .xLarge:               return TextSize.title3.textStyle
             case .fontSize:                         return .body
             case .text(let size):                   return size.textStyle
             case .heading(let style):               return style.textStyle
@@ -157,18 +223,18 @@ public extension Icon {
             case .custom:                           return .body
             }
         }
-        
+
         public static func == (lhs: Icon.Size, rhs: Icon.Size) -> Bool {
             lhs.value == rhs.value
         }
-        
+
         /// Default text line height for icon size.
         public var textLineHeight: CGFloat {
             switch self {
-            case .small:                            return TextSize.caption.iconSize
-            case .normal:                           return TextSize.subheadline.iconSize
-            case .large:                            return TextSize.callout.iconSize
-            case .xLarge:                           return TextSize.title3.iconSize
+            case .compact, .small:                  return TextSize.caption.iconSize
+            case .default, .normal:                 return TextSize.subheadline.iconSize
+            case .comfortable, .large:              return TextSize.callout.iconSize
+            case .prominent, .xLarge:               return TextSize.title3.iconSize
             case .fontSize(let size):               return round(size * 1.31)
             case .text(let size):                   return size.iconSize
             case .heading(let style):               return style.iconSize
@@ -176,16 +242,16 @@ public extension Icon {
             case .custom(let size):                 return size
             }
         }
-        
+
         /// Text line height for icon size for specified ContentSizeCategory.
         public func dynamicTextLineHeight(sizeCategory: ContentSizeCategory) -> CGFloat {
             round(textLineHeight * sizeCategory.ratio)
         }
-        
+
         public func textBaselineAlignmentGuide(sizeCategory: ContentSizeCategory, height: CGFloat) -> CGFloat {
             round(dynamicTextLineHeight(sizeCategory: sizeCategory) * Text.firstBaselineRatio + height / 2)
         }
-        
+
         public func baselineOffset(sizeCategory: ContentSizeCategory) -> CGFloat {
             round(dynamicTextLineHeight(sizeCategory: sizeCategory) * 0.2)
         }
@@ -214,14 +280,14 @@ extension Icon: TextRepresentable {
         case .image(let image, _):
             return SwiftUI.Text(image.resizable())
                 .baselineOffset(baselineOffset)
-        case .sfSymbol(let systemName, let color?):
+        case .sfSymbol(let systemName, let color?, let weight):
             return SwiftUI.Text(Image(systemName: systemName)).foregroundColor(color)
                 .baselineOffset(baselineOffset)
-                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
-        case .sfSymbol(let systemName, nil):
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio, weight: weight))
+        case .sfSymbol(let systemName, nil, let weight):
             return SwiftUI.Text(Image(systemName: systemName))
                 .baselineOffset(baselineOffset)
-                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio))
+                .font(.system(size: size.value * Self.sfSymbolToZuperSizeRatio * sizeCategory.ratio, weight: weight))
         case .none:
             return SwiftUI.Text("")
                 .baselineOffset(baselineOffset)

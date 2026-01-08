@@ -76,7 +76,7 @@ public extension Badge {
         icon: Icon.Content = .none,
         style: Style = .neutral,
         textSize:TextSize = .caption,
-        iconSize:Icon.Size = .small,
+        iconSize:Icon.Size = .compact,
         isStatus: Bool = false,
         iconPlacement: Icon.Placement = .leading
     ) {

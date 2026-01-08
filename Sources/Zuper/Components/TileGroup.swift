@@ -31,7 +31,7 @@ public struct TileGroup<Content: View>: View {
             .padding(.bottom, -Separator.Thickness.default.value)
             .clipShape(RoundedRectangle(cornerRadius: BorderRadius.default))
             .compositingGroup()
-            .elevation(.level1, shape: .roundedRectangle())
+            .elevation(.card, shape: .roundedRectangle())
         }
     }
 

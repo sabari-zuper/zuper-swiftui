@@ -25,7 +25,7 @@ public struct EmptyState: View {
     @ViewBuilder var texts: some View {
         if title.isEmpty == false || description.isEmpty == false {
             VStack(spacing: .xSmall) {
-                Heading(title, style: .h6, alignment: .center)
+                Heading(title, style: .headline, alignment: .center)
                     .accessibility(.emptyStateTitle)
                 Text(description, color: .inkNormal, alignment: .center)
                     .accessibility(.emptyStateDescription)

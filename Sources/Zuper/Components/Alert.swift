@@ -40,7 +40,7 @@ public struct Alert<Content: View>: View {
 
     public var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: .xSmall) {
-            Icon(content: iconContent, size: .normal)
+            Icon(content: iconContent, size: .default)
                 .foregroundColor(status.color)
                 .accessibility(.alertIcon)
             

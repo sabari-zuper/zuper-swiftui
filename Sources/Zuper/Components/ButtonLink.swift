@@ -25,26 +25,26 @@ public struct ButtonLink: View {
                         if style != .icon {
                             Text(
                                 label,
-                                size: .normal,
+                                size: .subheadline,
                                 color: TextColor.custom(colorStyle.color.normal),
                                 weight: .semibold)
                             .padding(.vertical, verticalPadding)
                         }
                     }
-                    
-                    TextStrut(.normal)
+
+                    TextStrut(.subheadline)
                         .padding(.vertical, verticalPadding)
                 }
             }
         )
-        .buttonStyle(ZuperStyle(style: colorStyle, size: size))
+        .buttonStyle(ZuperStyle(style: colorStyle, size: size, typeStyle: style))
     }
     
     var iconSize: Icon.Size {
         switch size {
-            case .default:          return .normal
-            case .button:           return .large
-            case .buttonSmall:      return .small
+            case .default:          return .default
+            case .button:           return .comfortable
+            case .buttonSmall:      return .compact
         }
     }
 
@@ -134,11 +134,16 @@ public extension ButtonLink {
 
         let style: ColorStyle
         let size: ButtonLink.Size
+        let typeStyle: TypeStyle
 
         public func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .foregroundColor(Color(configuration.isPressed ? style.color.active : style.color.normal))
-                .frame(maxWidth: size.maxWidth)
+                .frame(
+                    minWidth: typeStyle == .icon ? .touchTarget : nil,
+                    maxWidth: size.maxWidth,
+                    minHeight: typeStyle == .icon ? .touchTarget : nil
+                )
                 .contentShape(Rectangle())
         }
     }
