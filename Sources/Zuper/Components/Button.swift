@@ -51,23 +51,12 @@ public struct Button: View {
     }
 
     @ViewBuilder var text: some View {
-        if #available(iOS 14.0, *) {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-        } else {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-            // Prevents text value animation issue due to different iOS13 behavior
-            .animation(nil)
-        }
+        Text(
+            label,
+            size: size.textSize,
+            color: .custom(style.foregroundUIColor),
+            weight: .semibold
+        )
     }
 
     var isIconOnly: Bool {

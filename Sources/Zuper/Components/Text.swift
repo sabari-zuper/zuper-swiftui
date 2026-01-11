@@ -123,11 +123,7 @@ public enum TextSize {
         case .normal:               return .body
         case .large:                return .callout
         case .xLarge:
-            if #available(iOS 14.0, *) {
-                return .title3
-            } else {
-                return .callout
-            }
+            return .title3
         case .custom:               return .body
         }
     }

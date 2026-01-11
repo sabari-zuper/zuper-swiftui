@@ -18,23 +18,26 @@ public struct Heading: View {
         if content.isEmpty == false {
             text(sizeCategory: sizeCategory)
                 .multilineTextAlignment(alignment)
+                .lineSpacing(lineSpacing ?? 0)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibility(addTraits: .isHeader)
         }
     }
 
     func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
-        ZText(
-            content,
-            size: .custom(style.size),
-            color: color?.textColor,
-            weight: style.weight,
-            lineSpacing: lineSpacing,
-            alignment: alignment,
-            accentColor: accentColor,
-            isSelectable: false
-        )
-        .text(sizeCategory: sizeCategory)
+        let baseText = SwiftUI.Text(verbatim: content)
+            .zuperFont(
+                size: style.size,
+                weight: style.weight,
+                style: style.textStyle,
+                sizeCategory: sizeCategory
+            )
+        
+        if let textColor = color?.textColor {
+            return baseText.foregroundColor(textColor.value)
+        } else {
+            return baseText
+        }
     }
 }
 
@@ -44,13 +47,12 @@ public extension Heading {
     /// Creates Zuper Heading component.
     ///
     /// - Parameters:
-    ///   - content: String to display. Supports html formatting tags `<strong>`, `<u>`, `<ref>`.
+    ///   - content: String to display.
     ///   - style: Heading style.
     ///   - color: Font color. Can be set to `nil` and specified later using `.foregroundColor()` modifier.
     ///   - lineSpacing: Distance in points between the bottom of one line fragment and the top of the next.
     ///   - alignment: Horizontal multi-line alignment.
-    ///   - accentColor: Color for `<ref>` formatting tag.
-    ///   - linkColor: Color for `<a href>` and `<applink>` formatting tag.
+    ///   - accentColor: Deprecated - no longer used after performance optimization. Kept for backward compatibility.
     init(
         _ content: String,
         style: Style,
@@ -158,25 +160,13 @@ public extension Heading {
             case .display:
                 return .largeTitle
             case .displaySubtitle:
-                if #available(iOS 14.0, *) {
-                    return .title2
-                } else {
-                    return .headline
-                }
+                return .title2
                 //            case .title1:
                 //                return .title
                 //            case .title2:
-                //                if #available(iOS 14.0, *) {
-                //                    return .title2
-                //                } else {
-                //                    return .headline
-                //                }
+                //                return .title2
                 //            case .title3:
-                //                if #available(iOS 14.0, *) {
-                //                    return .title3
-                //                } else {
-                //                    return .callout
-                //                }
+                //                return .title3
 //                            case .title4:
 //                                return .callout
                             case .title5:
@@ -291,8 +281,8 @@ struct HeadingPreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Heading("Zuper, Field service", style: .h1)
-            Heading("Zuper, Field service", style: .h2)
+            Heading("Zuper, Field service", style: .h1, color: .custom(.blueDark))
+            Heading("Zuper, Field service", style: .h2, lineSpacing: .xxLarge, alignment: .center)
             Heading("Zuper, Field service", style: .h3)
             Heading("Zuper, Field service", style: .h4)
             Heading("Zuper, Field service", style: .h5)
