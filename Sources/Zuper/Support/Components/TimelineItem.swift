@@ -22,7 +22,7 @@ public struct TimelineItem<Footer: View>: View {
         HStack(alignment: (hasHeaderContent || hasDescription) ? .firstTextBaseline : .top, spacing: .small) {
 
             TimelineIndicator(type: type)
-            
+
             VStack(alignment: .leading, spacing: .xSmall) {
 
                 headerWithAccessibilitySizeSupport

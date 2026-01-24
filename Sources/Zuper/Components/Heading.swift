@@ -157,34 +157,16 @@ public extension Heading {
         
         public var textStyle: Font.TextStyle {
             switch self {
-            case .display:
-                return .largeTitle
-            case .displaySubtitle:
-                return .title2
-                //            case .title1:
-                //                return .title
-                //            case .title2:
-                //                return .title2
-                //            case .title3:
-                //                return .title3
-//                            case .title4:
-//                                return .callout
-                            case .title5:
-                                return .headline
-                            case .title6:
-                                return .headline
-            case .h1:
-                return .title
-            case .h2:
-                return .title
-            case .h3:
-                return .title
-            case .h4:
-                return .title
-            case .h5:
-                return .title
-            case .h6:
-                return .title
+            case .display:          return .largeTitle
+            case .displaySubtitle:  return .title2
+            case .title5:           return .headline
+            case .title6:           return .headline
+            case .h1:               return .title
+            case .h2:               return .title
+            case .h3:               return .title
+            case .h4:               return .title
+            case .h5:               return .title
+            case .h6:               return .title
             }
         }
         

@@ -64,7 +64,7 @@ public extension Font {
     }
 
     private static func customFont(_ name: String, size: CGFloat, style: Font.TextStyle = .body) -> Font {
-        return .custom(name, size: size, relativeTo: style)
+        .custom(name, size: size, relativeTo: style)
     }
 }
 

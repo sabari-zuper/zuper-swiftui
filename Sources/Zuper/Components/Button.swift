@@ -50,7 +50,7 @@ public struct Button: View {
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity)
     }
 
-    @ViewBuilder var text: some View {
+    var text: some View {
         Text(
             label,
             size: size.textSize,

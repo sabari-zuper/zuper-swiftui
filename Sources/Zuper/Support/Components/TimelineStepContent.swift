@@ -9,7 +9,7 @@ public struct TimelineStepBadgeText: View {
     let sublabel: String
     let style: TimelineStepStyle
     let alignmentComputation: (ViewDimensions) -> CGFloat
-    
+
     public var body: some View {
         if horisontalSizeClass == .compact && dynamicTypeSize.isAccessibilitySize {
             VStack(alignment: .leading, spacing: .xSmall) {
