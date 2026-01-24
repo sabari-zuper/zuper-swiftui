@@ -8,7 +8,7 @@ public struct TextStrut: View {
     let textSize: TextSize
     
     public var body: some View {
-        ZText("I", size: textSize, color: .custom(.clear))
+        Text("I", size: textSize, color: .custom(.clear))
             .accessibility(hidden: true)
             .accessibility(removeTraits: .isStaticText)
             .frame(width: 0)

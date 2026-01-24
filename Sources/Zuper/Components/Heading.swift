@@ -18,23 +18,26 @@ public struct Heading: View {
         if content.isEmpty == false {
             text(sizeCategory: sizeCategory)
                 .multilineTextAlignment(alignment)
+                .lineSpacing(lineSpacing ?? 0)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibility(addTraits: .isHeader)
         }
     }
 
     func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
-        ZText(
-            content,
-            size: style.textSize,  // Use proper TextSize for correct Dynamic Type scaling
-            color: color?.textColor,
-            weight: style.weight,
-            lineSpacing: lineSpacing,
-            alignment: alignment,
-            accentColor: accentColor,
-            isSelectable: false
-        )
-        .text(sizeCategory: sizeCategory)
+        let baseText = SwiftUI.Text(verbatim: content)
+            .zuperFont(
+                size: style.size,
+                weight: style.weight,
+                style: style.textStyle,
+                sizeCategory: sizeCategory
+            )
+        
+        if let textColor = color?.textColor {
+            return baseText.foregroundColor(textColor.value)
+        } else {
+            return baseText
+        }
     }
 }
 
@@ -44,13 +47,12 @@ public extension Heading {
     /// Creates Zuper Heading component.
     ///
     /// - Parameters:
-    ///   - content: String to display. Supports html formatting tags `<strong>`, `<u>`, `<ref>`.
+    ///   - content: String to display.
     ///   - style: Heading style.
     ///   - color: Font color. Can be set to `nil` and specified later using `.foregroundColor()` modifier.
     ///   - lineSpacing: Distance in points between the bottom of one line fragment and the top of the next.
     ///   - alignment: Horizontal multi-line alignment.
-    ///   - accentColor: Color for `<ref>` formatting tag.
-    ///   - linkColor: Color for `<a href>` and `<applink>` formatting tag.
+    ///   - accentColor: Deprecated - no longer used after performance optimization. Kept for backward compatibility.
     init(
         _ content: String,
         style: Style,

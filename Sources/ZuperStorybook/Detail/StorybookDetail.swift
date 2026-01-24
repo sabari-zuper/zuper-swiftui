@@ -113,7 +113,15 @@ struct StorybookDetail: View {
             case (.inputField, 0):          StorybookInputField.basic
             case (.inputField, 2):          StorybookInputField.password
             case (.inputField, 3):          StorybookInputField.mix
-            case (.keyValue, _):            StorybookKeyValue.basic
+            case (.keyValue, _):            
+                if #available(iOS 16.0, *) {
+                    StorybookKeyValue.basic
+                } else {
+                    VStack {
+                        Heading("KeyValue requires iOS 16+", style: .h3)
+                        Text("This component uses native LabeledContent", size: .small, color: .inkNormal)
+                    }.padding(.large)
+                }
             default:                        HStack { Heading("🚧 WIP 🚧", style: .h3) }.padding(.large)
         }
     }

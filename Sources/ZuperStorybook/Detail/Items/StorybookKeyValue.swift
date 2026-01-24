@@ -1,6 +1,7 @@
 import SwiftUI
 import Zuper
 
+@available(iOS 16.0, *)
 struct StorybookKeyValue {
 
     static let key = "Key"
@@ -29,6 +30,7 @@ struct StorybookKeyValue {
     }
 }
 
+@available(iOS 16.0, *)
 struct StorybookKeyValuePreviews: PreviewProvider {
 
     static var previews: some View {

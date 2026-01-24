@@ -50,24 +50,13 @@ public struct Button: View {
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity)
     }
 
-    @ViewBuilder var text: some View {
-        if #available(iOS 14.0, *) {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-        } else {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-            // Prevents text value animation issue due to different iOS13 behavior
-            .animation(nil)
-        }
+    var text: some View {
+        Text(
+            label,
+            size: size.textSize,
+            color: .custom(style.foregroundUIColor),
+            weight: .semibold
+        )
     }
 
     var isIconOnly: Bool {

@@ -268,13 +268,9 @@ extension Icon: TextRepresentable {
     
     public func swiftUIText(sizeCategory: ContentSizeCategory) -> SwiftUI.Text? {
         if content.isEmpty { return nil }
-        
-        if #available(iOS 14.0, *) {
-            return text(sizeCategory: sizeCategory)
-        }
+        return text(sizeCategory: sizeCategory)
     }
     
-    @available(iOS 14.0, *)
     func text(sizeCategory: ContentSizeCategory) -> SwiftUI.Text {
         switch content {
         case .image(let image, _):
