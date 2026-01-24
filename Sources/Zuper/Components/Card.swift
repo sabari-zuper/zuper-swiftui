@@ -111,7 +111,7 @@ public struct Card<Content: View>: View {
         case .bordered, .plain:
             return 0
         case .filled, .grouped:
-            return 16
+            return 20
         }
     }
 
