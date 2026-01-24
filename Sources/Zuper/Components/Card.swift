@@ -15,35 +15,125 @@ public enum CardContentLayout {
     case custom(padding: CGFloat, spacing: CGFloat)
 }
 
+/// Visual style for the Card appearance.
+///
+/// iOS 26 introduced cleaner card styles using system fill colors
+/// with no borders or shadows - just subtle filled backgrounds.
+///
+/// ## Migration Guide
+///
+/// Migrate from `.bordered` to iOS 26 styles:
+///
+/// | Old Pattern | New Pattern |
+/// |-------------|-------------|
+/// | `Card(contentLayout: .fill)` | `Card(contentLayout: .fill, style: .grouped)` |
+/// | `Card { }` | `Card(style: .filled) { }` |
+/// | `Card(showBorder: false)` | `Card(style: .plain)` or `Card(style: .filled)` |
+/// | Cards with Tiles/ListChoice | `Card(contentLayout: .fill, style: .grouped)` |
+///
+/// - Note: Cards with custom `backgroundColor` for selection states can remain as-is.
+///
+public enum CardStyle {
+    /// Legacy style with border.
+    ///
+    /// - Important: Migrate to `.filled` or `.grouped` for iOS 26 style.
+    ///
+    /// **Migration examples:**
+    /// ```swift
+    /// // Before
+    /// Card(contentLayout: .fill) { content }
+    ///
+    /// // After - for cards containing lists/tiles
+    /// Card(contentLayout: .fill, style: .grouped) { content }
+    ///
+    /// // After - for standard cards with padding
+    /// Card(contentLayout: .default(), style: .filled) { content }
+    /// ```
+    @available(*, deprecated, message: "Migrate to .filled or .grouped for iOS 26 style")
+    case bordered
+
+    /// iOS 26+ style using `tertiarySystemFill` - subtle filled background, no border.
+    /// Best for: Standard cards on plain backgrounds.
+    case filled
+
+    /// iOS 26+ style using `secondarySystemGroupedBackground` for grouped list contexts.
+    /// Best for: Cards containing Tiles, ListChoice, or in scrollable list views.
+    case grouped
+
+    /// Plain style with no background decoration.
+    /// Best for: Cards that need complete transparency or custom styling.
+    case plain
+}
+
 /// Separates content into sections.
 ///
 /// Card is a wrapping component around a custom content.
+///
+/// ## iOS 26 Style
+/// Use `.filled` or `.grouped` style for modern iOS appearance:
+/// ```swift
+/// Card(style: .filled) {
+///     Text("Content")
+/// }
+/// ```
+///
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
 public struct Card<Content: View>: View {
-    
+
     @Environment(\.idealSize) var idealSize
-    
+
     let content: Content
     let contentLayout: CardContentLayout
     let contentAlignment: HorizontalAlignment
+    let style: CardStyle
     let showBorder: Bool
     let backgroundColor: Color?
-    
+
     public var body: some View {
         VStack(alignment: contentAlignment, spacing: contentSpacing) {
             content
         }
         .padding(contentPadding)
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
-        .background(backgroundColor ?? .whiteDarker)
-        .tileBorder(showBorder ? .iOS : .none)
+        .background(resolvedBackgroundColor)
+        .modifier(CardStyleModifier(style: style, showBorder: showBorder))
         .ignoreScreenLayoutHorizontalPadding()
+        .padding(.horizontal, horizontalInset)
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)
         .accessibilityElement(children: .contain)
     }
-    
-    // SIMPLIFIED COMPUTED PROPERTIES (only what you use)
+
+    /// Horizontal inset based on card style.
+    /// iOS 26 styles get 16pt inset, legacy styles stay edge-to-edge.
+    private var horizontalInset: CGFloat {
+        switch style {
+        case .bordered, .plain:
+            return 0
+        case .filled, .grouped:
+            return 16
+        }
+    }
+
+    // MARK: - Private
+
+    private var resolvedBackgroundColor: Color {
+        if let backgroundColor {
+            return backgroundColor
+        }
+
+        switch style {
+        case .bordered:
+            return .whiteDarker
+        case .filled:
+            return .tertiarySystemFill
+        case .grouped:
+            return .secondarySystemGroupedBackground
+        case .plain:
+            return .clear
+        }
+    }
+
     private var contentPadding: CGFloat {
         switch contentLayout {
         case .fill:
@@ -54,7 +144,7 @@ public struct Card<Content: View>: View {
             return padding
         }
     }
-    
+
     private var contentSpacing: CGFloat {
         switch contentLayout {
         case .fill:
@@ -67,261 +157,134 @@ public struct Card<Content: View>: View {
     }
 }
 
-// MARK: - Inits matching your usage patterns
+// MARK: - Card Style Modifier
+
+private struct CardStyleModifier: ViewModifier {
+    let style: CardStyle
+    let showBorder: Bool
+
+    /// iOS standard card corner radius
+    private let iosCornerRadius: CGFloat = 20
+
+    func body(content: Content) -> some View {
+        switch style {
+        case .bordered:
+            content
+                .tileBorder(showBorder ? .iOS : .none)
+        case .filled, .grouped:
+            content
+                .clipShape(RoundedRectangle(cornerRadius: iosCornerRadius, style: .continuous))
+        case .plain:
+            content
+        }
+    }
+}
+
+// MARK: - Inits (Backward Compatible)
 public extension Card {
-    
-    // PATTERN 1: Custom padding/spacing
+
+    // PATTERN 1: Custom padding/spacing (most common)
     init(
         contentLayout: CardContentLayout,
         contentAlignment: HorizontalAlignment = .leading,
         showBorder: Bool = true,
-        backgroundColor: Color? = .whiteDarker,
+        backgroundColor: Color? = nil,
+        style: CardStyle = .bordered,
         @ViewBuilder content: () -> Content
     ) {
         self.contentLayout = contentLayout
         self.contentAlignment = contentAlignment
         self.showBorder = showBorder
         self.backgroundColor = backgroundColor
+        self.style = style
         self.content = content()
     }
-    
+
+    // PATTERN 2: Simple default
     init(
+        style: CardStyle = .bordered,
         @ViewBuilder content: () -> Content
     ) {
         self.contentLayout = .custom(padding: .small, spacing: .small)
         self.contentAlignment = .leading
         self.showBorder = true
-        self.backgroundColor = .whiteDarker
+        self.backgroundColor = nil
+        self.style = style
         self.content = content()
     }
-    
-    // PATTERN 2: Fill layout
+
+    // PATTERN 3: Fill layout / Border focus
     init(
-        showBorder: Bool = true,
+        showBorder: Bool,
         contentLayout: CardContentLayout = .fill,
-        backgroundColor: Color? = .whiteDarker,
+        backgroundColor: Color? = nil,
+        style: CardStyle = .bordered,
         @ViewBuilder content: () -> Content
     ) {
         self.contentLayout = contentLayout
         self.contentAlignment = .leading
         self.showBorder = showBorder
         self.backgroundColor = backgroundColor
+        self.style = style
         self.content = content()
     }
-    
-    // PATTERN 3: Background color focus
+
+    // PATTERN 4: Background color focus
     init(
         backgroundColor: Color?,
         showBorder: Bool = true,
         contentLayout: CardContentLayout = .default(),
+        style: CardStyle = .bordered,
         @ViewBuilder content: () -> Content
     ) {
         self.backgroundColor = backgroundColor
         self.showBorder = showBorder
         self.contentLayout = contentLayout
         self.contentAlignment = .leading
+        self.style = style
         self.content = content()
     }
-    
-    // PATTERN 4: Content alignment
+
+    // PATTERN 5: Content alignment focus
     init(
         contentAlignment: HorizontalAlignment,
         showBorder: Bool = true,
-        backgroundColor: Color? = .whiteDarker,
+        backgroundColor: Color? = nil,
         contentLayout: CardContentLayout = .default(),
+        style: CardStyle = .bordered,
         @ViewBuilder content: () -> Content
     ) {
         self.contentAlignment = contentAlignment
         self.showBorder = showBorder
         self.backgroundColor = backgroundColor
         self.contentLayout = contentLayout
+        self.style = style
         self.content = content()
     }
 }
 
-/// Separates content into sections.
-///
-/// Card is a wrapping component around a custom content.
-/// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
-// public struct Card<Content: View>: View {
-//
-//    @Environment(\.idealSize) var idealSize
-//    
-//    let title: String
-//    let description: String
-//    let iconContent: Icon.Content
-//    let action: CardAction
-//    let headerSpacing: CGFloat
-//    let contentLayout: CardContentLayout
-//    let contentAlignment: HorizontalAlignment
-//    let showBorder: Bool
-//    let titleStyle: Heading.Style
-//    let status: Status?
-//    let backgroundColor: Color?
-//    @ViewBuilder let content: Content
-//    
-//    public var body: some View {
-//        VStack(alignment: .leading, spacing: headerSpacing) {
-//            header
-//            
-//            if isContentEmpty == false {
-//                VStack(alignment: contentAlignment, spacing: contentSpacing) {
-//                    content
-//                }
-//                .padding(.top, isHeaderEmpty ? contentPadding : 0)
-//                .padding([.horizontal, .bottom], contentPadding)
-//            }
-//        }
-//        .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity, alignment: .leading)
-//        .background(backgroundColor)
-//        .tileBorder(
-//            showBorder ? .iOS : .none,
-//            status: status
-//        )
-//        .ignoreScreenLayoutHorizontalPadding()
-//        .accessibilityElement(children: .contain)
-//    }
-//    
-//    @ViewBuilder var header: some View {
-//        if isHeaderEmpty == false {
-//            HStack(alignment: .firstTextBaseline, spacing: 0) {
-//                Icon(content: iconContent, size: .heading(titleStyle))
-//                    .padding(.trailing, .xSmall)
-//                    .accessibility(.cardIcon)
-//                
-//                VStack(alignment: .leading, spacing: .xxSmall) {
-//                    Heading(title, style: titleStyle)
-//                        .accessibility(.cardTitle)
-//                    Text(description, color: .inkNormal)
-//                        .accessibility(.cardDescription)
-//                }
-//                
-//                if idealSize.horizontal == nil {
-//                    Spacer(minLength: 0)
-//                }
-//                
-//                switch action {
-//                case .buttonLink(let label, let action):
-//                    if label.isEmpty == false {
-//                        ButtonLink(label, action: action)
-//                            .padding(.leading, .xxxSmall)
-//                            .accessibility(.cardActionButtonLink)
-//                    }
-//                case .none:
-//                    EmptyView()
-//                }
-//            }
-//            .padding([.horizontal, .top], .medium)
-//            .padding(.bottom, isContentEmpty ? .medium : 0)
-//        }
-//    }
-//    
-//    var isHeaderEmpty: Bool {
-//        if case .none = action, iconContent.isEmpty, title.isEmpty, description.isEmpty {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-//    
-//    var isContentEmpty: Bool {
-//        content is EmptyView
-//    }
-//    
-//    var contentPadding: CGFloat {
-//        switch contentLayout {
-//        case .fill:                         return 0
-//        case .default:                      return .medium
-//        case .custom(let padding, _):       return padding
-//        }
-//    }
-//    
-//    var contentSpacing: CGFloat {
-//        switch contentLayout {
-//        case .fill:                         return 0
-//        case .default(let spacing):         return spacing
-//        case .custom(_, let spacing):       return spacing
-//        }
-//    }
-//}
-//
-//// MARK: - Inits
-//public extension Card {
-//    
-//    /// Creates Zuper Card wrapper component over a custom content.
-//    init(
-//        _ title: String = "",
-//        description: String = "",
-//        icon: Icon.Content = .none,
-//        action: CardAction = .none,
-//        headerSpacing: CGFloat = .medium,
-//        showBorder: Bool = true,
-//        titleStyle: Heading.Style = .h6,
-//        status: Status? = nil,
-//        backgroundColor: Color? = .whiteDarker,
-//        contentLayout: CardContentLayout = .default(),
-//        contentAlignment: HorizontalAlignment = .leading,
-//        @ViewBuilder content: () -> Content
-//    ) {
-//        self.title = title
-//        self.description = description
-//        self.iconContent = icon
-//        self.action = action
-//        self.headerSpacing = headerSpacing
-//        self.showBorder = showBorder
-//        self.titleStyle = titleStyle
-//        self.status = status
-//        self.backgroundColor = backgroundColor
-//        self.contentLayout = contentLayout
-//        self.contentAlignment = contentAlignment
-//        self.content = content()
-//    }
-//    
-//    /// Creates Zuper Card wrapper component with empty content.
-//    init(
-//        _ title: String = "",
-//        description: String = "",
-//        icon: Icon.Content = .none,
-//        action: CardAction = .none,
-//        headerSpacing: CGFloat = .medium,
-//        showBorder: Bool = true,
-//        titleStyle: Heading.Style = .h6,
-//        status: Status? = nil,
-//        backgroundColor: Color? = .whiteDarker
-//    ) where Content == EmptyView {
-//        self.init(
-//            title,
-//            description: description,
-//            icon: icon,
-//            action: action,
-//            headerSpacing: headerSpacing,
-//            showBorder: showBorder,
-//            titleStyle: titleStyle,
-//            status: status,
-//            backgroundColor: backgroundColor,
-//            content: { EmptyView() }
-//        )
-//    }
-// }
-
 // MARK: - Previews
 struct CardPreviews: PreviewProvider {
-    
+
     static var previews: some View {
         PreviewWrapper {
+
             standalone
                 .screenLayout()
-            
+
             content
                 .screenLayout()
             
+            ios26Styles
+                .screenLayout()
+
             standaloneIntrinsic
                 .padding(.medium)
         }
         .background(Color.screen)
         .previewLayout(.sizeThatFits)
     }
-    
+
     @ViewBuilder static var content: some View {
         cardWithFillLayoutContent
         cardWithFillLayoutContentNoHeader
@@ -330,22 +293,62 @@ struct CardPreviews: PreviewProvider {
         cardMultilineCritical
         clear
     }
-    
+
     static var storybook: some View {
         LazyVStack(spacing: .large) {
             standalone
             content
+            ios26Styles
         }
     }
-    
+
     static var standalone: some View {
-        Card {
+        Card() {
             contentPlaceholder
             contentPlaceholder
         }
-        .previewDisplayName("Standalone")
+        .previewDisplayName("Standalone (Bordered)")
     }
-    
+
+    // MARK: - iOS 26 Style Previews
+
+    static var ios26Styles: some View {
+        VStack(spacing: .medium) {
+            Text("iOS 26 Card Styles")
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, .medium)
+
+            Card(contentLayout: .default(), style: .filled) {
+                SwiftUI.Label("Filled Style", systemImage: "rectangle.fill")
+                Text("Uses tertiarySystemFill background")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            Card(contentLayout: .default(), style: .grouped) {
+                SwiftUI.Label("Grouped Style", systemImage: "rectangle.inset.filled")
+                Text("Uses secondarySystemGroupedBackground")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            Card(contentLayout: .default(), style: .plain) {
+                SwiftUI.Label("Plain Style", systemImage: "rectangle.dashed")
+                Text("No background decoration")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+
+            Card(contentLayout: .default(), style: .bordered) {
+                SwiftUI.Label("Bordered Style (Default)", systemImage: "rectangle")
+                Text("Legacy style with border")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .previewDisplayName("iOS 26 Styles")
+    }
+
     static var standaloneIntrinsic: some View {
         HStack(spacing: .medium) {
             Card() {
@@ -378,31 +381,31 @@ struct CardPreviews: PreviewProvider {
             contentPlaceholder
         }
     }
-    
+
     static var cardWithOnlyCustomContent: some View {
         Card {
             contentPlaceholder
             contentPlaceholder
         }
     }
-    
+
     static var cardWithTiles: some View {
-        Card() {
+        Card {
             contentPlaceholder
                 .frame(height: 30).clipped()
             Tile("Tile")
-            
+
             TileGroup {
                 Tile("Tile in TileGroup 1")
                 Tile("Tile in TileGroup 2")
             }
-            
+
             TileGroup {
                 Tile("Tile in TileGroup 1 (fixed)")
                 Tile("Tile in TileGroup 2 (fixed)")
             }
             .fixedSize(horizontal: true, vertical: false)
-            
+
             ListChoice("ListChoice 1")
                 .padding(.trailing, -.medium)
             ListChoice("ListChoice 2")
@@ -411,7 +414,7 @@ struct CardPreviews: PreviewProvider {
                 .frame(height: 30).clipped()
         }
     }
-    
+
     static var cardMultilineCritical: some View {
         Card(showBorder: true) {
             VStack {
@@ -421,11 +424,12 @@ struct CardPreviews: PreviewProvider {
         }
         .padding(.horizontal, 10)
     }
-    
+
     static var clear: some View {
-        Card(showBorder: true,
-             contentLayout: .fill,
-             backgroundColor: .clear
+        Card(
+            showBorder: true,
+            contentLayout: .fill,
+            backgroundColor: .clear
         ) {
             VStack(spacing: 0) {
                 ListChoice("ListChoice")
@@ -434,7 +438,7 @@ struct CardPreviews: PreviewProvider {
             .padding(.top, .xSmall)
         }
     }
-    
+
     static var snapshot: some View {
         standalone
             .screenLayout()
@@ -443,20 +447,20 @@ struct CardPreviews: PreviewProvider {
 }
 
 struct CardDynamicTypePreviews: PreviewProvider {
-    
+
     static var previews: some View {
         PreviewWrapper {
             content
                 .environment(\.sizeCategory, .extraSmall)
                 .previewDisplayName("Dynamic Type - XS")
-            
+
             content
                 .environment(\.sizeCategory, .accessibilityExtraLarge)
                 .previewDisplayName("Dynamic Type - XL")
         }
         .previewLayout(.sizeThatFits)
     }
-    
+
     @ViewBuilder static var content: some View {
         CardPreviews.snapshot
     }

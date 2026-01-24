@@ -226,6 +226,38 @@ public extension Color {
     /// Secondary fill color for subtle fills.
     static var fillSecondary: Color { .cloudNormal }
 
+    // MARK: - iOS System Fill Colors (iOS 26+)
+    // These are semantic colors that automatically adapt to light/dark mode
+    // and are designed for filling shapes and UI elements like cards.
+
+    /// Thin overlay fill - Use for subtle card backgrounds.
+    /// Equivalent to Apple's `Color(uiColor: .systemFill)`.
+    static var systemFill: Color { Color(uiColor: .systemFill) }
+
+    /// Medium overlay fill - Use for secondary card backgrounds.
+    /// Equivalent to Apple's `Color(uiColor: .secondarySystemFill)`.
+    static var secondarySystemFill: Color { Color(uiColor: .secondarySystemFill) }
+
+    /// Thick overlay fill - Use for tertiary card backgrounds.
+    /// Equivalent to Apple's `Color(uiColor: .tertiarySystemFill)`.
+    static var tertiarySystemFill: Color { Color(uiColor: .tertiarySystemFill) }
+
+    /// Thickest overlay fill - Use for quaternary card backgrounds.
+    /// Equivalent to Apple's `Color(uiColor: .quaternarySystemFill)`.
+    static var quaternarySystemFill: Color { Color(uiColor: .quaternarySystemFill) }
+
+    // MARK: - iOS System Grouped Background Colors (iOS 26+)
+    // Use these for cards in grouped/inset list contexts.
+
+    /// Primary grouped background - Main background for grouped content.
+    static var systemGroupedBackground: Color { Color(uiColor: .systemGroupedBackground) }
+
+    /// Secondary grouped background - Card/section background in grouped lists.
+    static var secondarySystemGroupedBackground: Color { Color(uiColor: .secondarySystemGroupedBackground) }
+
+    /// Tertiary grouped background - Nested content in grouped lists.
+    static var tertiarySystemGroupedBackground: Color { Color(uiColor: .tertiarySystemGroupedBackground) }
+
     // MARK: Status Colors (semantic meaning)
 
     /// Success color - Use for success states, confirmations.
