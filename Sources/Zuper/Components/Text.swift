@@ -179,12 +179,7 @@ public enum TextSize {
         case .subheadline:          return .subheadline
         case .footnote:             return .footnote
         case .caption:              return .caption
-        case .caption2:
-            if #available(iOS 14.0, *) {
-                return .caption2
-            } else {
-                return .caption
-            }
+        case .caption2:             return .caption2
         case .custom:               return .body
         }
     }

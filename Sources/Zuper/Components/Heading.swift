@@ -176,18 +176,8 @@ public extension Heading {
             switch self {
             case .largeTitle:       return .largeTitle
             case .title:            return .title
-            case .title2:
-                if #available(iOS 14.0, *) {
-                    return .title2
-                } else {
-                    return .title
-                }
-            case .title3:
-                if #available(iOS 14.0, *) {
-                    return .title3
-                } else {
-                    return .headline
-                }
+            case .title2:           return .title2
+            case .title3:           return .title3
             case .headline:         return .headline
             }
         }
