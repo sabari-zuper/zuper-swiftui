@@ -98,7 +98,7 @@ public struct Card<Content: View>: View {
         .background(resolvedBackgroundColor)
         .modifier(CardStyleModifier(style: style, showBorder: showBorder))
         .ignoreScreenLayoutHorizontalPadding()
-        .padding(.horizontal, horizontalInset)
+        // .padding(.horizontal, horizontalInset)
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)
         .accessibilityElement(children: .contain)
