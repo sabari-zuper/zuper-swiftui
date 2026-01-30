@@ -41,6 +41,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let description: String
     let iconContent: Icon.Content
     let value: String
+    let titleSize: TextSize
     let disclosure: ListChoiceDisclosure
     let showSeparator: Bool
     let content: Content
@@ -124,7 +125,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                 
                 if isHeaderTextEmpty == false {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
-                        Text(title, weight: .medium)
+                        Text(title, size: titleSize, weight: .medium)
                             .accessibility(.listChoiceTitle)
                         Text(description, size: .caption, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
@@ -220,6 +221,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         description: String = "",
         icon: Icon.Content = .none,
         value: String = "",
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -230,6 +232,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.title = title
         self.description = description
         self.value = value
+        self.titleSize = titleSize
         self.iconContent = icon
         self.disclosure = disclosure
         self.showSeparator = showSeparator
@@ -248,6 +251,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -260,6 +264,7 @@ public extension ListChoice {
             description: description,
             icon: icon,
             value: "",
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -274,6 +279,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -284,6 +290,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -298,6 +305,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -308,6 +316,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -322,6 +331,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -331,6 +341,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -349,6 +360,7 @@ public extension ListChoice where HeaderContent == Text {
         description: String = "",
         icon: Icon.Content = .none,
         value: String,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -360,6 +372,7 @@ public extension ListChoice where HeaderContent == Text {
             description: description,
             icon: icon,
             value: value,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -376,6 +389,7 @@ public extension ListChoice where HeaderContent == Text {
         description: String = "",
         icon: Icon.Content = .none,
         value: String,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -386,6 +400,7 @@ public extension ListChoice where HeaderContent == Text {
             description: description,
             icon: icon,
             value: value,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
