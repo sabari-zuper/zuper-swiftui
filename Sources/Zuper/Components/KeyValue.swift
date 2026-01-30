@@ -31,11 +31,11 @@ public struct KeyValue: View {
     }
     
     @ViewBuilder private var keyText: some View {
-        Text(key, size: size.keySize, color: .inkNormal, alignment: .init(alignment))
+        Text(key, size: size.valueSize, color: .inkNormal, alignment: .init(alignment))
     }
     
     @ViewBuilder private var valueText: some View {
-        ZText(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
+        Text(value, size: size.valueSize, weight: .medium, alignment: .init(alignment))
     }
     
     private var isEmpty: Bool {
