@@ -8,6 +8,7 @@ public struct KeyValue: View {
     let key: String
     let value: String
     let size: Size
+    let layout: Layout
     let alignment: HorizontalAlignment
 
     public var body: some View {
@@ -21,7 +22,7 @@ public struct KeyValue: View {
                 keyText
                     .accessibility(.keyValueKey)
             }
-            .labeledContentStyle(ZuperKeyValueStyle(size: size, alignment: alignment))
+            .labeledContentStyle(ZuperKeyValueStyle(size: size, layout: layout, alignment: alignment))
             .accessibilityElement(children: .ignore)
             .accessibility(label: .init(key))
             .accessibility(value: .init(value))
@@ -46,12 +47,23 @@ public struct KeyValue: View {
 @available(iOS 16.0, *)
 struct ZuperKeyValueStyle: LabeledContentStyle {
     let size: KeyValue.Size
+    let layout: KeyValue.Layout
     let alignment: HorizontalAlignment
-    
+
     func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: alignment, spacing: 0) {
-            configuration.label
-            configuration.content
+        switch layout {
+        case .vertical:
+            VStack(alignment: alignment, spacing: 0) {
+                configuration.label
+                configuration.content
+            }
+        case .horizontal:
+            HStack {
+                configuration.label
+                Spacer()
+                configuration.content
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 }
@@ -64,17 +76,27 @@ extension KeyValue {
         _ key: String = "",
         value: String = "",
         size: Size = .normal,
+        layout: Layout = .vertical,
         alignment: HorizontalAlignment = .leading
     ) {
         self.key = key
         self.value = value
         self.size = size
+        self.layout = layout
         self.alignment = alignment
     }
 }
 
 // MARK: - Types
 extension KeyValue {
+
+    /// Layout direction for key-value pair.
+    public enum Layout {
+        /// Key on top, value below (default).
+        case vertical
+        /// Key on leading side, value on trailing side (native LabeledContent style).
+        case horizontal
+    }
 
     public enum Size {
         case normal
@@ -125,6 +147,9 @@ struct KeyValuePreviews: PreviewProvider {
         VStack(alignment: .leading, spacing: .large) {
             KeyValue("Key", value: value)
             KeyValue("Key", value: value, size: .large)
+            Separator()
+            KeyValue("Key", value: value, layout: .horizontal)
+            KeyValue("Key", value: value, size: .large, layout: .horizontal)
             Separator()
             HStack(alignment: .firstTextBaseline, spacing: .large) {
                 KeyValue("Key with no value")
