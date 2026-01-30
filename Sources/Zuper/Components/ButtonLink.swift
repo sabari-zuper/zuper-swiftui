@@ -140,9 +140,9 @@ public extension ButtonLink {
             configuration.label
                 .foregroundColor(Color(configuration.isPressed ? style.color.active : style.color.normal))
                 .frame(
-                    minWidth: typeStyle == .icon ? .touchTarget : nil,
+                    minWidth: typeStyle == .icon ? .comfortable : nil,
                     maxWidth: size.maxWidth,
-                    minHeight: typeStyle == .icon ? .touchTarget : nil
+                    minHeight: typeStyle == .icon ? .comfortable : nil
                 )
                 .contentShape(Rectangle())
         }

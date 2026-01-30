@@ -109,7 +109,7 @@ public extension Checkbox {
                 indicator(isPressed: configuration.isPressed)
                 configuration.label
             }
-            .frame(minHeight: .touchTarget)
+            .frame(minHeight: .comfortable)
             .contentShape(Rectangle())
         }
 
