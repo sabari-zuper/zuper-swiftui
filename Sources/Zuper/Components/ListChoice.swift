@@ -40,6 +40,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let title: String
     let description: String
     let iconContent: Icon.Content
+    let iconBackgroundColor: Color?
     let value: String
     let titleSize: TextSize
     let disclosure: ListChoiceDisclosure
@@ -119,8 +120,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     @ViewBuilder var headerTexts: some View {
         if isHeaderEmpty == false {
             HStack(alignment: .center, spacing: .xSmall) {
-                Icon(content: iconContent)
-                    .foregroundColor(.inkDark)
+                iconView
                     .accessibility(.listChoiceIcon)
                 
                 if isHeaderTextEmpty == false {
@@ -134,6 +134,21 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
             }
             .padding(.leading, .medium)
             .padding(.vertical, verticalPadding)
+        }
+    }
+
+    @ViewBuilder var iconView: some View {
+        if let iconBackgroundColor {
+            Icon(content: iconContent, size: .normal)
+                .foregroundColor(.whiteNormal)
+                .padding(.xSmall)
+                .background(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(iconBackgroundColor)
+                )
+        } else {
+            Icon(content: iconContent)
+                .foregroundColor(.inkDark)
         }
     }
 
@@ -220,6 +235,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         value: String = "",
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -234,6 +250,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.value = value
         self.titleSize = titleSize
         self.iconContent = icon
+        self.iconBackgroundColor = iconBackgroundColor
         self.disclosure = disclosure
         self.showSeparator = showSeparator
         self.action = action
@@ -251,6 +268,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -263,6 +281,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             value: "",
             titleSize: titleSize,
             disclosure: disclosure,
@@ -279,6 +298,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -290,6 +310,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -305,6 +326,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -316,6 +338,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -331,6 +354,7 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -341,6 +365,7 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -359,6 +384,7 @@ public extension ListChoice where HeaderContent == Text {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -371,6 +397,7 @@ public extension ListChoice where HeaderContent == Text {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
@@ -388,6 +415,7 @@ public extension ListChoice where HeaderContent == Text {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -399,6 +427,7 @@ public extension ListChoice where HeaderContent == Text {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
@@ -458,7 +487,11 @@ struct ListChoicePreviews: PreviewProvider {
     }
 
     static var zuper: some View {
-        ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
+        VStack(spacing: 0) {
+            ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
+            ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
+            ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
+        }
     }
     
     
