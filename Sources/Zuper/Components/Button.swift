@@ -236,7 +236,7 @@ extension Button {
             configuration.label
                 .contentShape(Rectangle())
                 .background(background(for: configuration))
-                .cornerRadius(BorderRadius.default)
+                .cornerRadius(BorderRadius.iOS26)
         }
         
         @ViewBuilder func background(for configuration: Configuration) -> some View {

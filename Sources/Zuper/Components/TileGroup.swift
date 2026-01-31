@@ -29,7 +29,7 @@ public struct TileGroup<Content: View>: View {
             }
             // hide any last separator automatically by clipping it
             .padding(.bottom, -Separator.Thickness.default.value)
-            .clipShape(RoundedRectangle(cornerRadius: BorderRadius.default))
+            .clipShape(RoundedRectangle(cornerRadius: BorderRadius.iOS26))
             .compositingGroup()
             .elevation(.card, shape: .roundedRectangle())
         }
@@ -61,8 +61,10 @@ struct TileGroupPreviews: PreviewProvider {
     
     static var zuper: some View {
         TileGroup {
-            Text("Zuper Tile Group")
-                .padding()
+            Tile("Zuper Tile Group", description: "test")
+            Tile("Zuper Tile Group")
+            Tile("Zuper Tile Group")
+            Tile("Zuper Tile Group")
         }
     }
 

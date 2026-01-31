@@ -42,9 +42,9 @@ struct InputContent<Content: View>: View {
         }
         .foregroundColor(state.textColor)
         .background(backgroundColor(isPressed: isPressed).animation(.default, value: message))
-        .cornerRadius(BorderRadius.default)
+        .cornerRadius(BorderRadius.iOS26)
         .overlay(
-            RoundedRectangle(cornerRadius: BorderRadius.default)
+            RoundedRectangle(cornerRadius: BorderRadius.iOS26)
                 .strokeBorder(outlineColor(isPressed: isPressed), lineWidth: BorderWidth.emphasis)
         )
         .disabled(state == .disabled)

@@ -8,4 +8,6 @@ public enum BorderRadius {
     public static let `default`: CGFloat = 6
     /// 16 pts border radius.
     public static let large: CGFloat = 16
+    /// 20 pts border radius.
+    public static let iOS26: CGFloat = 22
 }

@@ -36,7 +36,7 @@ public struct Dialog: View {
         .padding(.medium)
         .background(Color.whiteDarker)
         .clipShape(shape)
-        .elevation(.modal, shape: .roundedRectangle(borderRadius: .small))
+        .elevation(.modal, shape: .roundedRectangle(borderRadius: .large))
         .padding(.xLarge)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.inkDark.opacity(0.45).edgesIgnoringSafeArea(.all))
@@ -73,7 +73,7 @@ public struct Dialog: View {
     }
 
     var shape: some InsettableShape {
-        RoundedRectangle(cornerRadius: .small)
+        RoundedRectangle(cornerRadius: .xMedium)
     }
 }
 

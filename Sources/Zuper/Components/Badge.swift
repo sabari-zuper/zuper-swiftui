@@ -50,7 +50,8 @@ public struct Badge: View {
                 TextStrut(textSize)
                     .padding(.vertical, Self.verticalPadding)
             }
-            .padding(.horizontal, .xSmall)
+            .padding(.horizontal, .medium)
+            .padding(.vertical, .xxSmall)
             .background(
                 background
                     .clipShape(shape)
@@ -174,9 +175,9 @@ struct BadgePreviews: PreviewProvider {
 
     static var standalone: some View {
         VStack(spacing: 8) {
-            Badge("Zuper", icon: .sfSymbol("mail", color: .inkDark), style: .light, textSize: .large, iconSize: .large)
+            Badge("Open", style: .light, textSize: .large, iconSize: .large)
             Badge("label", icon: gridIcon)
-            Badge("Zuper", style: .custom(labelColor: .blueDark, outlineColor: .blueDark, backgroundColor: .blueLight), textSize: .normal, iconSize: .large, isStatus: true)
+            Badge("Zuper", style: .custom(labelColor: .blueDark, outlineColor: .blueDark, backgroundColor: .blueLight), textSize: .caption, iconSize: .large, isStatus: true)
         }
     }
 

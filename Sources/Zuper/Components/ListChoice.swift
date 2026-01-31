@@ -127,7 +127,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
                         Text(title, size: titleSize, weight: .medium)
                             .accessibility(.listChoiceTitle)
-                        Text(description, size: .caption, color: .inkNormal)
+                        Text(description, size: .footnote, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
                     }
                 }
@@ -139,12 +139,12 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
 
     @ViewBuilder var iconView: some View {
         if let iconBackgroundColor {
-            Icon(content: iconContent, size: .normal)
-                .foregroundColor(.whiteNormal)
+            Icon(content: iconContent, size: .default)
+                .foregroundColor(iconBackgroundColor)
                 .padding(.xSmall)
                 .background(
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(iconBackgroundColor)
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(iconBackgroundColor.opacity(0.2))
                 )
         } else {
             Icon(content: iconContent)
@@ -488,6 +488,7 @@ struct ListChoicePreviews: PreviewProvider {
 
     static var zuper: some View {
         VStack(spacing: 0) {
+            ListChoice("Zuper Switch", disclosure: .disclosure(), showSeparator: true)
             ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
             ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
             ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
@@ -502,7 +503,18 @@ struct ListChoicePreviews: PreviewProvider {
             } headerContent: {
                 headerContent
             }
-
+            ListChoice(
+                "Tasks",
+                description: "3 Pending Tasks",
+                titleSize: .body,
+                disclosure: .disclosure(), headerContent: {
+                    // Leading icon with rounded background
+                    Image(systemName: "list.bullet")
+                        .foregroundColor(.red)
+                        .padding(10)
+                        .background(Color.red.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                })
             // Empty
             ListChoice(disclosure: .none)
         }
