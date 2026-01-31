@@ -192,11 +192,15 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         if isHeaderEmpty {
             return 0
         }
-        
+
         if iconContent.isEmpty {
             return .medium
         }
-        
+
+        if iconBackgroundColor != nil {
+            return .medium + 30 + .xSmall
+        }
+
         return .xxLarge
     }
 
