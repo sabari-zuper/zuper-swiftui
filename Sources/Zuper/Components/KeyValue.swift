@@ -53,7 +53,7 @@ struct ZuperKeyValueStyle: LabeledContentStyle {
     func makeBody(configuration: Configuration) -> some View {
         switch layout {
         case .vertical:
-            VStack(alignment: alignment, spacing: 0) {
+            VStack(alignment: alignment, spacing: .xxSmall) {
                 configuration.label
                 configuration.content
             }
@@ -111,8 +111,8 @@ extension KeyValue {
 
         var valueSize: TextSize {
             switch self {
-                case .normal:   return .callout  // 16pt - Apple HIG secondary content
-                case .large:    return .body     // 17pt - Apple HIG primary content
+                case .normal:   return .subheadline  // 16pt - Apple HIG secondary content
+                case .large:    return .callout     // 17pt - Apple HIG primary content
             }
         }
     }
