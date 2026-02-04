@@ -159,7 +159,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         if let iconBackgroundColor {
             Icon(content: iconContent, size: .default)
                 .foregroundColor(iconBackgroundColor)
-                .frame(minWidth: iconBackgroundSize.value, minHeight: iconBackgroundSize.value)
+                .frame(width: iconBackgroundSize.value, height: iconBackgroundSize.value)
                 .background(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(iconBackgroundColor.opacity(0.2))
