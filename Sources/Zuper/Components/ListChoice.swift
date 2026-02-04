@@ -157,7 +157,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
 
     @ViewBuilder var iconView: some View {
         if let iconBackgroundColor {
-            Icon(content: iconContent, size: .default)
+            Icon(content: iconContent, size: .custom(iconBackgroundSize.value/1.5))
                 .foregroundColor(iconBackgroundColor)
                 .frame(width: iconBackgroundSize.value, height: iconBackgroundSize.value)
                 .background(
@@ -528,6 +528,7 @@ struct ListChoicePreviews: PreviewProvider {
             ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
             ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
             ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
+            ListChoice("Settings", description: "App preferences", icon: .sfSymbol("building.fill", color: nil), iconBackgroundColor: .greenNormal, iconBackgroundSize: .custom(50))
         }
     }
     
