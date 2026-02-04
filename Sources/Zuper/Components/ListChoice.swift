@@ -28,6 +28,23 @@ public enum ListChoiceDisclosure: Equatable {
     /// An icon content.
     case icon(Icon.Content)
 }
+/// Size options for ListChoice icon background.
+public enum ListChoiceIconBackgroundSize {
+    /// Default size (30x30pt)
+    case `default`
+    /// Custom size
+    case custom(CGFloat)
+
+    var value: CGFloat {
+        switch self {
+        case .default:
+            return 30
+        case .custom(let size):
+            return size
+        }
+    }
+}
+
 
 /// Shows one of a selectable list of items with similar structures.
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
@@ -41,6 +58,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let description: String
     let iconContent: Icon.Content
     let iconBackgroundColor: Color?
+    let iconBackgroundSize: ListChoiceIconBackgroundSize
     let value: String
     let titleSize: TextSize
     let disclosure: ListChoiceDisclosure
@@ -141,7 +159,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         if let iconBackgroundColor {
             Icon(content: iconContent, size: .default)
                 .foregroundColor(iconBackgroundColor)
-                .frame(minWidth: 30, minHeight: 30)
+                .frame(minWidth: iconBackgroundSize.value, minHeight: iconBackgroundSize.value)
                 .background(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .fill(iconBackgroundColor.opacity(0.2))
@@ -198,7 +216,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         }
 
         if iconBackgroundColor != nil {
-            return .medium + 30 + .xSmall
+            return .medium + iconBackgroundSize.value + .xSmall
         }
 
         return .xxLarge
@@ -240,6 +258,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String = "",
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -255,6 +274,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.titleSize = titleSize
         self.iconContent = icon
         self.iconBackgroundColor = iconBackgroundColor
+        self.iconBackgroundSize = iconBackgroundSize
         self.disclosure = disclosure
         self.showSeparator = showSeparator
         self.action = action
@@ -273,6 +293,7 @@ public extension ListChoice {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -286,6 +307,7 @@ public extension ListChoice {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: "",
             titleSize: titleSize,
             disclosure: disclosure,
@@ -303,6 +325,7 @@ public extension ListChoice {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -315,6 +338,7 @@ public extension ListChoice {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -331,6 +355,7 @@ public extension ListChoice {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -343,6 +368,7 @@ public extension ListChoice {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -359,6 +385,7 @@ public extension ListChoice {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -370,6 +397,7 @@ public extension ListChoice {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -389,6 +417,7 @@ public extension ListChoice where HeaderContent == Text {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -402,6 +431,7 @@ public extension ListChoice where HeaderContent == Text {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
@@ -420,6 +450,7 @@ public extension ListChoice where HeaderContent == Text {
         description: String = "",
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -432,6 +463,7 @@ public extension ListChoice where HeaderContent == Text {
             description: description,
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
