@@ -292,6 +292,7 @@ struct CardPreviews: PreviewProvider {
         cardWithTiles
         cardMultilineCritical
         clear
+        glassEffect
     }
 
     static var storybook: some View {
@@ -437,6 +438,15 @@ struct CardPreviews: PreviewProvider {
             }
             .padding(.top, .xSmall)
         }
+    }
+
+    static var glassEffect: some View {
+        Card(showBorder: false, backgroundColor: .clear) {
+            contentPlaceholder
+            contentPlaceholder
+        }
+        .cardGlassEffect()
+        .previewDisplayName("Glass Effect (iOS 26+)")
     }
 
     static var snapshot: some View {
