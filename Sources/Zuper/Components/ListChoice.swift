@@ -202,12 +202,17 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     @ViewBuilder var separator: some View {
         if showSeparator {
             Separator()
-                .padding(.leading, separatorPadding)
+                .padding(.leading, separatorLeadingPadding)
+                .padding(.trailing, separatorTrailingPadding)
         }
     }
 
-    var separatorPadding: CGFloat {
+    var separatorLeadingPadding: CGFloat {
         if isHeaderEmpty {
+            // When there's custom content but no header, add medium padding
+            if !isCustomContentEmpty || !isCustomHeaderEmpty {
+                return .medium
+            }
             return 0
         }
 
@@ -220,6 +225,14 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         }
 
         return .xxLarge
+    }
+    
+    var separatorTrailingPadding: CGFloat {
+        // Add trailing padding when there's a disclosure view
+        if disclosure != .none {
+            return .medium
+        }
+        return 0
     }
 
     var isEmpty: Bool {
@@ -524,6 +537,9 @@ struct ListChoicePreviews: PreviewProvider {
 
     static var zuper: some View {
         VStack(spacing: 0) {
+            ListChoice(headerContent: {
+                Text("Zuper Soft solutions")
+            })
             ListChoice("Zuper Switch", disclosure: .disclosure(), showSeparator: true)
             ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
             ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
