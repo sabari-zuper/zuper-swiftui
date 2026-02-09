@@ -50,8 +50,7 @@ public struct Badge: View {
                 TextStrut(textSize)
                     .padding(.vertical, Self.verticalPadding)
             }
-            .padding(.horizontal, .medium)
-            .padding(.vertical, .xxSmall)
+            .padding(.horizontal, .xSmall)
             .background(
                 background
                     .clipShape(shape)
