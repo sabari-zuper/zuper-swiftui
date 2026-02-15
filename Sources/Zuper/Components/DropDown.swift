@@ -3,8 +3,6 @@ import SwiftUI
 /// Also known as dropdown. Offers a simple form control to select from many options.
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
 public struct DropDown: View {
-
-    @Binding private var messageHeight: CGFloat
     
     let label: String
     let labelAccentColor: UIColor?
@@ -22,7 +20,6 @@ public struct DropDown: View {
             label,
             labelAccentColor: labelAccentColor,
             message: message,
-            messageHeight: $messageHeight
         ) {
             SwiftUI.Button(
                 action: {
@@ -78,7 +75,6 @@ public extension DropDown {
         sufixContent: String? = nil,
         state: InputState = .default,
         message: Message? = nil,
-        messageHeight: Binding<CGFloat> = .constant(0),
         action: @escaping () -> Void = {}
     ) {
         self.label = label
@@ -90,7 +86,6 @@ public extension DropDown {
         self.sufixContent = sufixContent
         self.state = state
         self.message = message
-        self._messageHeight = messageHeight
         self.action = action
     }
 }
