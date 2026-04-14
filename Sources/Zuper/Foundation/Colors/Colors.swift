@@ -67,7 +67,7 @@ public extension Color {
     /// Zuper Ink Dark color.
     static var inkDark = Color("Ink Dark", bundle: .current)
     /// Zuper Ink Dark Active color.
-//    static var inkDarkActive = Color("Ink Dark Active", bundle: .current) // Not used
+    static var inkDarkActive = Color("Ink Dark Active", bundle: .current)
     /// Zuper Ink Dark Hover color.
 //    static var inkDarkHover = Color("Ink Dark Hover", bundle: .current) // Not Used
     /// Zuper Ink Light color.
