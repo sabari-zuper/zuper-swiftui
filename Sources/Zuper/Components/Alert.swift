@@ -69,7 +69,7 @@ public struct Alert<Content: View>: View {
         .padding([.vertical, .trailing], .medium)
         .padding(.leading, iconContent.isEmpty ? .medium : .small)
         .background(background)
-        .cornerRadius(BorderRadius.default)
+        .cornerRadius(BorderRadius.cardCornerRadius)
         .accessibilityElement(children: .contain)
     }
 
@@ -98,13 +98,8 @@ public struct Alert<Content: View>: View {
     @ViewBuilder var background: some View {
         backgroundColor
             .overlay(
-                RoundedRectangle(cornerRadius: BorderRadius.default)
+                RoundedRectangle(cornerRadius: BorderRadius.cardCornerRadius)
                     .strokeBorder(strokeColor, lineWidth: 1)
-            )
-            .overlay(
-                status.color
-                    .frame(width: 3),
-                alignment: .leading
             )
     }
     
