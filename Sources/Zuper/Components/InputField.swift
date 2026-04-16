@@ -73,7 +73,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                         .disableAutocorrection(isAutocompleteEnabled == false)
                         .textContentType(textContent)
                         .keyboardType(keyboard)
-                        .zuperFont(size: TextSize.normal.value, style: .body)
+                        .zuperFont(size: TextSize.body.value, style: .body)
                         .accentColor(.indicoNormal)
                         .background(textFieldPlaceholder, alignment: .leading)
                         .disabled(state == .disabled)
@@ -173,7 +173,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
             style: .init(
                 textContentType: textContent,
                 keyboardType: keyboard,
-                font: .zuper(size: TextSize.normal.value, weight: .regular),
+                font: .zuper(size: TextSize.body.value, weight: .regular, textStyle: .body),
                 state: state
             ),
             onEditingChanged: onEditingChanged,

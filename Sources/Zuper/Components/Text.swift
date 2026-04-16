@@ -72,7 +72,7 @@ public extension Text {
     ///   - strikethrough: Strikethrough style
     init(
         _ content: String,
-        size: TextSize = .normal,
+        size: TextSize = .body,  // 17pt - Apple HIG primary body text
         color: TextColor? = .inkDark,
         weight: Font.Weight = .regular,
         lineSpacing: CGFloat? = nil,
@@ -92,60 +92,171 @@ public extension Text {
 }
 
 // MARK: - Types
+
+/// Apple HIG-aligned text size enum for consistent typography across iOS.
+/// See: https://developer.apple.com/design/human-interface-guidelines/typography
 public enum TextSize {
-    /// 12 pts.
-    case small
-    /// 14 pts.
-    case normal
-    /// 16 pts.
-    case large
-    /// 18 pts.
-    case xLarge
+    // MARK: - Apple HIG Text Styles
+
+    /// 34pt - Navigation bars, main screen titles
+    case largeTitle
+    /// 28pt - Section headers
+    case title
+    /// 22pt - Subheadings
+    case title2
+    /// 20pt - Tertiary headers
+    case title3
+    /// 17pt - Emphasized body text (semibold by default in HIG)
+    case headline
+    /// 17pt - Primary content
+    case body
+    /// 16pt - Secondary content
+    case callout
+    /// 15pt - Smaller body text
+    case subheadline
+    /// 13pt - Auxiliary information
+    case footnote
+    /// 12pt - Supplementary content
+    case caption
+    /// 11pt - Smallest readable text
+    case caption2
+    /// Custom size
     case custom(CGFloat)
-    
-    public static let body3 = TextSize.small
-    public static let body2 = TextSize.normal
-    public static let body1 = TextSize.large
-    
+
+    // MARK: - Deprecated Legacy Aliases (backward compatibility)
+
+    @available(*, deprecated, renamed: "caption", message: "Use .caption (12pt) for Apple HIG compliance")
+    public static let small = TextSize.caption
+
+    @available(*, deprecated, renamed: "subheadline", message: "Use .subheadline (15pt) for Apple HIG compliance")
+    public static let normal = TextSize.subheadline
+
+    @available(*, deprecated, renamed: "callout", message: "Use .callout (16pt) for Apple HIG compliance")
+    public static let large = TextSize.callout
+
+    @available(*, deprecated, renamed: "title3", message: "Use .title3 (20pt) for Apple HIG compliance")
+    public static let xLarge = TextSize.title3
+
+    @available(*, deprecated, renamed: "callout", message: "Use .callout (16pt) for Apple HIG compliance")
+    public static let body1 = TextSize.callout
+
+    @available(*, deprecated, renamed: "subheadline", message: "Use .subheadline (15pt) for Apple HIG compliance")
+    public static let body2 = TextSize.subheadline
+
+    @available(*, deprecated, renamed: "caption", message: "Use .caption (12pt) for Apple HIG compliance")
+    public static let body3 = TextSize.caption
+
+    // MARK: - Computed Properties
+
+    /// Point size value for the text style
     public var value: CGFloat {
         switch self {
-        case .small:                return 12
-        case .normal:               return 14
-        case .large:                return 16
-        case .xLarge:               return 18
+        case .largeTitle:           return 34
+        case .title:                return 28
+        case .title2:               return 22
+        case .title3:               return 20
+        case .headline:             return 17
+        case .body:                 return 17
+        case .callout:              return 16
+        case .subheadline:          return 15
+        case .footnote:             return 13
+        case .caption:              return 12
+        case .caption2:             return 11
         case .custom(let size):     return size
         }
     }
-    
+
+    /// Apple text style for Dynamic Type scaling
     public var textStyle: Font.TextStyle {
         switch self {
-        case .small:                return .footnote
-        case .normal:               return .body
-        case .large:                return .callout
-        case .xLarge:
+        case .largeTitle:           return .largeTitle
+        case .title:                return .title
+        case .title2:
+            if #available(iOS 14.0, *) {
+                return .title2
+            } else {
+                return .title
+            }
+        case .title3:
             if #available(iOS 14.0, *) {
                 return .title3
             } else {
-                return .callout
+                return .headline
+            }
+        case .headline:             return .headline
+        case .body:                 return .body
+        case .callout:              return .callout
+        case .subheadline:          return .subheadline
+        case .footnote:             return .footnote
+        case .caption:              return .caption
+        case .caption2:
+            if #available(iOS 14.0, *) {
+                return .caption2
+            } else {
+                return .caption
             }
         case .custom:               return .body
         }
     }
-    
-    public var lineHeight: CGFloat {
+
+    /// UIKit text style for Dynamic Type scaling (used in attributed strings)
+    public var uiTextStyle: UIFont.TextStyle {
         switch self {
-        case .small:                return 16
-        case .normal:               return 20
-        case .large:                return 24
-        case .xLarge:               return 24
-        case .custom(let size):     return size * 1.31
+        case .largeTitle:           return .largeTitle
+        case .title:                return .title1
+        case .title2:               return .title2
+        case .title3:               return .title3
+        case .headline:             return .headline
+        case .body:                 return .body
+        case .callout:              return .callout
+        case .subheadline:          return .subheadline
+        case .footnote:             return .footnote
+        case .caption:              return .caption1
+        case .caption2:             return .caption2
+        case .custom:               return .body
         }
     }
-    
+
+    /// Line height based on Apple HIG recommendations (approximately 1.2x font size)
+    public var lineHeight: CGFloat {
+        switch self {
+        case .largeTitle:           return 41
+        case .title:                return 34
+        case .title2:               return 28
+        case .title3:               return 25
+        case .headline:             return 22
+        case .body:                 return 22
+        case .callout:              return 21
+        case .subheadline:          return 20
+        case .footnote:             return 18
+        case .caption:              return 16
+        case .caption2:             return 13
+        case .custom(let size):     return size * 1.2
+        }
+    }
+
+    /// Icon size to align with text
     public var iconSize: CGFloat {
         switch self {
-        case .large:                return 22
-        default:                    return lineHeight
+        case .largeTitle:           return 40
+        case .title:                return 34
+        case .title2:               return 28
+        case .title3:               return 25
+        case .headline, .body:      return 22
+        case .callout:              return 21
+        case .subheadline:          return 20
+        case .footnote:             return 18
+        case .caption:              return 16
+        case .caption2:             return 13
+        case .custom(let size):     return size * 1.2
+        }
+    }
+
+    /// Default weight per Apple HIG (headline is semibold, others are regular)
+    public var defaultWeight: Font.Weight {
+        switch self {
+        case .headline:             return .semibold
+        default:                    return .regular
         }
     }
 }

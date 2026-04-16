@@ -71,6 +71,7 @@ final class TagAttributedStringBuilder {
         _ string: String,
         fontSize: CGFloat,
         fontWeight: Font.Weight = .regular,
+        textStyle: UIFont.TextStyle = .body,
         lineSpacing: CGFloat?,
         color: UIColor? = nil,
         linkColor: UIColor? = nil,
@@ -84,7 +85,7 @@ final class TagAttributedStringBuilder {
             textAttributes[.paragraphStyle] = titleParagraphStyle
         }
 
-        textAttributes[.font] = UIFont.zuper(size: fontSize, weight: fontWeight.uiKit)
+        textAttributes[.font] = UIFont.zuper(size: fontSize, weight: fontWeight.uiKit, textStyle: textStyle)
         textAttributes[.foregroundColor] = color
 
         var linksAttributes: [NSAttributedString.Key: Any] = [:]
@@ -105,6 +106,7 @@ final class TagAttributedStringBuilder {
         _ string: String,
         fontSize: CGFloat? = nil,
         fontWeight: Font.Weight = .regular,
+        textStyle: UIFont.TextStyle = .body,
         lineSpacing: CGFloat?,
         linkColor: UIColor? = .productDark,
         alignment: TextAlignment
@@ -117,7 +119,7 @@ final class TagAttributedStringBuilder {
         }
 
         var textAttributes: [NSAttributedString.Key: Any] = [:]
-        textAttributes[.font] = fontSize.map { UIFont.zuper(size: $0, weight: fontWeight.uiKit) }
+        textAttributes[.font] = fontSize.map { UIFont.zuper(size: $0, weight: fontWeight.uiKit, textStyle: textStyle) }
         textAttributes[.foregroundColor] = UIColor.clear
         textAttributes[.paragraphStyle] = titleParagraphStyle
 

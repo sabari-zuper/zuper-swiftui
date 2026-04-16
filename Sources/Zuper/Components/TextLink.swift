@@ -125,7 +125,7 @@ struct TextLinkPreviews: PreviewProvider {
         TextLink(
             TagAttributedStringBuilder.all.attributedStringForLinks(
                 link("Text link"),
-                fontSize: TextSize.normal.value,
+                fontSize: TextSize.subheadline.value,
                 fontWeight: .regular,
                 lineSpacing: nil,
                 alignment: .leading

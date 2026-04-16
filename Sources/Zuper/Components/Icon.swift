@@ -146,10 +146,10 @@ public extension Icon {
         
         public var textStyle: Font.TextStyle {
             switch self {
-            case .small:                            return TextSize.small.textStyle
-            case .normal:                           return TextSize.normal.textStyle
-            case .large:                            return TextSize.large.textStyle
-            case .xLarge:                           return TextSize.xLarge.textStyle
+            case .small:                            return TextSize.caption.textStyle
+            case .normal:                           return TextSize.subheadline.textStyle
+            case .large:                            return TextSize.callout.textStyle
+            case .xLarge:                           return TextSize.title3.textStyle
             case .fontSize:                         return .body
             case .text(let size):                   return size.textStyle
             case .heading(let style):               return style.textStyle
@@ -165,10 +165,10 @@ public extension Icon {
         /// Default text line height for icon size.
         public var textLineHeight: CGFloat {
             switch self {
-            case .small:                            return TextSize.small.iconSize
-            case .normal:                           return TextSize.normal.iconSize
-            case .large:                            return TextSize.large.iconSize
-            case .xLarge:                           return TextSize.xLarge.iconSize
+            case .small:                            return TextSize.caption.iconSize
+            case .normal:                           return TextSize.subheadline.iconSize
+            case .large:                            return TextSize.callout.iconSize
+            case .xLarge:                           return TextSize.title3.iconSize
             case .fontSize(let size):               return round(size * 1.31)
             case .text(let size):                   return size.iconSize
             case .heading(let style):               return style.iconSize
@@ -273,30 +273,30 @@ struct IconPreviews: PreviewProvider {
         VStack(alignment: .leading, spacing: .small) {
             HStack(spacing: .xSmall) {
                 Text("16", color: .custom(.redNormal))
-                
+
                 HStack(alignment: .firstTextBaseline, spacing: .xxSmall) {
                     Icon(content: .sfSymbol("person.fill", color: .inkDark), size: .small)
-                    Text("Small text and icon size", size: .small)
+                    Text("Caption text and icon size", size: .caption)
                 }
                 .overlay(Separator(thickness: .hairline), alignment: .top)
                 .overlay(Separator(thickness: .hairline), alignment: .bottom)
             }
             HStack(spacing: .xSmall) {
                 Text("20", color: .custom(.orangeNormal))
-                
+
                 HStack(alignment: .firstTextBaseline, spacing: .xxSmall) {
                     Icon(content: .sfSymbol("person.fill", color: .inkDark), size: .normal)
-                    Text("Normal text and icon size", size: .normal)
+                    Text("Subheadline text and icon size", size: .subheadline)
                 }
                 .overlay(Separator(thickness: .hairline), alignment: .top)
                 .overlay(Separator(thickness: .hairline), alignment: .bottom)
             }
             HStack(spacing: .xSmall) {
                 Text("24", color: .custom(.greenNormal))
-                
+
                 HStack(alignment: .firstTextBaseline, spacing: .xxSmall) {
                     Icon(content: .sfSymbol("person.fill", color: .inkDark), size: .large)
-                    Text("Large text and icon size", size: .large)
+                    Text("Callout text and icon size", size: .callout)
                 }
                 .overlay(Separator(thickness: .hairline), alignment: .top)
                 .overlay(Separator(thickness: .hairline), alignment: .bottom)
@@ -394,43 +394,43 @@ struct IconPreviews: PreviewProvider {
     
     static var storybookMix: some View {
         VStack(alignment: .leading, spacing: .small) {
-            Text("SF Symbol vs Zuper sizes (custom-font-label)", size: .small)
+            Text("SF Symbol vs Zuper sizes (custom-font-label)", size: .caption)
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.xLarge.value), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .label(.text(.xLarge)), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.title3.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.title3.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .label(.text(.title3)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .fontSize(TextSize.xLarge.value), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .label(.text(.xLarge)), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.title3.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .fontSize(TextSize.title3.value), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .label(.text(.title3)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Text("XLarge", size: .xLarge, color: nil)
+                    Text("Title3", size: .title3, color: nil)
                 }
                 .foregroundColor(.blueNormal)
                 .border(Color.cloudLightActive, width: .hairline)
             }
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))
-            
+
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
-                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.small.iconSize), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.small.value), color: nil)
-                    Icon(sfSymbol: sfSymbol, size: .label(.text(.small)), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .custom(TextSize.caption.iconSize), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .fontSize(TextSize.caption.value), color: nil)
+                    Icon(sfSymbol: sfSymbol, size: .label(.text(.caption)), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
                     Icon(content: .sfSymbol("", color: .clear))
-                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
-                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.xLarge.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.title3.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.title3.iconSize), color: nil)
+                    Icon(sfSymbol:sfSymbol, size: .custom(TextSize.title3.iconSize), color: nil)
                     Color.clear.frame(width: .xSmall, height: 1)
-                    Text("Small", size: .small, color: nil)
+                    Text("Caption", size: .caption, color: nil)
                 }
                 .foregroundColor(.blueNormal)
                 .border(Color.cloudLightActive, width: .hairline)
             }
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))
             
-            Text("Flag - Image - SF Symbol sizes", size: .small)
+            Text("Flag - Image - SF Symbol sizes", size: .caption)
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
                     Icon(image: Image(systemName: "circle.fill"))
@@ -441,37 +441,37 @@ struct IconPreviews: PreviewProvider {
                 .border(Color.cloudLightActive, width: .hairline)
             }
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))
-            
+
             HStack(alignment: .firstTextBaseline, spacing: 0) {
                 Group {
                     Icon(image: Image(systemName: "circle.fill"))
                     Icon(sfSymbol: sfSymbol, size: .small, color: nil)
-                    Text("Text", size: .small, color: nil)
+                    Text("Text", size: .caption, color: nil)
                 }
                 .foregroundColor(.blueNormal)
                 .border(Color.cloudLightActive, width: .hairline)
             }
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))
-            
-            Text("Baseline alignment", size: .small)
+
+            Text("Baseline alignment", size: .caption)
             HStack(alignment: .firstTextBaseline) {
                 Group {
                     Text("O", size: .custom(30))
                     Icon(content:.sfSymbol(sfSymbol, color: .inkDark), size: .fontSize(30))
                     Icon(content:.sfSymbol(sfSymbol, color: .inkDark), size: .fontSize(8))
                     Text("O", size: .custom(8))
-                    Text("Text", size: .normal)
+                    Text("Text", size: .subheadline)
                 }
                 .border(Color.cloudLightActive, width: .hairline)
             }
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))
-            
-            Text("Icon color override", size: .small)
+
+            Text("Icon color override", size: .caption)
             HStack(alignment: .firstTextBaseline) {
                 Icon(content: .sfSymbol("grid.circle.fill", color: .inkDark), size: .xLarge)
                 Icon(content: .sfSymbol("grid.circle.fill", color: .inkDark))
-                Icon(content: .sfSymbol("grid.circle.fill", color: .inkDark), size: .text(.small))
-                Text("Text", size: .small, color: nil)
+                Icon(content: .sfSymbol("grid.circle.fill", color: .inkDark), size: .text(.caption))
+                Text("Text", size: .caption, color: nil)
             }
             .foregroundColor(.blueDark)
             .background(Separator(thickness: .hairline), alignment: .init(horizontal: .center, vertical: .firstTextBaseline))

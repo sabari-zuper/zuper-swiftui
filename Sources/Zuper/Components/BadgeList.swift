@@ -132,8 +132,8 @@ public extension BadgeList {
 
         var textSize: TextSize {
             switch self {
-                case .small:              	return .small
-                case .normal:               return .normal
+                case .small:                return .caption
+                case .normal:               return .subheadline
                 case .custom(let size):     return size
             }
         }

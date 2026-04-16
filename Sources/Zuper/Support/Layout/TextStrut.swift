@@ -26,33 +26,33 @@ struct TextStrutPreviews: PreviewProvider {
     static var previews: some View {
         PreviewWrapper {
             HStack(spacing: .xxxSmall) {
-                TextStrut(.large)
+                TextStrut(.callout)
                     .padding(.horizontal, 1)
                     .overlay(Color.redNormal)
                     .padding(.vertical, .xSmall)
                     .background(Color.redLight)
-                Text("Text", size: .large)
+                Text("Text", size: .callout)
             }
             .padding(.xxSmall)
 
             HStack(spacing: .xxxSmall) {
-                TextStrut(.large)
+                TextStrut(.callout)
                     .padding(.horizontal, 1)
                     .overlay(Color.redNormal)
                     .padding(.vertical, .xSmall)
                     .background(Color.redLight)
-              //  Icon(.grid, size: .text(.large))
+              //  Icon(.grid, size: .text(.callout))
             }
             .padding(.xxSmall)
 
             HStack(spacing: .xxxSmall) {
-               // Icon(.grid, size: .text(.large))
-                TextStrut(.large)
+               // Icon(.grid, size: .text(.callout))
+                TextStrut(.callout)
                     .padding(.horizontal, 1)
                     .overlay(Color.redNormal)
                     .padding(.vertical, .xSmall)
                     .background(Color.redLight)
-                Text("Text", size: .large)
+                Text("Text", size: .callout)
             }
             .padding(.xxSmall)
         }
