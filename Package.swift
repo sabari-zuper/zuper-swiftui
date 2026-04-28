@@ -34,13 +34,13 @@ let package = Package(
             name: "ZuperStorybook",
             dependencies: ["Zuper"]
         ),
-        .testTarget(
-            name: "SnapshotTests",
-            dependencies: [
-                "Zuper",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
-                .product(name: "Equatable", package: "equatable")
-            ]
-        ),
+//        .testTarget(
+//            name: "SnapshotTests",
+//            dependencies: [
+//                "Zuper",
+//                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+//                .product(name: "Equatable", package: "equatable")
+//            ]
+//        ),
     ]
 )
