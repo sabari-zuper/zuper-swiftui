@@ -41,10 +41,13 @@ struct InputContent<Content: View>: View {
             sufixContentLabel
         }
         .foregroundColor(state.textColor)
-        .background(backgroundColor(isPressed: isPressed).animation(.default, value: message))
-        .cornerRadius(BorderRadius.default)
+        .background(
+            RoundedRectangle(cornerRadius: BorderRadius.input)
+                .fill(backgroundColor(isPressed: isPressed))
+                .animation(.default, value: message)
+        )
         .overlay(
-            RoundedRectangle(cornerRadius: BorderRadius.default)
+            RoundedRectangle(cornerRadius: BorderRadius.input)
                 .strokeBorder(outlineColor(isPressed: isPressed), lineWidth: BorderWidth.emphasis)
         )
         .disabled(state == .disabled)
@@ -76,7 +79,7 @@ struct InputContent<Content: View>: View {
         switch (state, isPressed) {
             case (.disabled, _):        return .cloudLight
             case (.default, true):      return .cloudNormalHover
-            case (.default, false):     return .cloudNormal
+            case (.default, false):     return .clear
             case (.modified, true):     return .indicoLight
             case (.modified, false):    return .indicoLight.opacity(0.7)
         }
@@ -105,7 +108,7 @@ struct InputContent<Content: View>: View {
             case (.help, _, _):         return .indicoNormal
             case (_, .modified, _):     return .indicoDark
             case (_, .default, true):   return .indicoNormal
-            default:                    return backgroundColor(isPressed: isPressed)
+            default:                    return .cloudDark
         }
     }
 }

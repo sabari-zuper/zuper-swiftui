@@ -32,7 +32,6 @@ public struct Toast: View {
             ToastWrapper(
                 toast.description,
                 icon: toast.icon,
-                progress: toast.progress,
                 pauseAction: toastQueue.pause,
                 resumeAction: toastQueue.resume,
                 dismissAction: toastQueue.dismiss
@@ -56,8 +55,7 @@ public struct ToastContent: View {
 
     let description: String
     let iconContent: Icon.Content
-    let progress: CGFloat
-    
+
     public var body: some View {
         HStack {
             Label(
@@ -68,51 +66,43 @@ public struct ToastContent: View {
             )
             .foregroundColor(foregroundColor)
             .padding(.small)
-            
+
             Spacer()
         }
         .contentShape(Rectangle())
         .background(background)
+        .cardGlassEffect(cornerRadius: BorderRadius.iOS26, tint: Color.black.opacity(0.08))
     }
-    
+
     @ViewBuilder var background: some View {
-        backgroundColor
-            .overlay(progressIndicator, alignment: .leading)
-            .clipShape(shape)
-            .elevation(.level3, shape: .roundedRectangle())
-    }
-    
-    @ViewBuilder var progressIndicator: some View {
-        GeometryReader { geometry in
-            progressColor
-                .opacity(max(0, progress * 2 - 0.5) * 0.3)
+        if #available(iOS 26.0, *) {
+            Color.clear
+        } else {
+            backgroundColor
                 .clipShape(shape)
-                .frame(width: geometry.size.width * progress, alignment: .bottomLeading)
-                .animation(ToastQueue.animationIn, value: progress)
+                .elevation(.sheet, shape: .roundedRectangle(borderRadius: BorderRadius.iOS26))
         }
     }
 
     var foregroundColor: Color {
-        colorScheme == .light ? .whiteNormal : .inkDark
+        if #available(iOS 26.0, *) {
+            return .primary
+        }
+        return colorScheme == .light ? .whiteNormal : .inkDark
     }
 
     var backgroundColor: Color {
         colorScheme == .light ? .inkDark : .whiteDarker
     }
 
-    var progressColor: Color {
-        colorScheme == .light ? .inkNormal : .cloudNormal
-    }
-    
     var shape: some Shape {
-        RoundedRectangle(cornerRadius: BorderRadius.default, style: .continuous)
+        RoundedRectangle(cornerRadius: BorderRadius.iOS26, style: .continuous)
     }
-    
+
     /// Creates Zuper `Toast` component variant with no gesture handling or queue management.
-    public init(_ description: String, icon: Icon.Content = .none, progress: CGFloat = 0) {
+    public init(_ description: String, icon: Icon.Content = .none) {
         self.description = description
         self.iconContent = icon
-        self.progress = progress
     }
 }
 
@@ -124,16 +114,15 @@ public struct ToastWrapper: View {
     
     let description: String
     let iconContent: Icon.Content
-    let progress: CGFloat
     let pauseAction: () -> Void
     let resumeAction: () -> Void
     let dismissAction: () -> Void
-    
+
     @State private var offsetY: CGFloat = 0
     @State private var gaveFeedback: Bool = false
-    
+
     public var body: some View {
-        ToastContent(description, icon: iconContent, progress: progress)
+        ToastContent(description, icon: iconContent)
             .opacity(opacity)
             .offset(y: cappedOffsetY)
             .gesture(
@@ -176,14 +165,12 @@ public struct ToastWrapper: View {
     public init(
         _ description: String,
         icon: Icon.Content = .none,
-        progress: CGFloat = 0,
         pauseAction: @escaping () -> Void = {},
         resumeAction: @escaping() -> Void = {},
         dismissAction: @escaping () -> Void = {}
     ) {
         self.description = description
         self.iconContent = icon
-        self.progress = progress
         self.pauseAction = pauseAction
         self.resumeAction = resumeAction
         self.dismissAction = dismissAction
@@ -213,6 +200,7 @@ struct ToastPreviews: PreviewProvider {
             standalone
             standaloneWrapper
             storybook
+            glassEffect
         }
         .padding(.xLarge)
         .previewLayout(.sizeThatFits)
@@ -230,23 +218,26 @@ struct ToastPreviews: PreviewProvider {
         }
     }
 
+    static var glassEffect: some View {
+        ToastContent(description, icon: .checkCircle)
+            .previewDisplayName("Glass Effect (iOS 26+)")
+    }
+
     static var standalone: some View {
         ToastContent(description, icon: gridIcon)
 
     }
 
     static var standaloneWrapper: some View {
-        ToastWrapper(description, icon: .checkCircle, progress: 0.6)
+        ToastWrapper(description, icon: .checkCircle)
             .previewDisplayName("ToastWrapper")
     }
 
     static var storybook: some View {
         VStack(alignment: .leading, spacing: .xxxLarge) {
-            ToastContent(description, progress: 0.01)
-            ToastContent(description, progress: 0.2)
-            ToastContent(description, progress: 0.8)
-            ToastContent(description, progress: 1.1)
-            ToastContent("Toast shows a brief message that's clear & understandable.", icon: .checkCircle, progress: 0.6)
+            ToastContent(description)
+            ToastContent(description, icon: .checkCircle)
+            ToastContent("Toast shows a brief message that's clear & understandable.", icon: .checkCircle)
         }
         .padding(.top, .large)
         .padding(.bottom, .xxxLarge)

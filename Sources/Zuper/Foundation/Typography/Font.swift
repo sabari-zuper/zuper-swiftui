@@ -64,11 +64,7 @@ public extension Font {
     }
 
     private static func customFont(_ name: String, size: CGFloat, style: Font.TextStyle = .body) -> Font {
-        if #available(iOS 14.0, *) {
-            return .custom(name, size: size, relativeTo: style)
-        } else {
-            return .custom(name, size: size)
-        }
+        .custom(name, size: size, relativeTo: style)
     }
 }
 
@@ -110,10 +106,5 @@ public extension ContentSizeCategory {
     /// The ratio is smaller than font size ratio and should be used for components or indicators that are already large enough.
     var controlRatio: CGFloat {
         1 + (ratio - 1) * 0.5
-    }
-    
-    @available(iOS, deprecated: 15.0, message: "Use DynamicTypeSize.isAccessibilitySize instead from iOS 15.0")
-    var isAccessibilitySize: Bool {
-        ratio >= 1.6
     }
 }

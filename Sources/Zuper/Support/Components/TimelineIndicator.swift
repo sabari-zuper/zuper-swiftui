@@ -2,7 +2,7 @@ import SwiftUI
 
 struct TimelineIndicator: View {
 
-    public static let indicatorDiameter: CGFloat = Icon.Size.large.value
+    public static let indicatorDiameter: CGFloat = Icon.Size.comfortable.value
 
     @Environment(\.sizeCategory) var sizeCategory
     @Environment(\.accessibilityReduceMotion) var isReduceMotionEnabled

@@ -7,14 +7,8 @@ public struct LazyVStack<Content: View>: View {
     @ViewBuilder let content: Content
 
     public var body: some View {
-        if #available(iOS 14.0, *) {
-            SwiftUI.LazyVStack(alignment: alignment, spacing: spacing) {
-                content
-            }
-        } else {
-            VStack(alignment: alignment, spacing: spacing) {
-                content
-            }
+        SwiftUI.LazyVStack(alignment: alignment, spacing: spacing) {
+            content
         }
     }
 }

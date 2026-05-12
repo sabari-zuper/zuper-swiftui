@@ -50,24 +50,13 @@ public struct Button: View {
         .frame(maxWidth: idealSize.horizontal == true ? nil : .infinity)
     }
 
-    @ViewBuilder var text: some View {
-        if #available(iOS 14.0, *) {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-        } else {
-            Text(
-                label,
-                size: size.textSize,
-                color: .custom(style.foregroundUIColor),
-                weight: .semibold
-            )
-            // Prevents text value animation issue due to different iOS13 behavior
-            .animation(nil)
-        }
+    var text: some View {
+        Text(
+            label,
+            size: size.textSize,
+            color: .custom(style.foregroundUIColor),
+            weight: .semibold
+        )
     }
 
     var isIconOnly: Bool {
@@ -88,7 +77,7 @@ public struct Button: View {
 
     func presentHapticFeedback() {
         switch style {
-            case .primary:
+            case .primary, .prominent:
                 HapticsProvider.sendHapticFeedback(.light(1))
             case .secondary, .neutral, .status(.info, _):
                 HapticsProvider.sendHapticFeedback(.light(0.5))
@@ -146,6 +135,7 @@ extension Button {
         case secondary
         case neutral
         case destructive
+        case prominent
         case status(_ status: Status, subtle: Bool = false)
 
         public var foregroundColor: Color {
@@ -158,6 +148,7 @@ extension Button {
                 case .secondary:            return .productDark
                 case .neutral:                return .inkDark
                 case .destructive:                 return .whiteNormal
+                case .prominent:                return .whiteNormal
                 case .status(.critical, false): return .whiteNormal
                 case .status(.critical, true):  return .redDarkHover
                 case .status(.info, false):     return .whiteNormal
@@ -175,6 +166,7 @@ extension Button {
                 case .secondary:            Color.productLight
                 case .neutral:                Color.cloudNormal
                 case .destructive:                 Color.redNormal
+                case .prominent:                Color.inkDark
                 case .status(.critical, false): Color.redNormal
                 case .status(.critical, true):  Color.redLightHover
                 case .status(.info, false):     Color.blueNormal
@@ -192,6 +184,7 @@ extension Button {
                 case .secondary:            Color.productLightActive
                 case .neutral:                Color.cloudNormalActive
                 case .destructive:                 Color.redNormalActive
+                case .prominent:                Color.inkDarkActive
                 case .status(.critical, false): Color.redNormalActive
                 case .status(.critical, true):  Color.redLightActive
                 case .status(.info, false):     Color.blueNormalActive
@@ -211,8 +204,8 @@ extension Button {
 
         public var textSize: TextSize {
             switch self {
-                case .default:      return .normal
-                case .small:        return .small
+                case .default:      return .body        // 17pt - Apple HIG primary content
+                case .small:        return .subheadline // 15pt - Apple HIG for compact buttons
             }
         }
         
@@ -247,7 +240,7 @@ extension Button {
             configuration.label
                 .contentShape(Rectangle())
                 .background(background(for: configuration))
-                .cornerRadius(BorderRadius.default)
+                .cornerRadius(BorderRadius.iOS26)
         }
         
         @ViewBuilder func background(for configuration: Configuration) -> some View {
@@ -301,7 +294,8 @@ struct ButtonPreviews: PreviewProvider {
             Button("Secondary Button", style: .secondary)
             Button("Neutral Button", style: .neutral)
             Button("Destructive Button", style: .destructive)
-            
+            Button("Prominent Button", style: .prominent)
+
             Heading("Status Buttons", style: .h2)
             Button("Status Info", style: .status(.info))
             Button("Status Success", style: .status(.success))

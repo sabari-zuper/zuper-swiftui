@@ -2,13 +2,83 @@ import SwiftUI
 
 /// Use elevation to bring content closer to users.
 ///
-/// Elevation levels with higher numbers are usually visually closer to the user.
+/// Elevation creates visual hierarchy through shadows, making elements appear
+/// to float above the surface. Higher elevation levels appear closer to the user.
+///
+/// ## Apple HIG Recommendations
+/// Use elevation consistently based on component type:
+/// - **Cards/Tiles**: Use `.card` for subtle depth
+/// - **Floating buttons**: Use `.floating` for interactive elements
+/// - **Sheets/Popovers**: Use `.sheet` for overlays
+/// - **Modals/Dialogs**: Use `.modal` for focused interactions
+///
+/// ## Usage
+/// ```swift
+/// Card {
+///     Text("Content")
+/// }
+/// .elevation(.card)
+///
+/// Button("Action") { }
+/// .elevation(.floating)
+/// ```
+///
+/// - Note: Elevation is only applied in light mode. In dark mode, consider
+///   using lighter background colors to indicate hierarchy instead.
+///
 public enum Elevation {
+
+    // MARK: - Apple HIG Semantic Levels (Recommended)
+
+    /// Subtle elevation for cards, tiles, and list items.
+    /// Use for content that sits slightly above the background.
+    case card
+
+    /// Medium elevation for floating action buttons and interactive elements.
+    /// Use for elements that need to stand out from surrounding content.
+    case floating
+
+    /// Prominent elevation for sheets, popovers, and dropdown menus.
+    /// Use for temporary surfaces that appear above the main content.
+    case sheet
+
+    /// Maximum elevation for modals, dialogs, and alerts.
+    /// Use for focused interactions that require user attention.
+    case modal
+
+    // MARK: - Legacy Levels (Backward Compatibility)
+
+    /// Subtle elevation - Use `.card` instead.
+    @available(*, deprecated, renamed: "card", message: "Use .card for Apple HIG alignment")
     case level1
+
+    /// Medium elevation - Use `.floating` instead.
+    @available(*, deprecated, renamed: "floating", message: "Use .floating for Apple HIG alignment")
     case level2
+
+    /// Prominent elevation - Use `.sheet` instead.
+    @available(*, deprecated, renamed: "sheet", message: "Use .sheet for Apple HIG alignment")
     case level3
+
+    /// Maximum elevation - Use `.modal` instead.
+    @available(*, deprecated, renamed: "modal", message: "Use .modal for Apple HIG alignment")
     case level4
+
+    // MARK: - Custom
+
+    /// Custom elevation with specified shadow properties.
+    /// - Parameters:
+    ///   - opacity: Shadow opacity (0.0 - 1.0)
+    ///   - radius: Shadow blur radius in points
+    ///   - x: Horizontal shadow offset
+    ///   - y: Vertical shadow offset
+    ///   - padding: Optional padding for prerendered shadows
     case custom(opacity: Double, radius: CGFloat, x: CGFloat = 0, y: CGFloat = 0, padding: CGFloat? = nil)
+
+    // MARK: - Semantic Aliases
+
+    /// No elevation - flat appearance.
+    public static let none: Elevation? = nil
 }
 
 /// A shape to use as a surface on which `elevation` is applied.
@@ -88,10 +158,10 @@ struct ElevationModifier: ViewModifier {
 
     func prerenderedShadowPadding(for level: Elevation) -> CGFloat {
         switch level {
-            case .level1:                                       return .small
-            case .level2:                                       return .large
-            case .level3:                                       return .xLarge
-            case .level4:                                       return .xxLarge
+            case .card, .level1:                                return .small
+            case .floating, .level2:                            return .large
+            case .sheet, .level3:                               return .xLarge
+            case .modal, .level4:                               return .xxLarge
             case .custom(_, let radius, _, let y, let padding): return padding ?? (radius + y)
         }
     }
@@ -101,19 +171,19 @@ private extension View {
 
     @ViewBuilder func prerenderedShadow(level: Elevation, shadowColor: Color) -> some View {
         switch level {
-            case .level1:
+            case .card, .level1:
                 self
                     .shadow(color: shadowColor.opacity(0.22), radius: 1.4, y: 0.6)
                     .shadow(color: shadowColor.opacity(0.09), radius: 2.6, y: 3.6)
-            case .level2:
+            case .floating, .level2:
                 self
                     .shadow(color: shadowColor.opacity(0.26), radius: 3, y: 2.1)
                     .shadow(color: shadowColor.opacity(0.1), radius: 10, y: 9)
-            case .level3:
+            case .sheet, .level3:
                 self
                     .shadow(color: shadowColor.opacity(0.28), radius: 2.8, y: 2.4)
                     .shadow(color: shadowColor.opacity(0.16), radius: 12, y: 12)
-            case .level4:
+            case .modal, .level4:
                 self
                     .shadow(color: shadowColor.opacity(0.3), radius: 3.2, y: 2.7)
                     .shadow(color: shadowColor.opacity(0.17), radius: 18, y: 18)
@@ -125,23 +195,23 @@ private extension View {
 
     @ViewBuilder func shadow(level: Elevation, shadowColor: Color) -> some View {
         switch level {
-            case .level1:
+            case .card, .level1:
                 self
                     .shadow(color: shadowColor.opacity(0.12), radius: 1, y: 0.5)
                     .shadow(color: shadowColor.opacity(0.11), radius: 2, y: 2)
                     .shadow(color: shadowColor.opacity(0.10), radius: 4, y: 4)
-            case .level2:
+            case .floating, .level2:
                 self
                     .shadow(color: shadowColor.opacity(0.12), radius: 2, y: 1)
                     .shadow(color: shadowColor.opacity(0.11), radius: 4, y: 4)
                     .shadow(color: shadowColor.opacity(0.10), radius: 8, y: 8)
-            case .level3:
+            case .sheet, .level3:
                 self
                     .shadow(color: shadowColor.opacity(0.12), radius: 2, y: 1)
                     .shadow(color: shadowColor.opacity(0.11), radius: 4, y: 4)
                     .shadow(color: shadowColor.opacity(0.10), radius: 8, y: 8)
                     .shadow(color: shadowColor.opacity(0.06), radius: 16, y: 16)
-            case .level4:
+            case .modal, .level4:
                 self
                     .shadow(color: shadowColor.opacity(0.12), radius: 2, y: 1)
                     .shadow(color: shadowColor.opacity(0.11), radius: 4, y: 4)

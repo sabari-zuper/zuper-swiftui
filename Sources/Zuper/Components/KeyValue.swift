@@ -1,21 +1,70 @@
 import SwiftUI
 
 /// A pair of label and value to display read-only information.
+/// Now uses native iOS 16+ LabeledContent for better performance and integration.
+@available(iOS 16.0, *)
 public struct KeyValue: View {
 
     let key: String
     let value: String
     let size: Size
+    let layout: Layout
     let alignment: HorizontalAlignment
 
     public var body: some View {
-        KeyValueField(key, size: size, alignment: alignment) {
-            ZText(value, size: size.valueSize, weight: .medium, alignment: .init(alignment), isSelectable: true)
+        if isEmpty {
+            EmptyView()
+        } else {
+            LabeledContent {
+                valueText
+                    .accessibility(.keyValueValue)
+            } label: {
+                keyText
+                    .accessibility(.keyValueKey)
+            }
+            .labeledContentStyle(ZuperKeyValueStyle(size: size, layout: layout, alignment: alignment))
+            .accessibilityElement(children: .ignore)
+            .accessibility(label: .init(key))
+            .accessibility(value: .init(value))
+            .accessibility(addTraits: .isStaticText)
         }
-        .accessibilityElement(children: .ignore)
-        .accessibility(label: .init(key))
-        .accessibility(value: .init(value))
-        .accessibility(addTraits: .isStaticText)
+    }
+    
+    @ViewBuilder private var keyText: some View {
+        Text(key, size: size.valueSize, color: .inkNormal, alignment: .init(alignment))
+    }
+    
+    @ViewBuilder private var valueText: some View {
+        Text(value, size: size.valueSize, weight: .medium, alignment: .init(alignment))
+    }
+    
+    private var isEmpty: Bool {
+        key.isEmpty && value.isEmpty
+    }
+}
+
+// MARK: - LabeledContent Style
+@available(iOS 16.0, *)
+struct ZuperKeyValueStyle: LabeledContentStyle {
+    let size: KeyValue.Size
+    let layout: KeyValue.Layout
+    let alignment: HorizontalAlignment
+
+    func makeBody(configuration: Configuration) -> some View {
+        switch layout {
+        case .vertical:
+            VStack(alignment: alignment, spacing: .xxSmall) {
+                configuration.label
+                configuration.content
+            }
+        case .horizontal:
+            HStack {
+                configuration.label
+                Spacer()
+                configuration.content
+                    .foregroundStyle(.secondary)
+            }
+        }
     }
 }
 
@@ -27,11 +76,13 @@ extension KeyValue {
         _ key: String = "",
         value: String = "",
         size: Size = .normal,
+        layout: Layout = .vertical,
         alignment: HorizontalAlignment = .leading
     ) {
         self.key = key
         self.value = value
         self.size = size
+        self.layout = layout
         self.alignment = alignment
     }
 }
@@ -39,21 +90,29 @@ extension KeyValue {
 // MARK: - Types
 extension KeyValue {
 
+    /// Layout direction for key-value pair.
+    public enum Layout {
+        /// Key on top, value below (default).
+        case vertical
+        /// Key on leading side, value on trailing side (native LabeledContent style).
+        case horizontal
+    }
+
     public enum Size {
         case normal
         case large
 
         var keySize: TextSize {
             switch self {
-                case .normal:   return .small
-                case .large:    return .normal
+                case .normal:   return .caption
+                case .large:    return .subheadline
             }
         }
 
         var valueSize: TextSize {
             switch self {
-                case .normal:   return .normal
-                case .large:    return .large
+                case .normal:   return .subheadline  // 16pt - Apple HIG secondary content
+                case .large:    return .callout     // 17pt - Apple HIG primary content
             }
         }
     }
@@ -88,6 +147,9 @@ struct KeyValuePreviews: PreviewProvider {
         VStack(alignment: .leading, spacing: .large) {
             KeyValue("Key", value: value)
             KeyValue("Key", value: value, size: .large)
+            Separator()
+            KeyValue("Key", value: value, layout: .horizontal)
+            KeyValue("Key", value: value, size: .large, layout: .horizontal)
             Separator()
             HStack(alignment: .firstTextBaseline, spacing: .large) {
                 KeyValue("Key with no value")

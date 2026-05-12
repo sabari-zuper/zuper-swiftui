@@ -178,4 +178,97 @@ public extension UIColor {
     static var iconPrimary = fromResource(named:"Icon Primary")
     /// Zuper Icon Primary color.
     static var iconSecondary = fromResource(named:"Icon Secondary")
+
+    // MARK: - Apple HIG Semantic Aliases
+
+    // MARK: Text Colors (similar to Apple's label hierarchy)
+
+    /// Primary text color - Use for main content and titles.
+    /// Maps to Apple HIG's `.label` semantic color.
+    static var textPrimary: UIColor { .inkDark }
+
+    /// Secondary text color - Use for subtitles and supporting text.
+    /// Maps to Apple HIG's `.secondaryLabel` semantic color.
+    static var textSecondary: UIColor { .inkNormal }
+
+    /// Tertiary text color - Use for placeholder text and disabled states.
+    /// Maps to Apple HIG's `.tertiaryLabel` semantic color.
+    static var textTertiary: UIColor { .inkLight }
+
+    /// Inverse text color - Use for text on dark backgrounds.
+    static var textInverse: UIColor { .whiteNormal }
+
+    // MARK: Background Colors (similar to Apple's systemBackground hierarchy)
+
+    /// Primary background color - Main screen background.
+    /// Maps to Apple HIG's `.systemBackground` semantic color.
+    static var backgroundPrimary: UIColor { .whiteNormal }
+
+    /// Secondary background color - Cards, grouped content.
+    /// Maps to Apple HIG's `.secondarySystemBackground` semantic color.
+    static var backgroundSecondary: UIColor { .cloudLight }
+
+    /// Tertiary background color - Nested groups, inset content.
+    /// Maps to Apple HIG's `.tertiarySystemBackground` semantic color.
+    static var backgroundTertiary: UIColor { .cloudNormal }
+
+    // MARK: Separator Colors
+
+    /// Standard separator color for dividers and borders.
+    /// Maps to Apple HIG's `.separator` semantic color.
+    static var zupiSeparator: UIColor { .cloudNormal }
+
+    /// Opaque separator color for non-transparent dividers.
+    /// Maps to Apple HIG's `.opaqueSeparator` semantic color.
+    static var separatorOpaque: UIColor { .cloudDark }
+
+    // MARK: Fill Colors (for UI elements)
+
+    /// Primary fill color for filled UI elements.
+    static var fillPrimary: UIColor { .cloudLight }
+
+    /// Secondary fill color for subtle fills.
+    static var fillSecondary: UIColor { .cloudNormal }
+
+    // MARK: Status Colors (semantic meaning)
+
+    /// Success color - Use for success states, confirmations.
+    /// Maps to Apple HIG's `.systemGreen`.
+    static var statusSuccess: UIColor { .greenNormal }
+
+    /// Success background - Light background for success states.
+    static var statusSuccessBackground: UIColor { .greenLight }
+
+    /// Warning color - Use for warnings, caution states.
+    /// Maps to Apple HIG's `.systemOrange`.
+    static var statusWarning: UIColor { .orangeNormal }
+
+    /// Warning background - Light background for warning states.
+    static var statusWarningBackground: UIColor { .orangeLight }
+
+    /// Error/Destructive color - Use for errors, destructive actions.
+    /// Maps to Apple HIG's `.systemRed`.
+    static var statusError: UIColor { .redNormal }
+
+    /// Error background - Light background for error states.
+    static var statusErrorBackground: UIColor { .redLight }
+
+    /// Info color - Use for informational states.
+    /// Maps to Apple HIG's `.systemBlue`.
+    static var statusInfo: UIColor { .blueNormal }
+
+    /// Info background - Light background for info states.
+    static var statusInfoBackground: UIColor { .blueLight }
+
+    // MARK: Interactive Colors
+
+    /// Primary tint/accent color - Brand color for interactive elements.
+    /// Maps to Apple HIG's `.tint` semantic color.
+    static var zupiTint: UIColor { .productNormal }
+
+    /// Link color - Use for tappable text links.
+    static var zupiLink: UIColor { .blueNormal }
+
+    /// Disabled color - Use for disabled/inactive elements.
+    static var zupiDisabled: UIColor { .cloudDark }
 }

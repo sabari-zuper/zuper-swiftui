@@ -37,7 +37,7 @@ struct StorybookInputField {
                 inputField(value: "", message: .error(errorMessage), style: .compact)
                 inputField(value: value, message: .error(errorMessage), style: .compact)
             }
-        }
+        }.padding()
     }
 
     static var password: some View {

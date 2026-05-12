@@ -28,6 +28,23 @@ public enum ListChoiceDisclosure: Equatable {
     /// An icon content.
     case icon(Icon.Content)
 }
+/// Size options for ListChoice icon background.
+public enum ListChoiceIconBackgroundSize {
+    /// Default size (30x30pt)
+    case `default`
+    /// Custom size
+    case custom(CGFloat)
+
+    var value: CGFloat {
+        switch self {
+        case .default:
+            return 30
+        case .custom(let size):
+            return size
+        }
+    }
+}
+
 
 /// Shows one of a selectable list of items with similar structures.
 /// - Important: Component expands horizontally unless prevented by `fixedSize` or `idealSize` modifier.
@@ -40,7 +57,10 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let title: String
     let description: String
     let iconContent: Icon.Content
+    let iconBackgroundColor: Color?
+    let iconBackgroundSize: ListChoiceIconBackgroundSize
     let value: String
+    let titleSize: TextSize
     let disclosure: ListChoiceDisclosure
     let showSeparator: Bool
     let content: Content
@@ -104,7 +124,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                     Spacer(minLength: 0)
                 }
 
-                TextStrut(.large)
+                TextStrut(.callout)
                     .padding(.vertical, verticalPadding)
 
                 headerContent
@@ -118,21 +138,35 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     @ViewBuilder var headerTexts: some View {
         if isHeaderEmpty == false {
             HStack(alignment: .center, spacing: .xSmall) {
-                Icon(content: iconContent)
-                    .foregroundColor(.inkDark)
+                iconView
                     .accessibility(.listChoiceIcon)
                 
                 if isHeaderTextEmpty == false {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
-                        Text(title, weight: .medium)
+                        Text(title, size: titleSize, weight: .medium)
                             .accessibility(.listChoiceTitle)
-                        Text(description, size: .small, color: .inkNormal)
+                        Text(description, size: .footnote, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
                     }
                 }
             }
             .padding(.leading, .medium)
             .padding(.vertical, verticalPadding)
+        }
+    }
+
+    @ViewBuilder var iconView: some View {
+        if let iconBackgroundColor {
+            Icon(content: iconContent, size: .custom(iconBackgroundSize.value/1.5))
+                .foregroundColor(iconBackgroundColor)
+                .frame(width: iconBackgroundSize.value, height: iconBackgroundSize.value)
+                .background(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .fill(iconBackgroundColor.opacity(0.2))
+                )
+        } else {
+            Icon(content: iconContent)
+                .foregroundColor(.inkDark)
         }
     }
 
@@ -168,20 +202,37 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     @ViewBuilder var separator: some View {
         if showSeparator {
             Separator()
-                .padding(.leading, separatorPadding)
+                .padding(.leading, separatorLeadingPadding)
+                .padding(.trailing, separatorTrailingPadding)
         }
     }
 
-    var separatorPadding: CGFloat {
+    var separatorLeadingPadding: CGFloat {
         if isHeaderEmpty {
+            // When there's custom content but no header, add medium padding
+            if !isCustomContentEmpty || !isCustomHeaderEmpty {
+                return .medium
+            }
             return 0
         }
-        
+
         if iconContent.isEmpty {
             return .medium
         }
-        
+
+        if iconBackgroundColor != nil {
+            return .medium + iconBackgroundSize.value + .xSmall
+        }
+
         return .xxLarge
+    }
+    
+    var separatorTrailingPadding: CGFloat {
+        // Add trailing padding when there's a disclosure view
+        if disclosure != .none {
+            return .medium
+        }
+        return 0
     }
 
     var isEmpty: Bool {
@@ -219,7 +270,10 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String = "",
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -230,7 +284,10 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.title = title
         self.description = description
         self.value = value
+        self.titleSize = titleSize
         self.iconContent = icon
+        self.iconBackgroundColor = iconBackgroundColor
+        self.iconBackgroundSize = iconBackgroundSize
         self.disclosure = disclosure
         self.showSeparator = showSeparator
         self.action = action
@@ -248,6 +305,9 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -259,7 +319,10 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: "",
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -274,6 +337,9 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -284,6 +350,9 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -298,6 +367,9 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -308,6 +380,9 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -322,6 +397,9 @@ public extension ListChoice {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -331,6 +409,9 @@ public extension ListChoice {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -348,7 +429,10 @@ public extension ListChoice where HeaderContent == Text {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -359,7 +443,10 @@ public extension ListChoice where HeaderContent == Text {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: value,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -375,7 +462,10 @@ public extension ListChoice where HeaderContent == Text {
         _ title: String = "",
         description: String = "",
         icon: Icon.Content = .none,
+        iconBackgroundColor: Color? = nil,
+        iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String,
+        titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -385,7 +475,10 @@ public extension ListChoice where HeaderContent == Text {
             title,
             description: description,
             icon: icon,
+            iconBackgroundColor: iconBackgroundColor,
+            iconBackgroundSize: iconBackgroundSize,
             value: value,
+            titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -443,7 +536,16 @@ struct ListChoicePreviews: PreviewProvider {
     }
 
     static var zuper: some View {
-        ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
+        VStack(spacing: 0) {
+            ListChoice(headerContent: {
+                Text("Zuper Soft solutions")
+            })
+            ListChoice("Zuper Switch", disclosure: .disclosure(), showSeparator: true)
+            ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
+            ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
+            ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
+            ListChoice("Settings", description: "App preferences", icon: .sfSymbol("building.fill", color: nil), iconBackgroundColor: .greenNormal, iconBackgroundSize: .custom(50))
+        }
     }
     
     
@@ -454,7 +556,18 @@ struct ListChoicePreviews: PreviewProvider {
             } headerContent: {
                 headerContent
             }
-
+            ListChoice(
+                "Tasks",
+                description: "3 Pending Tasks",
+                titleSize: .body,
+                disclosure: .disclosure(), headerContent: {
+                    // Leading icon with rounded background
+                    Image(systemName: "list.bullet")
+                        .foregroundColor(.red)
+                        .padding(10)
+                        .background(Color.red.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                })
             // Empty
             ListChoice(disclosure: .none)
         }

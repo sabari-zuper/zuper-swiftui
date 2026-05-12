@@ -16,9 +16,9 @@ struct StorybookText {
             }
             .border(Color.cloudDark, width: .hairline)
 
-            Text(multilineText, color: .custom(.greenDark), alignment: .trailing)
+            ZText(multilineText, color: .custom(.greenDark), alignment: .trailing)
                 .background(Color.greenLight)
-            Text(multilineText, color: nil, alignment: .trailing)
+            ZText(multilineText, color: nil, alignment: .trailing)
                 .foregroundColor(.blueDark)
                 .background(Color.blueLight)
             ZText(multilineFormattedText, color: .custom(.greenDark), alignment: .trailing, accentColor: .orangeDark)

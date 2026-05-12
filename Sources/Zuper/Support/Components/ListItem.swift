@@ -37,7 +37,7 @@ public extension ListItem {
     init(
         _ text: String = "",
         icon: Icon.Content,
-        size: TextSize = .normal,
+        size: TextSize = .subheadline,
         iconSize: Icon.Size? = nil,
         spacing: CGFloat = .xxSmall,
         style: ListItem.Style = .primary,
@@ -55,7 +55,7 @@ public extension ListItem {
     /// Creates Zuper ListItem component with default appearance, using the `circleSmall` icon.
     init(
         _ text: String = "",
-        size: TextSize = .normal,
+        size: TextSize = .subheadline,
         spacing: CGFloat = .xSmall,
         style: ListItem.Style = .primary,
         linkAction: @escaping TextLink.Action = { _, _ in }

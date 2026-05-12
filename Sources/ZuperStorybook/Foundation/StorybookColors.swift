@@ -242,7 +242,6 @@ private struct ColorContent: View {
 
                         Spacer(minLength: .medium)
 
-                        if #available(iOS 14.0, *) {
                             ColorPicker(
                                 selection: Binding<Color>(
                                     get: { color.pointee },
@@ -254,7 +253,6 @@ private struct ColorContent: View {
                             ) {
                                 EmptyView()
                             }
-                        }
                     }
                     .padding(.horizontal, .small)
                     .padding(.vertical, .xSmall)

@@ -67,7 +67,7 @@ public struct TimelineStep<Header: View, Content: View>: View {
                             .fill(Color.whiteNormal)
                     )
             case .status:
-            Icon(content: style.iconSymbol, size: .large)
+            Icon(content: style.iconSymbol, size: .comfortable)
                     .background(
                         Circle()
                             .fill(Color.whiteNormal)
@@ -148,7 +148,7 @@ public enum TimelineStepStyle: Equatable {
     case `default`
     case status(Status)
 
-    public static let indicatorDiameter: CGFloat = Icon.Size.large.value
+    public static let indicatorDiameter: CGFloat = Icon.Size.comfortable.value
 
     public var iconSymbol: Icon.Content {
         switch self {

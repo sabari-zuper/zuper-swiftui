@@ -119,7 +119,7 @@ public struct Tile<Content: View>: View {
                 }
                 .padding(.vertical, verticalTextPadding)
 
-                TextStrut(.large)
+                TextStrut(.callout)
                     .padding(.vertical, verticalTextPadding)
 
                 if idealSize.horizontal == nil {
@@ -191,7 +191,7 @@ public extension Tile {
         showBorder: Bool = true,
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
-        titleStyle: Heading.Style = .h6,
+        titleStyle: Heading.Style = .headline,
         descriptionColor: TextColor = .inkNormal,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
@@ -221,7 +221,7 @@ public extension Tile {
         showBorder: Bool = true,
         status: Status? = nil,
         backgroundColor: BackgroundColor? = nil,
-        titleStyle: Heading.Style = .h6,
+        titleStyle: Heading.Style = .headline,
         descriptionColor: TextColor = .inkNormal,
         action: @escaping () -> Void = {}
     ) where Content == EmptyView {
@@ -286,7 +286,7 @@ struct TilePreviews: PreviewProvider {
     
     static var zuper: some View {
         VStack(spacing: .medium) {
-            Tile("Zuper Title", description: "Zuper description", icon: gridIcon, disclosure: .icon(.chevronRight), showBorder: true, status: .none, backgroundColor: .none, titleStyle: .title5, descriptionColor: .inkNormal)
+            Tile("Zuper Title", description: "Zuper description", icon: gridIcon, disclosure: .icon(.chevronRight), showBorder: true, status: .none, backgroundColor: .none, titleStyle: .headline, descriptionColor: .inkNormal)
         }
     }
 
