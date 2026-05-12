@@ -15,13 +15,16 @@ public struct CardGlassEffectModifier: ViewModifier {
 
     let style: CardGlassStyle
     let cornerRadius: CGFloat
+    let tint: Color?
 
     public init(
         style: CardGlassStyle = .regular,
-        cornerRadius: CGFloat = BorderRadius.iOS26
+        cornerRadius: CGFloat = BorderRadius.iOS26,
+        tint: Color? = nil
     ) {
         self.style = style
         self.cornerRadius = cornerRadius
+        self.tint = tint
     }
 
     public func body(content: Content) -> some View {
@@ -36,12 +39,14 @@ public struct CardGlassEffectModifier: ViewModifier {
 
     @available(iOS 26.0, *)
     private var glassValue: Glass {
+        let base: Glass
         switch style {
         case .regular:
-            return .regular
+            base = .regular
         case .clear:
-            return .clear
+            base = .clear
         }
+        return tint.map { base.tint($0) } ?? base
     }
 }
 
@@ -55,6 +60,8 @@ public extension View {
     /// - Parameters:
     ///   - style: The glass style to apply. Defaults to `.regular`.
     ///   - cornerRadius: The corner radius for the glass shape. Defaults to `BorderRadius.iOS26`.
+    ///   - tint: Optional tint color applied to the glass material. Useful to keep content
+    ///     legible on light backdrops (e.g. `Color.black.opacity(0.4)`).
     /// - Returns: A view with the Liquid Glass effect applied on iOS 26+, or unchanged on earlier versions.
     ///
     /// Example usage:
@@ -66,12 +73,14 @@ public extension View {
     /// ```
     func cardGlassEffect(
         _ style: CardGlassStyle = .regular,
-        cornerRadius: CGFloat = BorderRadius.iOS26
+        cornerRadius: CGFloat = BorderRadius.iOS26,
+        tint: Color? = nil
     ) -> some View {
         modifier(
             CardGlassEffectModifier(
                 style: style,
-                cornerRadius: cornerRadius
+                cornerRadius: cornerRadius,
+                tint: tint
             )
         )
     }

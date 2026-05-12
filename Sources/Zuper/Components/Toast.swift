@@ -71,7 +71,7 @@ public struct ToastContent: View {
         }
         .contentShape(Rectangle())
         .background(background)
-        .cardGlassEffect(cornerRadius: BorderRadius.iOS26)
+        .cardGlassEffect(cornerRadius: BorderRadius.iOS26, tint: Color.black.opacity(0.08))
     }
 
     @ViewBuilder var background: some View {
@@ -86,7 +86,7 @@ public struct ToastContent: View {
 
     var foregroundColor: Color {
         if #available(iOS 26.0, *) {
-            return .inkDark
+            return .primary
         }
         return colorScheme == .light ? .whiteNormal : .inkDark
     }
