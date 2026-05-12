@@ -9,11 +9,9 @@ struct StorybookToast {
 
     static var basic: some View {
         VStack(alignment: .leading, spacing: .xxxLarge) {
-            ToastContent(description, progress: 0.01)
-            ToastContent(description, progress: 0.2)
-            ToastContent(description, progress: 0.8)
-            ToastContent(description, progress: 1.1)
-            ToastContent("Toast shows a brief message that's clear & understandable.", icon: .checkCircle, progress: 0.6)
+            ToastContent(description)
+            ToastContent(description, icon: .checkCircle)
+            ToastContent("Toast shows a brief message that's clear & understandable.", icon: .checkCircle)
         }
         .padding(.top, .large)
         .padding(.bottom, .xxxLarge)
