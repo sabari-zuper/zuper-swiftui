@@ -69,7 +69,7 @@ public struct Alert<Content: View>: View {
         .padding([.vertical, .trailing], .medium)
         .padding(.leading, iconContent.isEmpty ? .medium : .small)
         .background(background)
-        .cornerRadius(BorderRadius.default)
+        .cornerRadius(BorderRadius.iOS26)
         .accessibilityElement(children: .contain)
     }
 
@@ -98,7 +98,7 @@ public struct Alert<Content: View>: View {
     @ViewBuilder var background: some View {
         backgroundColor
             .overlay(
-                RoundedRectangle(cornerRadius: BorderRadius.default)
+                RoundedRectangle(cornerRadius: BorderRadius.iOS26)
                     .strokeBorder(strokeColor, lineWidth: 1)
             )
             .overlay(

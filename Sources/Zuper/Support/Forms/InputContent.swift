@@ -50,6 +50,7 @@ struct InputContent<Content: View>: View {
             RoundedRectangle(cornerRadius: BorderRadius.input)
                 .strokeBorder(outlineColor(isPressed: isPressed), lineWidth: BorderWidth.emphasis)
         )
+        .contentShape(RoundedRectangle(cornerRadius: BorderRadius.input))
         .disabled(state == .disabled)
     }
 
