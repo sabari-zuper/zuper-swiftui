@@ -101,11 +101,11 @@ public struct Alert<Content: View>: View {
                 RoundedRectangle(cornerRadius: BorderRadius.iOS26)
                     .strokeBorder(strokeColor, lineWidth: 1)
             )
-            .overlay(
-                status.color
-                    .frame(width: 3),
-                alignment: .leading
-            )
+//            .overlay(
+//                status.color
+//                    .frame(width: 3),
+//                alignment: .leading
+//            )
     }
     
     var backgroundColor: Color {
@@ -209,11 +209,7 @@ struct AlertPreviews: PreviewProvider {
 
     static let title = "Title"
     static let description = """
-        The main description message of this Alert component should be placed here. If you need to use TextLink \
-        in this component, please do it by using <a href="..">Normal Underline text style</a>.
-
-        Description message can be <strong>formatted</strong>, but if more <ref>customizaton</ref> is needed a custom \
-        description content can be provided instead.
+        The main description message of this Alert component should be placed here.
         """
     static let primaryAndSecondaryConfiguration = AlertButtons.primaryAndSecondary("Primary", "Secondary")
     static let primaryConfiguration = AlertButtons.primary("Primary")
