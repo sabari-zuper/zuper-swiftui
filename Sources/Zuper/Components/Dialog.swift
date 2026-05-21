@@ -36,6 +36,7 @@ public struct Dialog: View {
         .padding(.medium)
         .background(Color.whiteDarker)
         .clipShape(shape)
+        .cardGlassEffect()
         .elevation(.modal, shape: .roundedRectangle(borderRadius: .large))
         .padding(.xLarge)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
