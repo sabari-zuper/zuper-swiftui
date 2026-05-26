@@ -19,7 +19,7 @@ public struct BadgeList: View {
             HStack(alignment: .firstTextBaseline, spacing: Self.spacing) {
                 badgeOrEmptySpace
                     .foregroundColor(.init(style.iconColor))
-                    .padding(.xxSmall)
+                    .padding(.xSmall)
                     .background(badgeBackground)
                 ZText(
                     label,
@@ -166,7 +166,12 @@ struct BadgeListPreviews: PreviewProvider {
     }
 
     static var standaloneSmallSecondary: some View {
-        BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .custom(.large))
+        VStack {
+            BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .custom(.subheadline))
+            BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .custom(.subheadline))
+            BadgeList("Neutral BadgeList", icon: .grid, labelColor: .secondary, size: .custom(.subheadline))
+            BadgeList("Neutral BadgeList", icon: .grid, style :.status(.info), labelColor: .custom(.blueNormal), size: .custom(.subheadline))
+        }
     }
 
     static var storybook: some View {
