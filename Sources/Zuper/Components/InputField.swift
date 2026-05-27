@@ -103,13 +103,13 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                 inputFocus = true
             }
         }
-        .onDisappear {
-            // iOS 26 SwiftUI race: TextField's textFieldDidEndEditing can write
-            // back to StateOrBinding storage during view teardown, such as lazy cell
-            // recycling, navigation pop, or sheet dismissal. Clearing focus here
-            // forces the commit while storage is still valid.
-            inputFocus =  false
-        }
+//        .onDisappear {
+//            // iOS 26 SwiftUI race: TextField's textFieldDidEndEditing can write
+//            // back to StateOrBinding storage during view teardown, such as lazy cell
+//            // recycling, navigation pop, or sheet dismissal. Clearing focus here
+//            // forces the commit while storage is still valid.
+//            inputFocus =  false
+//        }
     }
 
     @ViewBuilder var input: some View {
