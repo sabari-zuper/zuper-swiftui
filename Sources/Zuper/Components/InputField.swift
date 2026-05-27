@@ -88,7 +88,11 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
                 .padding(.top, .xxSmall)
         }
         .onTapGesture {
+            isEditing = true
             inputFocus = true
+        }
+        .onChange(of: inputFocus) { isFocused in
+            isEditing = isFocused
         }
         .accessibilityElement(children: .contain)
         .accessibility(label: .init(label))
