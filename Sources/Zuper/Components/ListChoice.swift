@@ -61,6 +61,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let iconBackgroundSize: ListChoiceIconBackgroundSize
     let value: String
     let titleSize: TextSize
+    let titleWeight: Font.Weight
     let disclosure: ListChoiceDisclosure
     let showSeparator: Bool
     let content: Content
@@ -143,7 +144,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                 
                 if isHeaderTextEmpty == false {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
-                        Text(title, size: titleSize, weight: .medium)
+                        Text(title, size: titleSize, weight: titleWeight)
                             .accessibility(.listChoiceTitle)
                         Text(description, size: .footnote, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
@@ -274,6 +275,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         value: String = "",
         titleSize: TextSize = .subheadline,
+        titleWeight: Font.Weight = .medium,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -285,6 +287,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.description = description
         self.value = value
         self.titleSize = titleSize
+        self.titleWeight = titleWeight
         self.iconContent = icon
         self.iconBackgroundColor = iconBackgroundColor
         self.iconBackgroundSize = iconBackgroundSize
@@ -400,6 +403,7 @@ public extension ListChoice {
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
+        titleWeight: Font.Weight = .medium,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -412,6 +416,7 @@ public extension ListChoice {
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
             titleSize: titleSize,
+            titleWeight: titleWeight,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
