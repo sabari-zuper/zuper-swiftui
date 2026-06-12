@@ -721,10 +721,9 @@ struct ListChoicePreviews: PreviewProvider {
                 title,
                 disclosure: .radio(isChecked: true, state: .normal),
                 showSeparator: false,
-                disclosurePosition: .leading
-            ) {
-                
-            }
+                disclosurePosition: .leading, headerContent: {
+                    
+                })
         }
     }
 
