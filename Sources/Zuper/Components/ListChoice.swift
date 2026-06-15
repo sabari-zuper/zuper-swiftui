@@ -167,8 +167,12 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                         .fill(iconBackgroundColor.opacity(0.2))
                 )
         } else {
+            // Reserve a fixed-width icon column so SF Symbols of differing intrinsic widths
+            // don't shift where the title starts. Only when an icon is present, so icon-less
+            // rows keep their natural (no-indent) layout.
             Icon(content: iconContent)
                 .foregroundColor(.inkDark)
+                .frame(width: iconContent.isEmpty ? nil : iconBackgroundSize.value, alignment: .center)
         }
     }
 
