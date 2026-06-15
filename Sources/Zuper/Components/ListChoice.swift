@@ -62,6 +62,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let value: String
     let titleSize: TextSize
     let titleWeight: Font.Weight
+    let titleColor: TextColor?
     let disclosure: ListChoiceDisclosure
     let showSeparator: Bool
     let content: Content
@@ -144,7 +145,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                 
                 if isHeaderTextEmpty == false {
                     VStack(alignment: .labelTextLeading, spacing: .xxxSmall) {
-                        Text(title, size: titleSize, weight: titleWeight)
+                        Text(title, size: titleSize, color: titleColor, weight: titleWeight)
                             .accessibility(.listChoiceTitle)
                         Text(description, size: .footnote, color: .inkNormal)
                             .accessibility(.listChoiceDescription)
@@ -276,6 +277,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         value: String = "",
         titleSize: TextSize = .subheadline,
         titleWeight: Font.Weight = .medium,
+        titleColor: TextColor? = .inkDark,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -288,6 +290,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.value = value
         self.titleSize = titleSize
         self.titleWeight = titleWeight
+        self.titleColor = titleColor
         self.iconContent = icon
         self.iconBackgroundColor = iconBackgroundColor
         self.iconBackgroundSize = iconBackgroundSize
@@ -404,6 +407,7 @@ public extension ListChoice {
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
         titleSize: TextSize = .subheadline,
         titleWeight: Font.Weight = .medium,
+        titleColor: TextColor? = .inkDark,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
@@ -417,6 +421,7 @@ public extension ListChoice {
             iconBackgroundSize: iconBackgroundSize,
             titleSize: titleSize,
             titleWeight: titleWeight,
+            titleColor: titleColor,
             disclosure: disclosure,
             showSeparator: showSeparator,
             disclosurePosition: disclosurePosition,
@@ -550,6 +555,7 @@ struct ListChoicePreviews: PreviewProvider {
             ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
             ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
             ListChoice("Settings", description: "App preferences", icon: .sfSymbol("building.fill", color: nil), iconBackgroundColor: .greenNormal, iconBackgroundSize: .custom(50))
+            
         }
     }
     
@@ -721,10 +727,10 @@ struct ListChoicePreviews: PreviewProvider {
                 title,
                 disclosure: .radio(isChecked: true, state: .normal),
                 showSeparator: false,
-                disclosurePosition: .leading, headerContent: {
-                    
-                })
-        }
+                disclosurePosition: .leading,
+                headerContent: { }
+            )
+        } 
     }
 
     static var storybookMix: some View {
