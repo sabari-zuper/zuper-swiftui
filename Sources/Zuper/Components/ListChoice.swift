@@ -65,6 +65,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let titleColor: TextColor?
     let disclosure: ListChoiceDisclosure
     let showSeparator: Bool
+    let showsPressHighlight: Bool
     let content: Content
     let action: () -> Void
     let position: ListChoiceDisclosurePosition
@@ -81,7 +82,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                     buttonContent
                 }
             )
-            .buttonStyle(ListChoiceButtonStyle())
+            .buttonStyle(ListChoiceButtonStyle(showsPressHighlight: showsPressHighlight))
             .accessibilityElement(children: .ignore)
             .accessibility(label: .init(title))
             .accessibility(value: .init(value))
@@ -167,12 +168,8 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                         .fill(iconBackgroundColor.opacity(0.2))
                 )
         } else {
-            // Reserve a fixed-width icon column so SF Symbols of differing intrinsic widths
-            // don't shift where the title starts. Only when an icon is present, so icon-less
-            // rows keep their natural (no-indent) layout.
             Icon(content: iconContent)
                 .foregroundColor(.inkDark)
-                .frame(width: iconContent.isEmpty ? nil : iconBackgroundSize.value, alignment: .center)
         }
     }
 
@@ -284,6 +281,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         titleColor: TextColor? = .inkDark,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content,
@@ -300,6 +298,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.iconBackgroundSize = iconBackgroundSize
         self.disclosure = disclosure
         self.showSeparator = showSeparator
+        self.showsPressHighlight = showsPressHighlight
         self.action = action
         self.content = content()
         self.headerContent = headerContent()
@@ -320,6 +319,7 @@ public extension ListChoice {
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content,
@@ -335,6 +335,7 @@ public extension ListChoice {
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: content,
@@ -352,6 +353,7 @@ public extension ListChoice {
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder headerContent: () -> HeaderContent
@@ -365,6 +367,7 @@ public extension ListChoice {
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() },
@@ -382,6 +385,7 @@ public extension ListChoice {
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
@@ -395,6 +399,7 @@ public extension ListChoice {
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: content,
@@ -414,6 +419,7 @@ public extension ListChoice {
         titleColor: TextColor? = .inkDark,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {}
     ) where HeaderContent == EmptyView, Content == EmptyView {
@@ -428,6 +434,7 @@ public extension ListChoice {
             titleColor: titleColor,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() },
@@ -449,6 +456,7 @@ public extension ListChoice where HeaderContent == Text {
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {},
         @ViewBuilder content: () -> Content
@@ -463,6 +471,7 @@ public extension ListChoice where HeaderContent == Text {
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: content
@@ -482,6 +491,7 @@ public extension ListChoice where HeaderContent == Text {
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
+        showsPressHighlight: Bool = true,
         disclosurePosition: ListChoiceDisclosurePosition = .trailing,
         action: @escaping () -> Void = {}
     ) where Content == EmptyView {
@@ -495,6 +505,7 @@ public extension ListChoice where HeaderContent == Text {
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
+            showsPressHighlight: showsPressHighlight,
             disclosurePosition: disclosurePosition,
             action: action,
             content: { EmptyView() }
@@ -508,6 +519,12 @@ extension ListChoice {
     // Solves the touch-down, touch-up animations that would otherwise need gesture avoidance logic.
     struct ListChoiceButtonStyle: SwiftUI.ButtonStyle {
 
+        let showsPressHighlight: Bool
+
+        init(showsPressHighlight: Bool = true) {
+            self.showsPressHighlight = showsPressHighlight
+        }
+
         func makeBody(configuration: Configuration) -> some View {
             configuration.label
                 .background(
@@ -517,7 +534,7 @@ extension ListChoice {
         }
 
         func backgroundColor(isPressed: Bool) -> Color {
-            isPressed ? .inkNormal.opacity(0.06) : .clear
+            isPressed && showsPressHighlight ? .inkNormal.opacity(0.06) : .clear
         }
     }
 }
@@ -554,7 +571,7 @@ struct ListChoicePreviews: PreviewProvider {
             ListChoice(headerContent: {
                 Text("Zuper Soft solutions")
             })
-            ListChoice("Zuper Switch", disclosure: .disclosure(), showSeparator: true)
+            ListChoice("Zuper Switch", disclosure: .disclosure(), showSeparator: true, showsPressHighlight: false)
             ListChoice("Zuper Switch", description: "Zuper switch description", icon: gridIcon, disclosure: .radio(), showSeparator: true)
             ListChoice("Tasks", description: "3 Pending Tasks", icon: .sfSymbol("checklist", color: nil), iconBackgroundColor: .blueNormal)
             ListChoice("Settings", description: "App preferences", icon: .sfSymbol("gearshape.fill", color: nil), iconBackgroundColor: .greenNormal)
