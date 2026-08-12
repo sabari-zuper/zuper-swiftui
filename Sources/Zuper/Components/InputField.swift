@@ -69,7 +69,7 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
 
                     input
                         .textFieldStyle(TextFieldStyle(leadingPadding: 0))
-                        .autocapitalization(autocapitalization)
+                        .autocapitalization(effectiveAutocapitalization)
                         .disableAutocorrection(isAutocompleteEnabled == false)
                         .textContentType(textContent)
                         .keyboardType(keyboard)
@@ -239,6 +239,15 @@ public struct InputField<Value>: View where Value: LosslessStringConvertible {
     var showPlaceholder: Bool {
         value.description.isEmpty
     }
+
+    /// Email and URL entry is case-sensitive/lowercase by convention, so force
+    /// autocapitalization off for those keyboards regardless of the caller's value.
+    var effectiveAutocapitalization: UITextAutocapitalizationType {
+        switch keyboard {
+            case .emailAddress, .URL:   return .none
+            default:                    return autocapitalization
+        }
+    }
 }
 
 public extension InputField {
@@ -261,7 +270,7 @@ public extension InputField {
         state: InputState = .default,
         textContent: UITextContentType? = nil,
         keyboard: UIKeyboardType = .default,
-        autocapitalization: UITextAutocapitalizationType = .none,
+        autocapitalization: UITextAutocapitalizationType = .sentences,
         isAutocompleteEnabled: Bool = false,
         isSecure: Bool = false,
         passwordStrength: PasswordStrengthIndicator.PasswordStrength = .empty,
@@ -321,7 +330,7 @@ public extension InputField {
         state: InputState = .default,
         textContent: UITextContentType? = nil,
         keyboard: UIKeyboardType = .default,
-        autocapitalization: UITextAutocapitalizationType = .none,
+        autocapitalization: UITextAutocapitalizationType = .sentences,
         isAutocompleteEnabled: Bool = false,
         message: Message? = nil,
         messageHeight: Binding<CGFloat> = .constant(0),
@@ -371,7 +380,7 @@ extension InputField {
         state: InputState = .default,
         textContent: UITextContentType? = nil,
         keyboard: UIKeyboardType = .default,
-        autocapitalization: UITextAutocapitalizationType = .none,
+        autocapitalization: UITextAutocapitalizationType = .sentences,
         isAutocompleteEnabled: Bool = false,
         passwordStrength: PasswordStrengthIndicator.PasswordStrength = .empty,
         message: Message? = nil,
