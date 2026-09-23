@@ -59,6 +59,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
     let iconContent: Icon.Content
     let iconBackgroundColor: Color?
     let iconBackgroundSize: ListChoiceIconBackgroundSize
+    let iconSize: Icon.Size
     let value: String
     let titleSize: TextSize
     let titleWeight: Font.Weight
@@ -168,7 +169,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
                         .fill(iconBackgroundColor.opacity(0.2))
                 )
         } else {
-            Icon(content: iconContent)
+            Icon(content: iconContent, size: iconSize)
                 .foregroundColor(.inkDark)
         }
     }
@@ -275,6 +276,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         value: String = "",
         titleSize: TextSize = .subheadline,
         titleWeight: Font.Weight = .medium,
@@ -296,6 +298,7 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         self.iconContent = icon
         self.iconBackgroundColor = iconBackgroundColor
         self.iconBackgroundSize = iconBackgroundSize
+        self.iconSize = iconSize
         self.disclosure = disclosure
         self.showSeparator = showSeparator
         self.showsPressHighlight = showsPressHighlight
@@ -316,6 +319,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -331,6 +335,7 @@ public extension ListChoice {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             value: "",
             titleSize: titleSize,
             disclosure: disclosure,
@@ -350,6 +355,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -364,6 +370,7 @@ public extension ListChoice {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -382,6 +389,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
         showSeparator: Bool = true,
@@ -396,6 +404,7 @@ public extension ListChoice {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             titleSize: titleSize,
             disclosure: disclosure,
             showSeparator: showSeparator,
@@ -414,6 +423,7 @@ public extension ListChoice {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         titleSize: TextSize = .subheadline,
         titleWeight: Font.Weight = .medium,
         titleColor: TextColor? = .inkDark,
@@ -429,6 +439,7 @@ public extension ListChoice {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             titleSize: titleSize,
             titleWeight: titleWeight,
             titleColor: titleColor,
@@ -452,6 +463,7 @@ public extension ListChoice where HeaderContent == Text {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -467,6 +479,7 @@ public extension ListChoice where HeaderContent == Text {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
@@ -487,6 +500,7 @@ public extension ListChoice where HeaderContent == Text {
         icon: Icon.Content = .none,
         iconBackgroundColor: Color? = nil,
         iconBackgroundSize: ListChoiceIconBackgroundSize = .default,
+        iconSize: Icon.Size = .default,
         value: String,
         titleSize: TextSize = .subheadline,
         disclosure: ListChoiceDisclosure = .disclosure(),
@@ -501,6 +515,7 @@ public extension ListChoice where HeaderContent == Text {
             icon: icon,
             iconBackgroundColor: iconBackgroundColor,
             iconBackgroundSize: iconBackgroundSize,
+            iconSize: iconSize,
             value: value,
             titleSize: titleSize,
             disclosure: disclosure,
@@ -568,6 +583,20 @@ struct ListChoicePreviews: PreviewProvider {
 
     static var zuper: some View {
         VStack(spacing: 0) {
+            ListChoice(
+                "Zuper with Selection",
+                icon: .sfSymbol("checkmark.circle.fill", color: .blueNormal),
+                iconSize: .comfortable,
+                disclosure: .none,
+                showSeparator: false,
+            )
+            ListChoice(
+                "Zuper without Selection",
+                icon: .sfSymbol("circle", color: .gray),
+                iconSize: .comfortable,
+                disclosure: .none,
+                showSeparator: false
+            )
             ListChoice(headerContent: {
                 Text("Zuper Soft solutions")
             })
