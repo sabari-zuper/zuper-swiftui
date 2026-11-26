@@ -40,6 +40,13 @@ public struct Badge: View {
                         color: .custom(labelColor),
                         weight: .medium
                     )
+                    // Status badges must stay on a single line: keep them to one
+                    // line and truncate with a tail ellipsis instead of wrapping to
+                    // a second line (e.g. job status on job cards). Non-status badges
+                    // use no line limit, so they wrap as before and are never
+                    // truncated (truncationMode only applies once text is clipped).
+                    .lineLimit(isStatus ? 1 : nil)
+                    .truncationMode(.tail)
                     .padding(.vertical, Self.verticalPadding)
                     if iconPlacement == .trailing && !isStatus && !iconContent.isEmpty{
                         Icon(content: iconContent, size: iconSize)
