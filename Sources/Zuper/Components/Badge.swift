@@ -40,6 +40,8 @@ public struct Badge: View {
                         color: .custom(labelColor),
                         weight: .medium
                     )
+                    .lineLimit(isStatus ? 1 : nil)
+                    .truncationMode(.tail)
                     .padding(.vertical, Self.verticalPadding)
                     if iconPlacement == .trailing && !isStatus && !iconContent.isEmpty{
                         Icon(content: iconContent, size: iconSize)
