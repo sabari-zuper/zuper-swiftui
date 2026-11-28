@@ -143,6 +143,11 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
         if isHeaderEmpty == false {
             HStack(alignment: .center, spacing: .xSmall) {
                 iconView
+                    // Reserve an icon column so SF Symbols of differing widths don't shift where the
+                    // title starts (restores e2041be, lost in 0b0f2b2). `minWidth`, not `width`: an icon
+                    // larger than the column (accessibility text sizes) widens its own row instead of
+                    // overlapping the title. Icon-less rows keep their natural layout.
+                    .frame(minWidth: iconContent.isEmpty ? nil : iconBackgroundSize.value, alignment: .center)
                     .accessibility(.listChoiceIcon)
                 
                 if isHeaderTextEmpty == false {
@@ -224,11 +229,9 @@ public struct ListChoice<HeaderContent: View, Content: View>: View {
             return .medium
         }
 
-        if iconBackgroundColor != nil {
-            return .medium + iconBackgroundSize.value + .xSmall
-        }
-
-        return .xxLarge
+        // Separator starts where the title starts: leading padding + icon column + spacing. Same for
+        // icons with and without a background, now that both use the fixed column.
+        return .medium + iconBackgroundSize.value + .xSmall
     }
     
     var separatorTrailingPadding: CGFloat {
